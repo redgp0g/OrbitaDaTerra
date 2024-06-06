@@ -1,7 +1,16 @@
 @extends('master')
 @section('title', 'Cartas Novas')
 @section('conteudo')
-    @include('partials.navbarHome', ['title' => 'Cartas Novas'])
+    @include('components.navbarHome', [
+        'items' => [
+            ['label' => 'Cartas Contempladas', 'url' => url('/contempladas/' . $cadastro->IDCadastro), 'auth' => 'guest'],
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'auth' => 'auth'],
+            ['label' => 'Acessar Conta', 'url' => url('/usuario'), 'auth' => 'guest'],
+            ['label' => 'Cadastrar-se', 'url' => url('/usuario' . $cadastro->IDCadastro), 'auth' => 'guest'],
+            ['label' => 'Fazer Simulação', 'url' => url('/simulacao/' . $cadastro->IDCadastro), 'auth' => 'auth'],
+        ],
+    ])
+
 
     <div class="section 3" style="min-height: 85vh;">
         <div class="container">
