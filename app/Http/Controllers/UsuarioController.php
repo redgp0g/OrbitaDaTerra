@@ -32,7 +32,6 @@ class UsuarioController extends Controller
                 $user->EmailConfirmado &&
                 !$user->ContaSuspendida
             ) {
-                ddd($user->IDUsuario);
                 HistoricoAcesso::create([
                     'IDUsuario' => $user->IDUsuario,
                     'DataEntrada' => now(),
