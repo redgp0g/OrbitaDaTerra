@@ -129,8 +129,9 @@ function atualizarOptionsFiltroDataTable(
     });
 }
 
-$("#cep").focusout(function () {
-    var cep = $("#cep").val();
+$("#CEP").focusout(function () {
+    var cep = $(this).val();
+    console.log(cep);
     cep = cep.replace(/\D/g, "");
     var url = "https://api.brasilaberto.com/v1/zipcode/" + cep;
 
@@ -138,10 +139,10 @@ $("#cep").focusout(function () {
         .then((response) => response.json())
         .then((data) => {
             if (data && data.result) {
-                $("#endereco").val(data.result.street);
-                $("#bairro").val(data.result.district);
-                $("#cidade").val(data.result.city);
-                $("#estado").val(data.result.state);
+                $("#Endereco").val(data.result.street);
+                $("#Bairro").val(data.result.district);
+                $("#Cidade").val(data.result.city);
+                $("#Estado").val(data.result.state);
             } else {
                 console.error("Resposta da API sem dados válidos.");
             }
