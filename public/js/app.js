@@ -1,5 +1,3 @@
-import "./bootstrap";
-
 function habilitar() {
     if (document.getElementById("toggle").checked) {
         document.getElementById("btnCadastro").disabled = false;
