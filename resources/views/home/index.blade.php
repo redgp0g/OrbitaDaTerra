@@ -6,15 +6,14 @@
             ['label' => 'Cartas Contempladas', 'url' => url('/contempladas/' . $cadastro->IDCadastro), 'auth' => 'guest'],
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'auth' => 'auth'],
             ['label' => 'Acessar Conta', 'url' => url('/usuario'), 'auth' => 'guest'],
-            ['label' => 'Cadastrar-se', 'url' => url('/usuario' . $cadastro->IDCadastro), 'auth' => 'guest'],
-            ['label' => 'Fazer Simulação', 'url' => url('/simulacao/' . $cadastro->IDCadastro), 'auth' => 'auth'],
+            ['label' => 'Cadastrar-se', 'url' => url('/usuario/create/' . $cadastro->IDCadastro), 'auth' => 'guest'],
+            ['label' => 'Fazer Simulação', 'url' => url('/simulacao/' . $cadastro->IDCadastro), 'auth' => 'guest'],
         ],
     ])
 
-
-    <div class="section 3" style="min-height: 85vh;">
-        <div class="container">
-            <div class="row">
+<div class="section 3" style="min-height: 85vh;">
+    <div class="container">
+        <div class="row">
                 @for ($x = 1; $x <= 7; $x++)
                     @php
                         $filteredCartas = $cartas->filter(function ($carta) use ($x) {
