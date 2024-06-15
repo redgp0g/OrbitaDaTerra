@@ -19,21 +19,33 @@ class User extends Authenticatable
     protected $fillable = [
         'Login',
         'Senha',
+        'IDCadastro',
+        'DataCadastro',
+        'EmailConfirmado',
+        'CodigoVerificacaoEmail',
+        'AdminConfirmado',
+        'ContaSuspendida',
+        'TokeRecuperacaoSenha'
     ];
 
     protected $hidden = [
         'Senha',
-        'remember_token',
     ];
 
-    
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
+    public $timestamps = false;
     
     public function getAuthPassword()
     {
         return $this->Senha;
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($usuario) {
+            $usuario->DataCadastro = now();
+            $usuario->EmailConfirmado = 0;
+            $usuario->AdminConfirmado = 0;
+            $usuario->ContaSuspendida = 0;
+        });
     }
 }
