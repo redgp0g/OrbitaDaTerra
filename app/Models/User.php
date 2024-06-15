@@ -48,4 +48,8 @@ class User extends Authenticatable
             $usuario->ContaSuspendida = 0;
         });
     }
+
+    public function  cadastro() {
+        return $this->belongsTo(Cadastro::class, 'IDCadastro','IDCadastro');
+    }
 }

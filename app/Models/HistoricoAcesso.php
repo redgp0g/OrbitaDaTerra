@@ -19,4 +19,9 @@ class HistoricoAcesso extends Model
         'DataEntrada',
         'DataSaida'
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'IDUsuario', 'IDUsuario');
+    }
 }
