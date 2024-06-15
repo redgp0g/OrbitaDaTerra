@@ -11,6 +11,7 @@ Route::get('/simulacao/{idVendedor?}', [HomeController::class, 'simulacao'])->wh
 Route::view('/usuario', 'usuario.login')->name('usuario.login');
 Route::post('/auth', [UsuarioController::class, 'auth'])->name('usuario.auth');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
+Route::get('/dashboard/historicoAcesso', [DashboardController::class, 'historicoAcesso'])->name('dashboard.historicoAcesso')->middleware('auth');
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('usuario.logout');
 Route::get('/usuario/create/{id?}', [UsuarioController::class, 'create'])->name('usuario.create')->where('id','[0-9]+');
 Route::post('/usuario/store', [UsuarioController::class, 'store'])->name('usuario.store');
