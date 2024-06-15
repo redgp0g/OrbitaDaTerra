@@ -41,7 +41,7 @@
                                                 <input type="password" id="senha" class="form-control" name="Senha"
                                                     placeholder="Senha" aria-describedby="password" />
                                             </div>
-                                            <div class="d-flex flex-row-reverse m-2">
+                                            <div class="d-flex flex-row-reverse m-2 d-none">
                                                 <a href="/public/index.php/usuario/recoverPassword">Esqueceu a Senha?</a>
                                             </div>
                                         </div>
