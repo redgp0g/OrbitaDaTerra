@@ -105,7 +105,7 @@ class UsuarioController extends Controller
 
             // sendEmail($mensagemNotificacao, 'Cadastro de Usuário', 'denilson@orbitadaterra.com.br');
             // sendEmail($mensagemUsuario, 'Verificação de Email', $cadastrado->Email);
-            return redirect("usuario/auth")->with('sucesso', 'Cadastrado com sucesso! Verifique a sua caixa de entrada do email para realizar a validação!');
+            return redirect("usuario")->with('sucesso', 'Cadastrado com sucesso! Verifique a sua caixa de entrada do email para realizar a validação!');
         } catch (Exception $ex) {
             if ($cadastrado) {
                 Cadastro::destroy($cadastrado->IDCadastro);
