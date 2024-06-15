@@ -9,7 +9,7 @@
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'auth' => 'auth'],
             ['label' => 'Acessar Conta', 'url' => url('/usuario'), 'auth' => 'guest'],
             ['label' => 'Cadastrar-se', 'url' => url('/usuario' . $cadastro->IDCadastro), 'auth' => 'guest'],
-            ['label' => 'Fazer Simulação', 'url' => url('/simulacao/' . $cadastro->IDCadastro), 'auth' => 'auth'],
+            ['label' => 'Fazer Simulação', 'url' => url('/simulacao/' . $cadastro->IDCadastro), 'auth' => 'guest'],
         ],
     ])
 
