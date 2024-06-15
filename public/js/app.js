@@ -153,3 +153,23 @@ $("#CEP").focusout(function () {
 
     return false;
 });
+
+
+function validarCPF(cpf) {
+    var token = "5735|bXDX7IRtgcyFFLs4SMSX3BFGXBvseRWR";
+    var apiUrl = "https://api.invertexto.com/v1/validator?type=cpf&token=" + token + "&value=" + cpf;
+
+    $.get(apiUrl, function(data) {
+            if (data.valid) {
+                console.log("CPF válido");
+            } else {
+                console.log("CPF inválido");
+                alert('CPF Inválido');
+                $("#CPF").val("");
+                $("#CPF").focus();
+            }
+        })
+        .fail(function() {
+            console.log("Erro ao chamar a API de validação do CPF");
+        });
+}
