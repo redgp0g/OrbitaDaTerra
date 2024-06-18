@@ -12,6 +12,8 @@ class Carta extends Model
     protected $table = 'Carta';
     protected $primaryKey = 'IDCarta';
 
+    public $timestamps = false;
+    
     public function tipoCarta()
     {
         return $this->belongsTo(TipoCarta::class, 'IDTipoCarta', 'IDTipoCarta');

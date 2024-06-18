@@ -12,6 +12,8 @@ class TipoCarta extends Model
     protected $table = 'TipoCarta';
     protected $primaryKey = 'IDTipoCarta';
 
+    public $timestamps = false;
+    
     public function cartas()
     {
         return $this->hasMany(Carta::class, 'IDTipoCarta', 'IDTipoCarta');
