@@ -15,3 +15,5 @@ Route::get('/dashboard/historicoAcesso', [DashboardController::class, 'historico
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('usuario.logout');
 Route::get('/usuario/create/{id?}', [UsuarioController::class, 'create'])->name('usuario.create')->where('id','[0-9]+');
 Route::post('/usuario/store', [UsuarioController::class, 'store'])->name('usuario.store');
+
+Route::get('/dashboard/contas', [DashboardController::class, 'contas'])->name('dashboard.contas')->middleware('auth');

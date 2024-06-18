@@ -43,15 +43,9 @@ class DashboardController extends Controller
 
     public function contas()
     {
-        $connect = connect();
+        $contas = User::with('cadastro')->orderBy('AdminConfirmado')->get();
 
-        $query = $connect->query("SELECT * FROM `Usuario` as U INNER JOIN Cadastro as C on C.IDCadastro = U.IDCadastro ORDER BY AdminConfirmado, ContaSuspendida ASC");
-        $contas = $query->fetchAll();
-
-        return [
-            'view' => $this->getViewPath() . '/contas.php',
-            'data' => ['title' => 'Contas em Aprovação', 'contas' => $contas]
-        ];
+        return view('dashboard.contas', compact('contas'));
     }
 
     public function perfilUsuario()
