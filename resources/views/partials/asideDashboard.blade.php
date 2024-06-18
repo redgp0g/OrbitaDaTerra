@@ -96,7 +96,7 @@
                     </ul>
                     <ul class="sub-nav collapse" id="sidebar-consultar" data-bs-parent="#sidebar-menu">
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ url('/dashboard/empresa')}}">
+                            <a class="nav-link " href="{{ url('/dashboard/empresas')}}">
                                 <i class="icon">
                                     <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
                                         viewBox="0 0 24 24" fill="currentColor">
