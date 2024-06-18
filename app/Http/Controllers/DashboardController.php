@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cadastro;
+use App\Models\Empresa;
 use App\Models\HistoricoAcesso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,14 +32,11 @@ class DashboardController extends Controller
         return view('dashboard.index', compact('leadsIndicados', 'leads'));
     }
 
-    public function indexEmpresa()
+    public function empresas()
     {
-        $empresas = all('Empresa');
+        $empresas = Empresa::all();
 
-        return [
-            'view' => $this->getViewPath() . '/indexEmpresa.php',
-            'data' => ['title' => 'Dashboard', 'empresas' => $empresas]
-        ];
+        return view('dashboard.empresa', compact('empresas'));
     }
 
     public function contas()
