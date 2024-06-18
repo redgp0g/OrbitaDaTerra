@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cadastro;
 use App\Models\Empresa;
 use App\Models\HistoricoAcesso;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
