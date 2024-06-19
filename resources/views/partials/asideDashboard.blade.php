@@ -155,7 +155,7 @@
                     </ul>
                     <ul class="sub-nav collapse" id="sidebar-cadastrar" data-bs-parent="#sidebar-menu">
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ url('/dashboard/cartavendida')}}">
+                            <a class="nav-link " href="{{ url('/dashboard/cartaVendida')}}">
                                 <i class="icon">
                                     <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
                                         viewBox="0 0 24 24" fill="currentColor">

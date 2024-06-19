@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cadastro;
 use App\Models\Empresa;
 use App\Models\HistoricoAcesso;
+use App\Models\TipoCarta;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -119,24 +120,14 @@ class DashboardController extends Controller
         }
     }
 
-    public function createCartaVendida()
+    public function cartaVendida()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $connect = connect();
+        $tiposCartas = TipoCarta::all();
+        $cadastros = Cadastro::all();
+        $administradoras = Empresa::where('TipoEmpresa','Administradora')->get();
+        $autorizadas = Empresa::where('TipoEmpresa','Autorizada')->get();
 
-            $tiposCartas = all('TipoCarta');
-            $cadastros = all('Cadastro');
-
-
-            $query = $connect->query("SELECT IDEmpresa, NomeFantasia FROM Empresa WHERE TipoEmpresa = 'Administradora'");
-            $administradoras = $query->fetchAll();
-            return [
-                'view' => $this->getViewPath() . '/createCartaVendida.php',
-                'data' => ['title' => 'Cadastrar Carta Vendida', 'tiposCartas' => $tiposCartas, 'administradoras' => $administradoras, 'cadastros' => $cadastros]
-            ];
-        }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        }
+        return view('dashboard.cartaVendida', compact('tiposCartas', 'administradoras', 'cadastros','autorizadas'));
     }
 
     public function historicoAcesso()
