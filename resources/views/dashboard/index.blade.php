@@ -36,26 +36,38 @@
                         <div id="formNovoLead" class="d-none align-items-center align-self-center">
                             <div class="card-body">
                                 <div class="new-user-info">
-                                    <form method="post" id="formCadastrarLead">
+                                    <form method="post" id="formCadastrarLead" action="{{ url('/api/cadastros') }}">
                                         <div class="row">
                                             <div class="form-group col-md-12">
-                                                <label class="form-label" for="cname">Nome Completo:</label>
-                                                <input type="text" class="form-control" name="nome"
+                                                <label class="form-label" for="Nome">Nome Completo:</label>
+                                                <input type="text" class="form-control" name="Nome"
                                                     placeholder="Nome do lead" required>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="mobno">Número de
+                                                <label class="form-label" for="Telefone">Número de
                                                     Telefone:</label>
-                                                <input type="text" class="form-control celular" name="telefone"
-                                                    id="telefone" placeholder="Número de telefone" required
+                                                <input type="text" class="form-control celular" name="Telefone"
+                                                    id="Telefone" placeholder="Número de telefone" required
                                                     pattern="\(\d{2}\) \d{5}-\d{4}">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label class="form-label">Observações (Não Obrigatório):</label>
-                                                <input class="form-control" name="observacoes" placeholder="Observações">
+                                                <label class="form-label" for="Observacoes">Observações (Não
+                                                    Obrigatório):</label>
+                                                <input class="form-control" id="Observacoes" name="Observacoes"
+                                                    placeholder="Observações">
                                             </div>
                                         </div>
-                                        <input type="hidden" name="idVendedor" value="{{ auth()->user()->IDCadastro }}">
+                                        @if (auth()->user()->TipoCadastro == 'Vendedor')
+                                            <input type="hidden" name="IDCadastroVendedor"
+                                                value="{{ auth()->user()->IDCadastro }}">
+                                        @else
+                                            <input type="hidden" name="IDCadastroVendedor"
+                                                value="{{ auth()->user()->IDCadastroVendedorIndicado }}">
+                                        @endif
+                                        <input type="hidden" name="IDCadastroIndicador"
+                                            value="{{ auth()->user()->IDCadastro }}">
+                                        <input type="hidden" name="TipoCadastro" value="Lead">
+                                        <input type="hidden" name="Origem" value="Cadastrado no Dashboard">
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </form>
                                 </div>
@@ -568,17 +580,13 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
             event.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
-                url: '/public/index.php/dashboard/cadastrarLead',
+                url: '/api/cadastros',
                 type: 'POST',
                 data: formData,
                 dataType: 'json',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        alert(response.message);
-                        window.location.reload();
-                    } else {
-                        alert(response.message);
-                    }
+                success: function() {
+                    alert("Cadastro realizado com sucesso!");
+                    window.location.reload();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error('Erro na requisição AJAX:', textStatus, errorThrown);
