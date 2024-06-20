@@ -176,23 +176,23 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formEditarLead" method="post">
+                    <form id="formEditarLead">
                         <div class="form-group">
                             <label for="nome-edit">Nome Completo:</label>
-                            <input type="text" class="form-control" name="nome" id="nome-edit" required>
+                            <input type="text" class="form-control" name="Nome" id="nome-edit" required>
                         </div>
                         <div class="form-group">
                             <label for="telefone-edit">Número de Telefone:</label>
-                            <input type="text" class="form-control celular" name="telefone" id="telefone-edit"
+                            <input type="text" class="form-control celular" name="Telefone" id="telefone-edit"
                                 required pattern="\(\d{2}\) \d{5}-\d{4}">
                         </div>
                         <div class="form-group">
                             <label for="email-edit">Email:</label>
-                            <input type="email" class="form-control" name="email" id="email-edit">
+                            <input type="email" class="form-control" name="Email" id="email-edit">
                         </div>
                         <div class="form-group">
                             <label for="atividadeVendedor-edit">Atividade:</label>
-                            <select class="form-control" name="atividadeVendedor" id="atividadeVendedor-edit">
+                            <select class="form-control" name="AtividadeVendedor" id="atividadeVendedor-edit">
                                 <option value="">Selecione uma Atividade</option>
                                 <option value="Ligar">Ligar</option>
                                 <option value="Não Atendeu a Ligação">Não Atendeu a Ligação</option>
@@ -226,14 +226,14 @@
                         </div>
                         <div class="form-group">
                             <label for="email-edit">Quando Executará Atividade?</label>
-                            <input type="date" class="form-control" name="previsaoAtividadeVendedor"
+                            <input type="date" class="form-control" name="PrevisaoAtividadeVendedor"
                                 id="previsaoAtividadeVendedor-edit">
                         </div>
                         <div class="form-group">
                             <label for="observacoes-edit">Observações</label>
-                            <textarea class="form-control" name="observacoes" id="observacoes-edit"></textarea>
+                            <textarea class="form-control" name="Observacoes" id="observacoes-edit"></textarea>
                         </div>
-                        <input type="hidden" name="cadastroId" id="cadastroId-edit" value="">
+                        <input type="hidden" name="IDCadastro" id="cadastroId-edit" value="">
                         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </form>
                 </div>
@@ -481,7 +481,7 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
             table.on('click', '.editar-lead', function() {
                 var cadastroId = $(this).data('id');
                 $.ajax({
-                    url: '/public/index.php/api/buscarCadastroUsuario/idCadastro/' + cadastroId,
+                    url: '/api/cadastros/' + cadastroId,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -549,19 +549,14 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
         $("#formEditarLead").submit(function() {
             event.preventDefault();
             var formData = $(this).serialize();
+            let idCadastro = $("#cadastroId-edit").val();
             $.ajax({
-                url: '/public/index.php/dashboard/atualizarLead',
-                type: 'POST',
+                url: '/api/cadastros/' + idCadastro,
+                type: 'PUT',
                 data: formData,
                 dataType: 'json',
                 success: function(response) {
-                    if (response.status === 'success') {
-                        $('#editarLeadModal').modal('hide');
-                        alert(response.message);
-                        window.location.reload();
-                    } else {
-                        alert(response.message);
-                    }
+                    window.location.reload();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error('Erro na requisição AJAX:', textStatus, errorThrown);
