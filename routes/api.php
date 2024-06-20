@@ -1,19 +1,14 @@
 <?php
 
+use App\Http\Controllers\api\CadastroController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/cadastros', [CadastroController::class, 'index']);
+Route::get('/cadastros/{id}', [CadastroController::class, 'show']);
+Route::post('/cadastros', [CadastroController::class, 'store']);
+Route::put('/cadastros/{id}', [CadastroController::class, 'update']);
