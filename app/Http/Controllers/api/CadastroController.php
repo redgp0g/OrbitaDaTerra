@@ -49,4 +49,12 @@ class CadastroController extends Controller
         return response()->json($cadastro);
     }
 
+    public function excluirLead(Request $request, $id) {
+        $data = $request->all();
+        $data['DataUltimoVendedor'] = now();
+        $data['IDCadastroVendedor'] = null;
+        Cadastro::find($id)->update($data);
+        return response()->json(201);
+    }
+
 }

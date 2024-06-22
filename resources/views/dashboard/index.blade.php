@@ -439,32 +439,27 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
 
             table.on('click', '.delete-lead', function(event) {
                 var cadastroId = $(this).data('id');
-                var vendedorId = <?php echo auth()->user()->IDCadastro; ?>;
-
-                var observacoes = prompt('Digite as observações (opcional):');
-
-                if (observacoes === null) {
-                    return;
-                }
+                var vendedorId = {{ auth()->user()->IDCadastro }};
 
                 if (confirm('Tem certeza de que deseja excluir este lead?')) {
+                    var observacoes = prompt('Digite as observações (opcional):');
+                    if (observacoes === null) {
+                        return;
+                    }
+
                     $.ajax({
-                        url: '/public/index.php/api/deletarLead',
-                        type: 'POST',
+                        url: '/api/cadastros/excluirLead/' + cadastroId,
+                        type: 'PUT',
                         dataType: 'json',
                         data: {
-                            vendedorId: vendedorId,
-                            cadastroId: cadastroId,
-                            observacoes: observacoes
+                            IDUltimoCadastroVendedor: vendedorId,
+                            ObservacoesUltimoVendedor: observacoes,
                         },
-                        success: function(response) {
-                            if (response === 'success') {
-                                var row = table.row($('button[data-id="' + cadastroId + '"]')
-                                    .closest('tr'));
-                                row.remove().draw();
-                            } else {
-                                alert("Erro ao deletar o lead.");
-                            }
+                        success: function() {
+                            alert('Lead excluído com sucesso!');
+                            var row = table.row($('button[data-id="' + cadastroId + '"]')
+                                .closest('tr'));
+                            row.remove().draw();
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.error('Erro na requisição AJAX:', textStatus, errorThrown);
