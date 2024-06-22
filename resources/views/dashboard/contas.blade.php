@@ -12,8 +12,6 @@
                                 <th>Login</th>
                                 <th>Email Confirmado</th>
                                 <th>Telefone</th>
-                                <th>CEP</th>
-                                <th>Data de Nascimento</th>
                                 <th>Tipo Cadastro</th>
                                 <th>Data Cadastro</th>
                                 <th>Ações</th>
@@ -30,8 +28,6 @@
                                         <td>Não Confirmado</td>
                                     @endif
                                     <td>{{ $conta->cadastro->Telefone }}</td>
-                                    <td>{{ $conta->cadastro->CEP }}</td>
-                                    <td>{{ $conta->cadastro->DataNascimento }}</td>
                                     <td>{{ $conta->cadastro->TipoCadastro }}</td>
                                     <td>{{ $conta->DataCadastro }}</td>
                                     <td>
