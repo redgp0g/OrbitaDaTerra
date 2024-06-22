@@ -16,8 +16,11 @@ class DashboardController extends Controller
 
         $user = Auth::user();
 
-        $leadsIndicados = Cadastro::where('IDCadastroIndicador', $user->IDCadastro)
-            ->where('IDCadastroVendedor', '<>', $user->IDCadastro)
+        $leadsIndicados = Cadastro::select('L.*', 'I.Nome as NomeIndicador')
+            ->from('Cadastro as L')
+            ->join('Cadastro as I', 'L.IDCadastroIndicador', '=', 'I.IDCadastro')
+            ->where('L.IDCadastroIndicador', $user->IDCadastro)
+            ->where('L.IDCadastroVendedor', '<>', $user->IDCadastro)
             ->get();
 
 
