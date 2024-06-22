@@ -469,10 +469,6 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
                 }
             });
 
-            $('#email-edit').on('focusout', function() {
-                var email = $(this).val();
-                validarEmail(email, this);
-            });
 
             table.on('click', '.editar-lead', function() {
                 var cadastroId = $(this).data('id');
