@@ -20,7 +20,7 @@
                         <tbody>
                             @foreach ($contas as $conta)
                                 <tr>
-                                    <td>{{ $conta->cadastro->Nome }}</td>
+                                    <td class="{{ $conta->ContaSuspendida ? 'text-danger' : '' }}">{{ $conta->cadastro->Nome }}</td>
                                     <td>{{ $conta->Login }}</td>
                                     @if ($conta->EmailConfirmado)
                                         <td>Confirmado</td>
