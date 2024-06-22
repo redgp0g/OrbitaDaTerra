@@ -11,8 +11,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/cadastros', [CadastroController::class, 'index']);
-Route::get('/cadastros/{id}', [CadastroController::class, 'show']);
+Route::get('/cadastros/{id}', [CadastroController::class, 'show'])->where('id','[0-9]+');
 Route::post('/cadastros', [CadastroController::class, 'store']);
+Route::put('/cadastros/{id}', [CadastroController::class, 'update'])->where('id','[0-9]+');
 Route::put('/cadastros/excluirLead/{id}', [CadastroController::class, 'excluirLead'])->where('id','[0-9]+');
 
 Route::put('/usuario/liberar/{id}', [UsuarioController::class, 'liberar'])->where('id','[0-9]+');
