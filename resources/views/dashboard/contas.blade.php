@@ -34,10 +34,9 @@
                                         <button class="btn btn-info detalhes"
                                             data-id="{{ $conta->IDUsuario }}">Detalhes</button>
                                         @if (!$conta->AdminConfirmado)
-                                            <button class="btn btn-success aprovar"
+                                            <button class="btn btn-success liberar"
                                                 data-id="{{ $conta->IDUsuario }}">Liberar</button>
-                                        @endif
-                                        @if (!$conta->ContaSuspendida)
+                                        @elseif (!$conta->ContaSuspendida)
                                             <button class="btn btn-danger suspender"
                                                 data-id="{{ $conta->IDUsuario }}">Suspender</button>
                                         @endif
@@ -126,113 +125,104 @@
     </div>
 
 
-            <script>
-                const modal = $('#detalhesConta');
-                $(document).ready(function() {
+    <script>
+        const modal = $('#detalhesConta');
+        $(document).ready(function() {
 
-                    var table = $('#datatable').DataTable({
-                        "language": {
-                            "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json"
-                        },
-                        "dom": '<"row align-items-center"<"col-md-6" l><"col-md-6" f>><"table-responsive border-bottom my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">',
-                        "responsive": true,
-                        "order": []
-                    });
+            var table = $('#datatable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json"
+                },
+                "dom": '<"row align-items-center"<"col-md-6" l><"col-md-6" f>><"table-responsive border-bottom my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">',
+                "responsive": true,
+                "order": []
+            });
 
-                    table.on('click', '.detalhes', function() {
-                        var idUsuario = $(this).data('id');
-                        $.ajax({
-                            url: '/public/index.php/api/buscarCadastroUsuario/idUsuario/' + idUsuario,
-                            type: 'GET',
-                            dataType: 'json',
-                            success: function(data) {
-                                if (data) {
-                                    $("#nome-details").val(data.Nome);
-                                    var telefoneString = data.Telefone.toString();
-                                    var telefoneFormatado = telefoneString.replace(/\D/g, '').match(
-                                        /(\d{0,2})(\d{0,5})(\d{0,4})/);
-                                    var telefoneMascarado = !telefoneFormatado[2] ? telefoneFormatado[
-                                            1] : '(' + telefoneFormatado[1] + ') ' + telefoneFormatado[
-                                            2] +
-                                        (telefoneFormatado[3] ? '-' + telefoneFormatado[3] : '');
-                                    $("#telefone-details").val(telefoneMascarado);
-                                    $("#cpf-details").val(data.CPF);
-                                    $("#email-details").val(data.Email);
-                                    $("#cep-details").val(data.CEP);
-                                    $("#endereco-details").val(data.Endereco);
-                                    $("#bairro-details").val(data.Bairro);
-                                    $("#cidade-details").val(data.Cidade);
-                                    $("#estado-details").val(data.Estado);
-                                    $("#tipocadastro-details").val(data.TipoCadastro);
-                                    $("#datacadastro-details").val(data.DataCadastro);
-                                    $("#observacoes-details").val(data.Observacoes);
-                                    $("#arquivo-details").attr("src", data.Curriculo);
-                                    $('#detalhesConta').modal('show');
-                                } else {
-                                    alert('Lead não encontrado ou erro ao buscar os dados.');
-                                }
-                            },
-                            error: function(jqXHR, textStatus, errorThrown) {
-                                console.error('Erro na requisição AJAX:', textStatus, errorThrown);
-                                alert('Erro na requisição AJAX.');
-                            }
-                        });
-                    });
-
-                    table.on('click', '.aprovar', function() {
-                        var button = $(this);
-                        var idUsuario = $(this).data('id');
-                        if (confirm('Tem certeza de que deseja aprovar essa conta?')) {
-                            $.ajax({
-                                url: '/public/index.php/api/aprovarUsuario',
-                                type: 'POST',
-                                dataType: 'json',
-                                data: {
-                                    idUsuario: idUsuario
-                                },
-                                success: function(data) {
-                                    if (data == "success") {
-                                        alert('Aprovado!');
-                                        var row = table.row($('button[data-id="' + idUsuario + '"]')
-                                            .closest('tr'));
-                                        row.remove().draw();
-                                    }
-                                },
-                                error: function(jqXHR, textStatus, errorThrown) {
-                                    console.error('Erro na requisição AJAX:', textStatus, errorThrown);
-                                    alert('Erro na requisição AJAX.');
-                                }
-                            });
+            table.on('click', '.detalhes', function() {
+                var idUsuario = $(this).data('id');
+                $.ajax({
+                    url: '/api/usuario/' + idUsuario,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data) {
+                            $("#nome-details").val(data.Nome);
+                            var telefoneString = data.Telefone.toString();
+                            var telefoneFormatado = telefoneString.replace(/\D/g, '').match(
+                                /(\d{0,2})(\d{0,5})(\d{0,4})/);
+                            var telefoneMascarado = !telefoneFormatado[2] ? telefoneFormatado[
+                                    1] : '(' + telefoneFormatado[1] + ') ' + telefoneFormatado[
+                                    2] +
+                                (telefoneFormatado[3] ? '-' + telefoneFormatado[3] : '');
+                            $("#telefone-details").val(telefoneMascarado);
+                            $("#cpf-details").val(data.CPF);
+                            $("#email-details").val(data.Email);
+                            $("#cep-details").val(data.CEP);
+                            $("#endereco-details").val(data.Endereco);
+                            $("#bairro-details").val(data.Bairro);
+                            $("#cidade-details").val(data.Cidade);
+                            $("#estado-details").val(data.Estado);
+                            $("#tipocadastro-details").val(data.TipoCadastro);
+                            $("#datacadastro-details").val(data.DataCadastro);
+                            $("#observacoes-details").val(data.Observacoes);
+                            $("#arquivo-details").attr("src", data.Curriculo);
+                            $('#detalhesConta').modal('show');
+                        } else {
+                            alert('Lead não encontrado ou erro ao buscar os dados.');
                         }
-                    });
-
-
-                    table.on('click', '.suspender', function() {
-                        var button = $(this);
-                        var idUsuario = $(this).data('id');
-                        if (confirm('Tem certeza de que deseja suspender essa conta?')) {
-                            $.ajax({
-                                url: '/public/index.php/api/suspenderUsuario',
-                                type: 'POST',
-                                dataType: 'json',
-                                data: {
-                                    idUsuario: idUsuario
-                                },
-                                success: function(data) {
-                                    if (data == "success") {
-                                        alert('Suspendido!');
-                                        var row = table.row($('button[data-id="' + idUsuario + '"]')
-                                            .closest('tr'));
-                                        row.remove().draw();
-                                    }
-                                },
-                                error: function(jqXHR, textStatus, errorThrown) {
-                                    console.error('Erro na requisição AJAX:', textStatus, errorThrown);
-                                    alert('Erro na requisição AJAX.');
-                                }
-                            });
-                        }
-                    });
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Erro na requisição AJAX:', textStatus, errorThrown);
+                        alert('Erro na requisição AJAX.');
+                    }
                 });
-            </script>
-        @endsection
+            });
+
+            table.on('click', '.liberar', function() {
+                var button = $(this);
+                var idUsuario = $(this).data('id');
+                if (confirm('Tem certeza de que deseja liberar essa conta?')) {
+                    $.ajax({
+                        url: '/api/usuario/liberar/' + idUsuario,
+                        type: 'PUT',
+                        dataType: 'json',
+                        success: function() {
+                            alert('Aprovado!');
+                            var row = table.row($('button[data-id="' + idUsuario + '"]')
+                                .closest('tr'));
+                            row.remove().draw();
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error('Erro na requisição AJAX:', textStatus, errorThrown);
+                            alert('Erro na requisição AJAX.');
+                        }
+                    });
+                }
+            });
+
+
+            table.on('click', '.suspender', function() {
+                var button = $(this);
+                var idUsuario = $(this).data('id');
+                if (confirm('Tem certeza de que deseja suspender essa conta?')) {
+                    $.ajax({
+                        url: '/api/usuario/suspender/' + idUsuario,
+                        type: 'PUT',
+                        dataType: 'json',
+                        success: function(data) {
+                            alert('Suspendido!');
+                            var row = table.row($('button[data-id="' + idUsuario + '"]')
+                                .closest('tr'));
+                            row.remove().draw();
+
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error('Erro na requisição AJAX:', textStatus, errorThrown);
+                            alert('Erro na requisição AJAX.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+@endsection
