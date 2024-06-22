@@ -15,11 +15,13 @@ class Empresa extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'IDCadastroRepresentante',
         'CNPJ',
         'NomeFantasia',
         'RazaoSocial',
         'Telefone',
+        'NomeRepresentante',
+        'CelularRepresentante',
+        'EmailRepresentante',
         'CEP',
         'Endereco',
         'Numero',
