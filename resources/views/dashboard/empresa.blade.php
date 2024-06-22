@@ -97,20 +97,13 @@
 
                 if (confirm('Tem certeza de que deseja excluir esta empresa?')) {
                     $.ajax({
-                        url: '/public/index.php/api/deletarEmpresa',
-                        type: 'POST',
+                        url: '/api/empresas/' + empresaId,
+                        type: 'DELETE',
                         dataType: 'json',
-                        data: {
-                            empresaId: empresaId,
-                        },
                         success: function(response) {
-                            if (response === 'success') {
-                                var row = table.row($('button[data-id="' + empresaId + '"]')
-                                    .closest('tr'));
-                                row.remove().draw();
-                            } else {
-                                alert("Erro ao deletar a empresa.");
-                            }
+                            var row = table.row($('button[data-id="' + empresaId + '"]')
+                                .closest('tr'));
+                            row.remove().draw();
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.error('Erro na requisição AJAX:', textStatus, errorThrown);
