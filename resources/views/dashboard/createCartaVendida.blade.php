@@ -3,7 +3,8 @@
     <div class="col-16">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="">
+                <form method="POST" action="{{ url('/dashboard/storeCartaVendida') }}">
+                    @csrf
                     <div class="row">
                         <div class="form-group col-lg-2">
                             <label class="form-label" for="IDEmpresaAdministradora">Administradora</label>
@@ -121,20 +122,20 @@
                                 required>
                         </div>
                         <div class="form-group col-lg-3">
-                            <label class="form-label" for="taxaTransferencia">Taxa de Transferência</label>
-                            <input type="text" id="taxaTransferencia" name="taxaTransferencia" class="form-control"
+                            <label class="form-label" for="TaxaTransferencia">Taxa de Transferência</label>
+                            <input type="text" id="TaxaTransferencia" name="TaxaTransferencia" class="form-control"
                                 placeholder="Taxa de Transferência" required>
                         </div>
                         <div class="form-group col-lg-3">
-                            <label class="form-label" for="taxaTransferencia">Contemplada?</label>
+                            <label class="form-label" for="Contemplada">Contemplada?</label>
                             <div class="row">
                                 <div>
                                     <label for="taxaTransferenciaSim">Sim</label>
-                                    <input type="radio" id="taxaTransferenciaSim" name="taxaTransferencia" value="1">
+                                    <input type="radio" id="contempladaSim" name="Contemplada" value="1">
                                 </div>
                                 <div>
                                     <label for="taxaTransferenciaNão">Não</label>
-                                    <input type="radio" id="taxaTransferenciaNão" name="taxaTransferencia" value="0">
+                                    <input type="radio" id="contempladaNão" name="Contemplada" value="0">
                                 </div>
                             </div>
                         </div>

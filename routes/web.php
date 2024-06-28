@@ -22,4 +22,5 @@ Route::get('/dashboard/contas', [DashboardController::class, 'contas'])->name('d
 Route::get('/dashboard/empresas', [DashboardController::class, 'empresas'])->name('dashboard.empresas')->middleware('auth');
 Route::get('/dashboard/createEmpresa', [DashboardController::class, 'createEmpresa'])->name('dashboard.createEmpresa')->middleware('auth');
 Route::post('/dashboard/storeEmpresa', [DashboardController::class, 'storeEmpresa'])->name('dashboard.storeEmpresa')->middleware('auth');
-Route::get('/dashboard/cartaVendida', [DashboardController::class, 'cartaVendida'])->name('dashboard.cartaVendida')->middleware('auth');
+Route::get('/dashboard/createCartaVendida', [DashboardController::class, 'createCartaVendida'])->name('dashboard.createCartaVendida')->middleware('auth');
+Route::post('/dashboard/storeCartaVendida', [DashboardController::class, 'storeCartaVendida'])->name('dashboard.storeCartaVendida')->middleware('auth');

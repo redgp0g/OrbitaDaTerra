@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cadastro;
+use App\Models\CartaVendida;
 use App\Models\Empresa;
 use App\Models\HistoricoAcesso;
 use App\Models\TipoCarta;
@@ -80,14 +81,22 @@ class DashboardController extends Controller
         return view('dashboard.empresas');
     }
 
-    public function cartaVendida()
+    public function createCartaVendida()
     {
         $tiposCartas = TipoCarta::all();
         $cadastros = Cadastro::all();
         $administradoras = Empresa::where('TipoEmpresa', 'Administradora')->get();
         $autorizadas = Empresa::where('TipoEmpresa', 'Autorizada')->get();
 
-        return view('dashboard.cartaVendida', compact('tiposCartas', 'administradoras', 'cadastros', 'autorizadas'));
+        return view('dashboard.createCartaVendida', compact('tiposCartas', 'administradoras', 'cadastros', 'autorizadas'));
+    }
+
+    public function storeCartaVendida(Request $request)
+    {
+        $data = $request->all();
+    
+        CartaVendida::create($data);
+        return redirect('/contempladas/' . Auth::user()->IDCadastro);
     }
 
     public function historicoAcesso()
