@@ -35,7 +35,7 @@
                                     <div class="card">
                                         <img src="{{ asset('/images/tipoproduto/' . $carta->tipocarta->Imagem) }}">
                                         <div class="card-body">
-                                            <h5 class="card-title">Consórcio de {{ $carta->Descricao }}</h5>
+                                            <h5 class="card-title">Consórcio de {{ $carta->tipocarta->Descricao }}</h5>
                                             <p class="card-text"><span class="text-danger">Crédito:</span>
                                                 R${{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
                                             <p class="card-text"><span class="text-danger">Parcela Integral:</span>
