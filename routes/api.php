@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\CadastroController;
+use App\Http\Controllers\api\CartaController;
 use App\Http\Controllers\api\EmpresaController;
 use App\Http\Controllers\api\UsuarioController;
 use Illuminate\Http\Request;
@@ -15,6 +16,10 @@ Route::get('/cadastros/{id}', [CadastroController::class, 'show'])->where('id','
 Route::post('/cadastros', [CadastroController::class, 'store']);
 Route::put('/cadastros/{id}', [CadastroController::class, 'update'])->where('id','[0-9]+');
 Route::put('/cadastros/excluirLead/{id}', [CadastroController::class, 'excluirLead'])->where('id','[0-9]+');
+
+Route::post('/cartas/simulacao', [CartaController::class, 'simulacao']);
+Route::get('/prazos/tipocarta/{idTipoCarta}', [CartaController::class, 'buscarPrazosPorTipoCarta'])->where('idTipoCarta','[0-9]+');
+Route::get('/creditos/tipocarta/{idTipoCarta}', [CartaController::class, 'buscarCreditosPorTipoCarta'])->where('idTipoCarta','[0-9]+');
 
 Route::put('/usuario/liberar/{id}', [UsuarioController::class, 'liberar'])->where('id','[0-9]+');
 Route::put('/usuario/suspender/{id}', [UsuarioController::class, 'suspender'])->where('id','[0-9]+');

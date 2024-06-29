@@ -19,21 +19,25 @@
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="simulacao-nome">Nome:</label>
-                                                <input type="text" class="form-control" id="simulacao-nome" required
-                                                    placeholder="Nome">
+                                                <input type="text" class="form-control" name="Nome"
+                                                    id="simulacao-nome" required placeholder="Nome">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="simulacao-celular">Celular:</label>
-                                                <input type="text" class="form-control celular" id="simulacao-celular"
-                                                    required placeholder="Celular">
+                                                <input type="text" class="form-control celular" name="Telefone"
+                                                    id="simulacao-celular" required placeholder="Celular">
                                             </div>
-                                            <div class="form-group col-md-6 d-none">
-                                                <label class="form-label" for="simulacao-email">Email:</label>
-                                                <input type="email" class="form-control email" id="simulacao-email"
-                                                    placeholder="Email">
-                                            </div>
-                                            <input type="hidden" name="numerovendedor" id="numerovendedor"
-                                                value="<{{ $cadastro->Telefone }}">
+                                            <input type="hidden" name="Origem" value="Lead fez a Simulação">
+                                            <input type="hidden" name="TipoCadastro" value="Lead">
+                                            @if ($cadastro->TipoCadastro == 'Vendedor')
+                                                <input type="hidden" name="IDCadastroVendedor"
+                                                    value="{{ $cadastro->IDCadastro }}">
+                                            @else
+                                                <input type="hidden" name="IDCadastroVendedor"
+                                                    value="{{ $cadastro->IDCadastroVendedorIndicado }}">
+                                            @endif
+                                            <input type="hidden" name="IDCadastroIndicador"
+                                                value="{{ $cadastro->IDCadastro }}">
                                             <button type="submit" class="btn btn-primary">Próximo</button>
                                         </div>
                                     </form>
@@ -41,10 +45,10 @@
                             </div>
                             <div id="simulacao-dados" class="d-none vw-auto">
                                 <h5 class="mb-3">Simulação</h5>
-                                <form id="formSimulacao" class="">
+                                <form id="formSimulacao" method="POST">
                                     <div class="form-group col-sm-6">
-                                        <label class="form-label">Consórcio:</label>
-                                        <select id="tipoSelect" name="type" class="selectpicker form-control"
+                                        <label class="form-label" for="IDTipoCarta">Consórcio:</label>
+                                        <select id="IDTipoCarta" name="IDTipoCarta" class="selectpicker form-control"
                                             data-style="py-0" required>
                                             <option value="" selected disabled>Selecione o Consórcio</option>
                                             @foreach ($tiposCarta as $tipo)
@@ -54,17 +58,19 @@
                                     </div>
                                     <div id="simulacao2" class="d-none row">
                                         <div class="form-group col-md-6">
-                                            <label class="form-label" for="pass">Valor do Crédito:</label>
-                                            <select id="creditoSelect" class="form-control select2" multiple required>
+                                            <label class="form-label" for="Credito">Valor do Crédito:</label>
+                                            <select id="Credito" name="Credito" class="form-control select2" multiple
+                                                required>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label class="form-label" for="prazo">Prazo:</label>
-                                            <select id="prazoSelect" class="selectpicker form-control" required>
+                                            <label class="form-label" for="Prazo">Prazo:</label>
+                                            <select id="Prazo" name="Prazo" class="selectpicker form-control"
+                                                required>
                                                 <option value="" selected disabled>Selecione o Prazo</option>
                                             </select>
                                         </div>
-                                        <input type="hidden" id="idNovoLead">
+                                        <input type="hidden" id="IDCadastro" name="IDCadastro">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Gerar Simulação</button>
                                 </form>
@@ -91,89 +97,54 @@
             </div>
         </div>
     </div>
-    </div>
 
     <script>
-        $('#formSimulacaoDados').on('submit', function() {
+        $('#formSimulacaoDados').submit(function(event) {
             event.preventDefault();
-            let form = new FormData();
-
-            form.append('nome', $('#simulacao-nome').val());
-            form.append('celular', $('#simulacao-celular').val());
-            form.append('email', $('#simulacao-email').val());
-            form.append('numeroVendedor', $('#numerovendedor').val());
+            let formData = $(this).serialize();
 
             $.ajax({
-                url: '/public/index.php/enviardadosSimulacao',
+                url: '/api/cadastros',
                 type: 'POST',
-                data: form,
-                processData: false,
-                contentType: false,
+                data: formData,
+                dataType: 'json',
                 success: function(response) {
-                    $('#idNovoLead').val(response);
+                    console.log(response);
+                    $('#IDCadastro').val(response.IDCadastro);
                     $('#simulacao-dados-lead').hide();
                     $('#simulacao-dados').removeClass('d-none');
                 },
-                error: function(xhr, status, error) {
-                    alert('Houve um erro ao enviar os dados!');
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Erro na requisição AJAX:', textStatus, errorThrown);
+                    alert('Erro na requisição AJAX.');
                 }
             });
         });
 
-        $('#formSimulacao').on('submit', async function() {
-            event.preventDefault();
-            let form = new FormData();
-            $('#simulacao').addClass('d-none');
 
-            form.append('valorCredito', $('#creditoSelect').val());
-            form.append('tipoCarta', $('#tipoSelect').val());
-            form.append('prazo', $('#prazoSelect').val());
-            form.append('idLead', $('#idNovoLead').val());
-
-            var solicitacao = await $.ajax({
-                url: '/public/index.php/gerarSimulacao',
-                type: 'POST',
-                data: form,
-                processData: false,
-                contentType: false,
-                error: function(xhr, status, error) {
-                    alert('Houve um erro ao gerar a simulação!');
-                }
-            });
-
-            preencherTabela(solicitacao);
-            $('#simulacao').removeClass('d-none');
-        });
-
-        $('#tipoSelect').change(async function() {
+        $('#IDTipoCarta').change(async function() {
             let tipoCartaId = $(this).val();
-            let form = new FormData();
-            form.append('tipo_carta_id', tipoCartaId);
 
             try {
                 var creditos = await $.ajax({
-                    url: '/public/index.php/buscarCreditosPorTipoCarta',
-                    type: 'POST',
-                    data: form,
-                    processData: false,
-                    contentType: false
+                    url: '/api/creditos/tipocarta/' + tipoCartaId,
+                    type: 'GET',
+                    contentType: 'json',
                 });
 
                 var prazos = await $.ajax({
-                    url: '/public/index.php/buscarPrazosPorTipoCarta',
-                    type: 'POST',
-                    data: form,
-                    processData: false,
-                    contentType: false
+                    url: '/api/prazos/tipocarta/' + tipoCartaId,
+                    type: 'GET',
+                    contentType: 'json',
                 });
 
-                $('#creditoSelect').empty();
+                $('#Credito').empty();
                 $.each(creditos, function(index, obj) {
-                    var valorFormatado = obj.ValorCredito.toLocaleString('pt-BR', {
+                    var valorFormatado = obj.toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
                     });
-                    $('#creditoSelect').append('<option value="' + obj.ValorCredito + '">' +
+                    $('#Credito').append('<option value="' + obj + '">' +
                         valorFormatado + '</option>');
                 });
                 $('.select2').select2({
@@ -192,10 +163,10 @@
                 });
 
 
-                $('#prazoSelect').empty();
-                $('#prazoSelect').append('<option value="" selected disabled>Selecione o Prazo</option>');
+                $('#Prazo').empty();
+                $('#Prazo').append('<option value="" selected disabled>Selecione o Prazo</option>');
                 $.each(prazos, function(index, obj) {
-                    $('#prazoSelect').append('<option value="' + obj.Prazo + '">' + obj.Prazo +
+                    $('#Prazo').append('<option value="' + obj + '">' + obj +
                         ' meses</option>');
                 });
 
@@ -206,8 +177,40 @@
             }
         });
 
+        $('#formSimulacao').submit(async function(event) {
+            event.preventDefault();
+            let form = new FormData();
+            $('#simulacao').addClass('d-none');
+
+            var creditos = [];
+
+            $('#Credito').select2('data').forEach(element => {
+                creditos.push(element.id);
+            });
+
+            form.append('IDTipoCarta', $('#IDTipoCarta').val());
+            form.append('Prazo', $('#Prazo').val());
+            form.append('IDCadastro', $('#IDCadastro').val());
+            form.append('ValorCredito', JSON.stringify(creditos));
+
+            var solicitacao = await $.ajax({
+                url: '/api/cartas/simulacao',
+                type: 'POST',
+                data: form,
+                error: function(xhr, status, error) {
+                    alert('Houve um erro ao gerar a simulação!');
+                }
+            });
+            preencherTabela(solicitacao);
+        });
+
         function preencherTabela(data) {
             $('#tableSimulacao tbody').empty();
+
+            if (data.length === 0) {
+                alert('Nenhuma carta encontrada, por favor, tente gerar com outras informações!')
+                return;
+            }
 
             data.forEach(function(item) {
                 var valorCredito = item.ValorCredito.toLocaleString('pt-BR', {
@@ -243,7 +246,8 @@
                 });
 
                 $('#tableSimulacao tbody').append(row);
-            });
+            });         
+            $('#simulacao').removeClass('d-none');         
         }
     </script>
 @endsection
