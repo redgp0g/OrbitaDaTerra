@@ -81,6 +81,39 @@
                             </td>
                         </tr>
                     @endforeach
+                    @foreach ($cartasVendidas as $carta)
+                        @php
+                            $saldoDevedor = $carta->ValorCredito - $carta->ValorGarantia;
+                            $parcelas = $carta->ParcelasPagar;
+                            $totalParcelas = $carta->ValorParcela * $parcelas;
+                            $percentualParcela = (($totalParcelas - $saldoDevedor) / $saldoDevedor / $parcelas) * 100;
+                        @endphp
+                        <tr>
+                            <td>{{ $carta->IDCartaVendida }}</td>
+                            <td>{{ $carta->tipoCarta->Descricao }}</td>
+                            <td>R${{ $carta->ValorCredito }}</td>
+                            <td>R${{ number_format($carta->ValorGarantia, 2, ',', '.') }}</td>
+                            <td>{{ $carta->ParcelasPagar }}</td>
+                            <td>R${{ number_format($carta->ValorParcela, 2, ',', '.') }}</td>
+                            <td>{{ number_format($percentualParcela, 2, ',') }}%</td>
+                            <td>{{ $carta->empresaAdministradora->NomeFantasia }}</td>
+                            <td>
+                                @if ($carta->Status == 'Reservar')
+                                    Disponível
+                                @else
+                                    Reservado
+                                @endif
+                            </td>
+                            <td>
+                                @if ($carta->Status == 'Reservar')
+                                    <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}"
+                                        data-carta-categoria="{{ $carta->tipoCarta->descricao }}"
+                                        data-carta-valor="{{ $carta->ValorCredito }}"
+                                        onclick="reservarCarta(this)">Reservar</button>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -88,7 +121,6 @@
 
     @include('components.faleComOVendedor', ['cadastro' => $cadastro])
     <script>
-    
         const tiposCarta = document.querySelectorAll('.dropdown-menu li');
         const nav = document.getElementById('navbarSupportedContent');
 
