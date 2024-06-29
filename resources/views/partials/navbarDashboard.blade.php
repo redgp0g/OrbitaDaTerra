@@ -32,8 +32,8 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li class="d-none">
-                            <a class="dropdown-item" href="perfil_usuario.php">Perfil</a>
+                        <li>
+                            <a class="dropdown-item" href="{{ url('/dashboard/perfil') }}">Perfil</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ url('/' . auth()->user()->IDCadastro) }}">Página do

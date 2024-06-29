@@ -52,12 +52,9 @@ class DashboardController extends Controller
         return view('dashboard.contas', compact('contas'));
     }
 
-    public function perfilUsuario()
+    public function perfil()
     {
-        return [
-            'view' => $this->getViewPath() . '/perfilUsuario.php',
-            'data' => ['title' => 'Perfil']
-        ];
+        return view('dashboard.perfil');
     }
 
     public function createEmpresa()
