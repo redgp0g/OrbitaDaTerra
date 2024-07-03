@@ -99,10 +99,7 @@
                             <th>Origem</th>
                             <th>Atividade do Vendedor</th>
                             <th>Previsão Atividade</th>
-                            <?php if (auth()->user()->TipoCadastro = 'Vendedor') {
-                                echo '<th>Indicador</th>';
-                            }
-                            ?>
+                            <th>Indicador</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
