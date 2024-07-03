@@ -25,7 +25,8 @@ class User extends Authenticatable
         'CodigoVerificacaoEmail',
         'AdminConfirmado',
         'ContaSuspendida',
-        'TokeRecuperacaoSenha'
+        'TokeRecuperacaoSenha',
+        'is_migrated'
     ];
 
     protected $hidden = [

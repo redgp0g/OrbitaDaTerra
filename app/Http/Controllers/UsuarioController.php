@@ -24,14 +24,28 @@ class UsuarioController extends Controller
             'password' => $request->input('Senha'),
         ];
 
-        if (Auth::attempt($credenciais)) {
-            $user = Auth::user();
+        $user = User::where('Login', $request->input('Login'))->first();
 
-            if (
-                $user->AdminConfirmado &&
-                $user->EmailConfirmado &&
-                !$user->ContaSuspendida
-            ) {
+        if ($user) {
+            if (!$user->is_migrated) {
+                if (hash('sha256', $request->input('Senha')) === $user->Senha) {
+                    $user->Senha = bcrypt($request->input('Senha'));
+                    $user->is_migrated = true;
+                    $user->save();
+
+                    Auth::login($user);
+                } else {
+                    return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
+                }
+            } else {
+                if (!Auth::attempt($credenciais)) {
+                    return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
+                }
+
+                $user = Auth::user();
+            }
+
+            if ($user->AdminConfirmado && $user->EmailConfirmado && !$user->ContaSuspendida) {
                 HistoricoAcesso::create([
                     'IDUsuario' => $user->IDUsuario,
                     'DataEntrada' => now(),
@@ -40,12 +54,13 @@ class UsuarioController extends Controller
                 return redirect()->intended('/dashboard');
             } else {
                 Auth::logout();
-                return redirect()->route('usuario.login')->with('erro', 'Usuário não autorizado. Verifique se o administrador liberou seu acesso e seu email está confirmado e se sua conta não está suspensa.');
+                return redirect()->route('usuario.login')->with('erro', 'Usuário não autorizado. Verifique se o administrador liberou seu acesso e se seu email está confirmado e se sua conta não está suspensa.');
             }
         } else {
             return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
         }
     }
+
 
     public function logout(Request $request)
     {
