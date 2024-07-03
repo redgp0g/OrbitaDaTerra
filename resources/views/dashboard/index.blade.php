@@ -254,20 +254,21 @@
                 <div class="modal-body">
                     <div class="card">
                         <div class="form-group py-6">
-                            <label>Acessar Whatsapp do Lead</label>
+                            <label>Enviar Mensagem</label>
+                            <textarea id="mensagemPadrao1" rows="11" class="form-control">Olá [NomeLead]! Tudo bem?</textarea>
                         </div>
-                        <button class="btn btn-success link-whatsapp" data-textareaid="">Acessar Whatsapp</button>
+                        <button class="btn btn-success link-whatsapp" data-textareaid="">Enviar Whatsapp</button>
                     </div>
                     <div class="card">
                         <div class="form-group py-6">
                             <label>Mensagem Padrão 1</label>
-                            <textarea id="mensagemPadrao1" rows="11" disabled class="form-control">Olá [NomeLead]!
+                            <textarea id="mensagemPadrao1" rows="11" class="form-control">Olá [NomeLead]!
 
 Tudo bem?
 
 Sou <?php echo $primeiroNomeUsuario; ?>, estou aqui para te orientar como adquirir motos, automóveis, imóveis, construir e investir através do Consórcio.
 
-Não perca tempo! Confira a minha página repleta de opções de crédito disponíveis para você: https://orbitadaterraconsorcio.com.br/public/index.php/id/<?php echo auth()->user()->Telefone; ?>.
+Não perca tempo! Confira a minha página repleta de opções de crédito disponíveis para você: https://orbitadaterraconsorcio.com.br/id/<?php echo auth()->user()->Telefone; ?>.
 
 Estou à disposição para tornar seus sonhos em realidade.
 
@@ -279,7 +280,7 @@ Aguardo seu contato!</textarea>
                     <div class="card">
                         <div class="form-group py-6">
                             <label>Mensagem com Indicador</label>
-                            <textarea id="mensagemComIndicador" rows="11" disabled class="form-control">Olá [NomeLead], Tudo bem?  
+                            <textarea id="mensagemComIndicador" rows="11" class="form-control">Olá [NomeLead], Tudo bem?  
 
 Sou <?php echo $primeiroNomeUsuario; ?>, estou entrando em contato por indicação do [NomeIndicador] para te apresentar como adquirir motos, automóveis, imóveis, construir e investir através do Consórcio.  
 
