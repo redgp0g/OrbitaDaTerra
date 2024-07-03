@@ -14,6 +14,22 @@ class Carta extends Model
 
     public $timestamps = false;
     
+    protected $fillable = [
+        'IDCarta',
+        'IDTipoCarta',
+        'IDEmpresaAdministradora',
+        'ValorCredito',
+        'ParcelaIntegral',
+        'ParcelaFlex',
+        'PercentualFlex',
+        'Prazo',
+        'TaxaAdmin',
+        'FundoReserva',
+        'Seguro',
+        'DataAssembleia',
+        'Observacoes',
+        'Grupo',
+    ];
     public function tipoCarta()
     {
         return $this->belongsTo(TipoCarta::class, 'IDTipoCarta', 'IDTipoCarta');
