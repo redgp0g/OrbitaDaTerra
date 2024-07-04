@@ -268,7 +268,7 @@ Tudo bem?
 
 Sou <?php echo $primeiroNomeUsuario; ?>, estou aqui para te orientar como adquirir motos, automóveis, imóveis, construir e investir através do Consórcio.
 
-Não perca tempo! Confira a minha página repleta de opções de crédito disponíveis para você: https://orbitadaterraconsorcio.com.br/id/<?php echo auth()->user()->Telefone; ?>.
+Não perca tempo! Confira a minha página repleta de opções de crédito disponíveis para você: https://orbitadaterraconsorcio.com.br/<?php echo auth()->user()->IDCadastro; ?>.
 
 Estou à disposição para tornar seus sonhos em realidade.
 
@@ -284,7 +284,7 @@ Aguardo seu contato!</textarea>
 
 Sou <?php echo $primeiroNomeUsuario; ?>, estou entrando em contato por indicação do [NomeIndicador] para te apresentar como adquirir motos, automóveis, imóveis, construir e investir através do Consórcio.  
 
-Confira a minha página repleta de opções de crédito disponíveis para você: https://orbitadaterraconsorcio.com.br/public/index.php/id/<?php echo auth()->user()->Telefone; ?>.
+Confira a minha página repleta de opções de crédito disponíveis para você: https://orbitadaterraconsorcio.com.br/<?php echo auth()->user()->IDCadastro; ?>.
 
  Vamos tornar seus sonhos em realidade? 
 
