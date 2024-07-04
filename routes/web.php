@@ -6,6 +6,7 @@ use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/{idVendedor?}', [HomeController::class, 'index'])->where('idVendedor','[0-9]+');
+Route::get('/public/index.php/id/{idVendedor?}', [HomeController::class, 'index'])->where('idVendedor','[0-9]+');
 Route::get('/contempladas/{idVendedor?}', [HomeController::class, 'contempladas'])->where('idVendedor','[0-9]+');
 Route::get('/simulacao/{idVendedor?}', [HomeController::class, 'simulacao'])->where('idVendedor','[0-9]+');
 
