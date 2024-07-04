@@ -58,10 +58,10 @@
                         <tr>
                             <td>{{ htmlspecialchars($carta['id']) }}</td>
                             <td>{{ htmlspecialchars($carta['categoria']) }}</td>
-                            <td>R${{ number_format($carta['valor_credito'], 2, ',', '.') }}</td>
-                            <td>R${{ number_format($carta['entrada'], 2, ',', '.') }}</td>
+                            <td>R$ {{ number_format($carta['valor_credito'], 2, ',', '.') }}</td>
+                            <td>R$ {{ number_format($carta['entrada'], 2, ',', '.') }}</td>
                             <td>{{ htmlspecialchars($carta['parcelas']) }}</td>
-                            <td>R${{ number_format($carta['valor_parcela'], 2, ',', '.') }}</td>
+                            <td>R$ {{ number_format($carta['valor_parcela'], 2, ',', '.') }}</td>
                             <td>{{ number_format($percentualParcela, 2, ',') }}%</td>
                             <td>{{ htmlspecialchars($carta['administradora']) }}</td>
                             <td>
@@ -91,10 +91,10 @@
                         <tr>
                             <td>{{ $carta->IDCartaVendida }}</td>
                             <td>{{ $carta->tipoCarta->Descricao }}</td>
-                            <td>R${{ $carta->ValorCredito }}</td>
-                            <td>R${{ number_format($carta->ValorGarantia, 2, ',', '.') }}</td>
+                            <td>R$ {{ $carta->ValorCredito }}</td>
+                            <td>R$ {{ number_format($carta->ValorGarantia, 2, ',', '.') }}</td>
                             <td>{{ $carta->ParcelasPagar }}</td>
-                            <td>R${{ number_format($carta->ValorParcela, 2, ',', '.') }}</td>
+                            <td>R$ {{ number_format($carta->ValorParcela, 2, ',', '.') }}</td>
                             <td>{{ number_format($percentualParcela, 2, ',') }}%</td>
                             <td>{{ $carta->empresaAdministradora->NomeFantasia }}</td>
                             <td>

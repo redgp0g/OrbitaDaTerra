@@ -37,13 +37,13 @@
                                         <div class="card-body">
                                             <h5 class="card-title">Consórcio de {{ $carta->tipocarta->Descricao }}</h5>
                                             <p class="card-text"><span class="text-danger">Crédito:</span>
-                                                R${{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
+                                                R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
                                             <p class="card-text"><span class="text-danger">Parcela Integral:</span>
-                                                R${{ number_format($carta->ParcelaIntegral, 2, ',', '.') }}</p>
+                                                R$ {{ number_format($carta->ParcelaIntegral, 2, ',', '.') }}</p>
                                             <p class="card-text"><span class="text-danger">Parcela Flex
                                                     ({{ number_format($carta->PercentualFlex) }}%)
                                                     : </span>
-                                                R${{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
+                                                R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
                                             <p class="card-text"><span class="text-danger">Prazo:</span> {{ $carta->Prazo }}
                                                 Meses</p>
                                         </div>
