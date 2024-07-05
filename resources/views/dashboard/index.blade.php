@@ -255,9 +255,9 @@
                     <div class="card">
                         <div class="form-group py-6">
                             <label>Enviar Mensagem</label>
-                            <textarea id="mensagemPadrao1" rows="11" class="form-control">Olá [NomeLead]! Tudo bem?</textarea>
+                            <textarea id="mensagem" rows="11" class="form-control">Olá [NomeLead]! Tudo bem?</textarea>
                         </div>
-                        <button class="btn btn-success link-whatsapp" data-textareaid="">Enviar Whatsapp</button>
+                        <button class="btn btn-success link-whatsapp" data-textareaid="mensagem">Enviar Whatsapp</button>
                     </div>
                     <div class="card">
                         <div class="form-group py-6">
