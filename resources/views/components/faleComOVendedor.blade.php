@@ -9,10 +9,9 @@
             <input type="text" class="form-control" id="Nome" name="Nome" placeholder="Nome" autofocus
                 required />
         </div>
-        <div class="mb-3">
+        <div class="mb-3 d-flex flex-column">
             <label for="celular" class="form-label">Celular <span class="text-danger">*</span></label>
-            <input type="text" class="form-control celular" id="celular" name="Telefone"
-                placeholder="Digite seu celular com DDD" maxlength="16" required pattern="\(\d{2}\) \d{5}-\d{4}" />
+            <input type="text" class="form-control celular" id="celular" />
         </div>
         <div class="mb-3">
             <label for="Email" class="form-label">E-mail</label>
@@ -35,8 +34,21 @@
     onclick="document.getElementById('dialogFaleVendedor').showModal()"><i class="fa fa-whatsapp px-2"></i></button>
 
 <script>
+    const input = document.querySelector(".celular");
+    const iti = window.intlTelInput(input, {
+        initialCountry: "br",
+        separateDialCode: true,
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/build/js/utils.js",
+    });
+
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "Telefone";
+    input.parentNode.appendChild(hiddenInput);
+
     $("#enviarDados").submit(function(event) {
         event.preventDefault();
+        hiddenInput.value = iti.getNumber();
         let formData = $(this).serialize();
         let telefoneVendedor = {{ $cadastro->Telefone }};
         $.ajax({

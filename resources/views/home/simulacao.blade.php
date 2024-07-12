@@ -22,10 +22,10 @@
                                                 <input type="text" class="form-control" name="Nome"
                                                     id="simulacao-nome" required placeholder="Nome">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="d-flex flex-column form-group col-md-6">
                                                 <label class="form-label" for="simulacao-celular">Celular:</label>
-                                                <input type="text" class="form-control celular" name="Telefone"
-                                                    id="simulacao-celular" required placeholder="Celular">
+                                                <input type="text" class="form-control celular" name=""
+                                                    id="simulacao-celular" required>
                                             </div>
                                             <input type="hidden" name="Origem" value="Lead fez a Simulação">
                                             <input type="hidden" name="TipoCadastro" value="Lead">
@@ -99,8 +99,21 @@
     </div>
 
     <script>
+        const input = document.querySelector(".celular");
+        const iti = window.intlTelInput(input, {
+            initialCountry: "br",
+            separateDialCode: true,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/build/js/utils.js",
+        });
+
+        const hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "Telefone";
+        input.parentNode.appendChild(hiddenInput);
+
         $('#formSimulacaoDados').submit(function(event) {
             event.preventDefault();
+            hiddenInput.value = iti.getNumber();
             let formData = $(this).serialize();
 
             $.ajax({

@@ -6,46 +6,6 @@ function habilitar() {
     }
 }
 
-$(".celular").on("input", function (e) {
-    var x = e.target.value
-        .replace(/\D/g, "")
-        .match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-    e.target.value = !x[2]
-        ? x[1]
-        : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
-});
-
-$(".celular").on("change", function (e) {
-    var pattern = /\(\d{2}\) \d{5}-\d{4}/;
-    var isValid = pattern.test(e.target.value);
-
-    if (!isValid) {
-        alert(
-            "Por favor, digite um número de celular válido no formato (12) 34567-8910."
-        );
-    }
-});
-
-$(".telefone").on("input", function (e) {
-    var x = e.target.value
-        .replace(/\D/g, "")
-        .match(/(\d{0,2})(\d{0,4})(\d{0,4})/);
-    e.target.value = !x[2]
-        ? x[1]
-        : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
-});
-
-$(".telefone").on("change", function (e) {
-    var pattern = /\(\d{2}\) \d{4}-\d{4}/;
-    var isValid = pattern.test(e.target.value);
-
-    if (!isValid) {
-        alert(
-            "Por favor, digite um número de celular válido no formato (01) 2345-6789."
-        );
-    }
-});
-
 function mascaraCEP(inputCep) {
     var cep = inputCep.value.replace(/\D/g, "");
     cep = cep.replace(/^(\d{5})(\d{3})/, "$1-$2");
