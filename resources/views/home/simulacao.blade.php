@@ -122,7 +122,6 @@
                 data: formData,
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
                     $('#IDCadastro').val(response.IDCadastro);
                     $('#simulacao-dados-lead').hide();
                     $('#simulacao-dados').removeClass('d-none');
