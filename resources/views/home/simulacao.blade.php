@@ -189,7 +189,7 @@
             }
         });
 
-        $('#formSimulacao').submit(async function(event) {
+        $('#formSimulacao').submit(function(event) {
             event.preventDefault();
             let form = new FormData();
             $('#simulacao').addClass('d-none');
@@ -205,15 +205,19 @@
             form.append('IDCadastro', $('#IDCadastro').val());
             form.append('ValorCredito', JSON.stringify(creditos));
 
-            var solicitacao = await $.ajax({
+            $.ajax({
                 url: '/api/cartas/simulacao',
                 type: 'POST',
                 data: form,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    preencherTabela(data);
+                },
                 error: function(xhr, status, error) {
                     alert('Houve um erro ao gerar a simulação!');
                 }
             });
-            preencherTabela(solicitacao);
         });
 
         function preencherTabela(data) {
@@ -258,8 +262,8 @@
                 });
 
                 $('#tableSimulacao tbody').append(row);
-            });         
-            $('#simulacao').removeClass('d-none');         
+            });
+            $('#simulacao').removeClass('d-none');
         }
     </script>
 @endsection
