@@ -1,0 +1,50 @@
+name: Deploy da Aplicação Laravel 🚀
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy para Produção 🚀
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configurar PHP 🐘
+        uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: "8.0"
+
+      - name: Fazer Checkout do Código 📥
+        uses: actions/checkout@v4
+
+      - name: Copiar Arquivo .env 📄
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Instalar Dependências 📦
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Gerar Chave da Aplicação 🔑
+        run: php artisan key:generate
+
+      - name: Executar Testes 🧪
+        env:
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+          MAIL_HOST: ${{ secrets.MAIL_HOST }}
+          MAIL_PORT: ${{ secrets.MAIL_PORT }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_FROM_ADDRESS: ${{ secrets.MAIL_FROM_ADDRESS }}
+        run: php artisan test
+
+      - name: Deploy para o FTP 🌐
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
