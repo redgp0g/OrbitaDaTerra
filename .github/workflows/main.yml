@@ -23,11 +23,11 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Instalar Dependências 📦
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer install --no-dev --no-scripts --prefer-dist
 
       - name: Gerar Chave da Aplicação 🔑
         run: php artisan key:generate
-        
+
       - name: Executar Testes 🧪
         env:
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
