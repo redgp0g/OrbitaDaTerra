@@ -19,17 +19,21 @@ jobs:
       - name: Fazer Checkout do Código 📥
         uses: actions/checkout@v4
 
+      - name: Copiar Arquivo .env 📄
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
       - name: Definir Variáveis de Ambiente 🌿
         run: |
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env
-          echo "MAIL_PORT=${{ secrets.MAIL_PORT }}" >> .env
-          echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
-          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
-          echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> .env
+          sed -i "s/^DB_DATABASE=.*/DB_DATABASE=${{ secrets.DB_DATABASE }}/" .env
+          sed -i "s/^DB_HOST=.*/DB_HOST=${{ secrets.DB_HOST }}/" .env
+          sed -i "s/^DB_USERNAME=.*/DB_USERNAME=${{ secrets.DB_USERNAME }}/" .env
+          sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/" .env
+          sed -i "s/^MAIL_HOST=.*/MAIL_HOST=${{ secrets.MAIL_HOST }}/" .env
+          sed -i "s/^MAIL_PORT=.*/MAIL_PORT=${{ secrets.MAIL_PORT }}/" .env
+          sed -i "s/^MAIL_USERNAME=.*/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/" .env
+          sed -i "s/^MAIL_PASSWORD=.*/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}/" .env
+          sed -i "s/^MAIL_FROM_ADDRESS=.*/MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}/" .env
+          
       - name: Instalar Dependências 📦
         run: composer install --no-dev --no-scripts --prefer-dist
 
