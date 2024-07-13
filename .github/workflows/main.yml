@@ -28,13 +28,6 @@ jobs:
       - name: Gerar Chave da Aplicação 🔑
         run: php artisan key:generate
         
-      - name: Exibir Secrets para Verificação 🔍
-        run: |
-          echo "DB_DATABASE: ${{ secrets.DB_DATABASE }}"
-          echo "DB_HOST: ${{ secrets.DB_HOST }}"
-          echo "DB_USERNAME: ${{ secrets.DB_USERNAME }}"
-          echo "DB_PASSWORD: ${{ secrets.DB_PASSWORD }}"
-
       - name: Executar Testes 🧪
         env:
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
