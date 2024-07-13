@@ -46,9 +46,7 @@
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="Telefone">Número de
                                                     Telefone:</label>
-                                                <input type="text" class="form-control celular" name="Telefone"
-                                                    id="Telefone" placeholder="Número de telefone" required
-                                                    pattern="\(\d{2}\) \d{5}-\d{4}">
+                                                <input type="text" class="form-control celular" id="Telefone" required>
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label class="form-label" for="Observacoes">Observações (Não
@@ -299,6 +297,22 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
     </div>
     </main>
     <script>
+        const input = document.querySelector(".celular");
+        const iti = window.intlTelInput(input, {
+            initialCountry: "br",
+            separateDialCode: true,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/build/js/utils.js",
+        });
+
+        const hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "Telefone";
+        input.parentNode.appendChild(hiddenInput);
+
+        $('#formCadastrarLead').submit(function(event) {
+            hiddenInput.value = iti.getNumber();
+        });
+
         const modalEditarLead = $('#editarLeadModal');
         const modalEnviarMensagem = $('#enviarMensagemModal');
 
