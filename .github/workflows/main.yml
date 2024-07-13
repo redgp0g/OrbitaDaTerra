@@ -19,9 +19,6 @@ jobs:
       - name: Fazer Checkout do Código 📥
         uses: actions/checkout@v4
 
-      - name: Copiar Arquivo .env 📄
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
       - name: Definir Variáveis de Ambiente 🌿
         run: |
           echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
