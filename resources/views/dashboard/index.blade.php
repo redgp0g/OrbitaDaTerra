@@ -43,7 +43,7 @@
                                                 <input type="text" class="form-control" name="Nome"
                                                     placeholder="Nome do lead" required>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="d-flex flex-column form-group col-md-6">
                                                 <label class="form-label" for="Telefone">Número de
                                                     Telefone:</label>
                                                 <input type="text" class="form-control celular" id="Telefone" required>
