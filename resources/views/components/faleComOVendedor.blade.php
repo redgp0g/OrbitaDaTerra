@@ -11,7 +11,7 @@
         </div>
         <div class="mb-3 d-flex flex-column">
             <label for="celular" class="form-label">Celular <span class="text-danger">*</span></label>
-            <input type="text" class="form-control celular" id="celular" />
+            <input type="text" class="form-control celular" id="celular" required />
         </div>
         <div class="mb-3">
             <label for="Email" class="form-label">E-mail</label>
