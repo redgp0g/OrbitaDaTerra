@@ -54,3 +54,10 @@ html {
 .select2-container--default .select2-results__option--selected{
     display: none;
 }
+
+@media (max-width: 992px) {
+    .w-lg-100 {
+      width: 100% !important;
+    }
+  }
+  
