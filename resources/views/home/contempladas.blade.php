@@ -151,7 +151,7 @@
         }
 
         function reservarCarta(button) {
-            var numeroVendedor = $('#numerovendedor').val();
+            var numeroVendedor = {{ $cadastro->Telefone }}
             var mensagemPadrao = "Olá, eu gostaria de reservar uma carta contemplada! Código: " + button.dataset.cartaId +
                 ", valor de crédito: " + button.dataset.cartaValor + ", carta de " + button.dataset.cartaCategoria;
 
