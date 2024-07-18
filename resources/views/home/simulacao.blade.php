@@ -270,13 +270,12 @@
                         .click(function() {
                             var numeroVendedor = {{ $cadastro->Telefone }};
                             var mensagemPadrao =
-                                "Olá, eu gostaria de reservar uma carta nova! Valor de crédito: " +
+                                "Olá, eu gostaria de reservar uma carta de " + $(this).data('carta-tipo') +
+                                "! Valor de crédito: " +
                                 $(this).data('carta-valor') +
                                 ", Parcela Flex: " + $(this).data('carta-flex') +
                                 ", Parcela Integral: " + $(this).data('carta-integral') +
-                                ", Carta de " + $(this).data('carta-tipo') +
-                                ", Prazo: " + $(this).data('carta-prazo') +
-                                " meses. Valor de crédito: " + $(this).data('carta-integral');
+                                ", Prazo: " + $(this).data('carta-prazo') + " meses";
 
                             mensagemPadrao = encodeURIComponent(mensagemPadrao);
 
