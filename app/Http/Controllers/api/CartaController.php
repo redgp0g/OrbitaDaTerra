@@ -16,7 +16,7 @@ class CartaController extends Controller
         $prazo = $request->input('Prazo');
         $idCadastro = $request->input('IDCadastro');
         
-        $cartas = Carta::whereIn('ValorCredito', $valorCredito)->where('IDTipoCarta', $idTipoCarta)->where('Prazo', $prazo)->get();
+        $cartas = Carta::with('tipoCarta')->whereIn('ValorCredito', $valorCredito)->where('IDTipoCarta', $idTipoCarta)->where('Prazo', $prazo)->get();
         foreach ($valorCredito as $valor) {
             Simulacao::create([
                 'IDCadastro' => $idCadastro,

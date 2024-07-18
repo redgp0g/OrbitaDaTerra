@@ -254,18 +254,39 @@
                     });
                 }
 
-                var row = '<tr>' +
-                    '<td>' + valorCredito + '</td>' +
-                    '<td>' + parcelaIntegral + '</td>' +
-                    '<td>' + parcelaFlex + '</td>' +
-                    '<td><button class="btn btn-info btn-quero-esse">Quero esse!</button></td>' +
-                    '</tr>';
+                var row = $('<tr>').append(
+                    $('<td>').text(valorCredito),
+                    $('<td>').text(parcelaIntegral),
+                    $('<td>').text(parcelaFlex),
+                    $('<td>').append(
+                        $('<button>')
+                        .addClass('btn btn-info btn-quero-esse')
+                        .data('carta-valor', item.ValorCredito)
+                        .data('carta-integral', item.ParcelaIntegral)
+                        .data('carta-flex', item.ParcelaFlex)
+                        .data('carta-tipo', item.tipo_carta.Descricao)
+                        .data('carta-prazo', item.Prazo)
+                        .text('Quero esse!')
+                        .click(function() {
+                            var numeroVendedor = {{ $cadastro->Telefone }};
+                            var mensagemPadrao =
+                                "Olá, eu gostaria de reservar uma carta nova! Valor de crédito: " +
+                                $(this).data('carta-valor') +
+                                ", Parcela Flex: " + $(this).data('carta-flex') +
+                                ", Parcela Integral: " + $(this).data('carta-integral') +
+                                ", Carta de " + $(this).data('carta-tipo') +
+                                ", Prazo: " + $(this).data('carta-prazo') +
+                                " meses. Valor de crédito: " + $(this).data('carta-integral');
 
-                var novaRow = $(row);
+                            mensagemPadrao = encodeURIComponent(mensagemPadrao);
 
-                novaRow.find('.btn-quero-esse').click(function() {
-                    console.log('Botão "Quero esse!" clicado para o item:', item);
-                });
+                            var linkWhatsApp = 'https://api.whatsapp.com/send?phone=' + numeroVendedor +
+                                '&text=' + mensagemPadrao;
+
+                            window.location.href = linkWhatsApp;
+                        })
+                    )
+                );
 
                 $('#tableSimulacao tbody').append(row);
             });
