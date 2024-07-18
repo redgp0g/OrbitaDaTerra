@@ -302,6 +302,7 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
         const iti = window.intlTelInput(input, {
             initialCountry: "br",
             separateDialCode: true,
+            strictMode: true,
             utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/build/js/utils.js",
         });
 
@@ -311,7 +312,12 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
         input.parentNode.appendChild(hiddenInput);
 
         $('#formCadastrarLead').submit(function(event) {
-            hiddenInput.value = iti.getNumber();
+            let celular = iti.getNumber();
+            if (celular.startsWith('+55') && celular.length < 14) {
+                alert('Telefone Incorreto!');
+                return;
+            }
+            hiddenInput.value = celular;
         });
 
         const modalEditarLead = $('#editarLeadModal');

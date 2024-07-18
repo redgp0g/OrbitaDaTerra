@@ -102,6 +102,7 @@
         const input = document.querySelector(".celular");
         const iti = window.intlTelInput(input, {
             initialCountry: "br",
+            strictMode: true,
             separateDialCode: true,
             utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/build/js/utils.js",
         });
@@ -113,7 +114,12 @@
 
         $('#formSimulacaoDados').submit(function(event) {
             event.preventDefault();
-            hiddenInput.value = iti.getNumber();
+            let celular = iti.getNumber();
+            if (celular.startsWith('+55') && celular.length < 14) {
+                alert('Celular Incorreto!');
+                return;
+            }
+            hiddenInput.value = celular;
             let formData = $(this).serialize();
 
             $.ajax({
