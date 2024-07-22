@@ -19,6 +19,7 @@ Route::post('/usuario/store', [UsuarioController::class, 'store'])->name('usuari
 Route::get('/emailVerification', [UsuarioController::class, 'emailVerification'])->name('email.verification');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
+Route::get('/dashboard/leads', [DashboardController::class, 'leads'])->name('dashboard.leads')->middleware('auth');
 Route::get('/dashboard/historicoAcesso', [DashboardController::class, 'historicoAcesso'])->name('dashboard.historicoAcesso')->middleware('auth');
 Route::get('/dashboard/contas', [DashboardController::class, 'contas'])->name('dashboard.contas')->middleware('auth');
 Route::get('/dashboard/empresas', [DashboardController::class, 'empresas'])->name('dashboard.empresas')->middleware('auth');

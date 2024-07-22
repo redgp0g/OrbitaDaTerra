@@ -38,6 +38,20 @@ class DashboardController extends Controller
         return view('dashboard.index', compact('leadsIndicados', 'leads'));
     }
 
+    public function leads()
+    {
+        $leads = Cadastro::select('L.*', 'I.Nome as NomeIndicador','V.Nome as NomeVendedor')
+            ->from('Cadastro as L')
+            ->join('Cadastro as I', 'L.IDCadastroIndicador', '=', 'I.IDCadastro')
+            ->join('Cadastro as V', 'L.IDCadastroVendedor', '=', 'V.IDCadastro')
+            ->orderBy('L.PrevisaoAtividadeVendedor')
+            ->orderByDesc('L.DataCadastro')
+            ->get();
+
+
+        return view('dashboard.leads', compact('leads'));
+    }
+
     public function empresas()
     {
         $empresas = Empresa::all();
