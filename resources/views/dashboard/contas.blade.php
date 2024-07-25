@@ -32,7 +32,7 @@
                                     <td>{{ $conta->DataCadastro }}</td>
                                     <td>
                                         <button class="btn btn-info detalhes"
-                                            data-id="{{ $conta->IDUsuario }}">Detalhes</button>
+                                            data-id="{{ $conta->IDCadastro }}">Detalhes</button>
                                         @if (!$conta->AdminConfirmado)
                                             <button class="btn btn-success liberar"
                                                 data-id="{{ $conta->IDUsuario }}">Liberar</button>
@@ -141,7 +141,7 @@
             table.on('click', '.detalhes', function() {
                 var idUsuario = $(this).data('id');
                 $.ajax({
-                    url: '/api/usuario/' + idUsuario,
+                    url: '/api/cadastros/' + idUsuario,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
