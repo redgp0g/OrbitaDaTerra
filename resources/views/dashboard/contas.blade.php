@@ -109,11 +109,6 @@
                         <input type="datetime-local" class="form-control" name="datacadastro" id="datacadastro-details"
                             disabled required>
                     </div>
-                    <div class="form-group">
-                        <label for="arquivo-details">Arquivo:</label>
-                        <iframe style="width:100%; height:500px;" name="arquivo" id="arquivo-details"></iframe>
-                    </div>
-
                     <!-- Campo ocultado -->
                     <div class="form-group d-none">
                         <label for="observacoes-details">Observações</label>
@@ -165,7 +160,6 @@
                             $("#tipocadastro-details").val(data.TipoCadastro);
                             $("#datacadastro-details").val(data.DataCadastro);
                             $("#observacoes-details").val(data.Observacoes);
-                            $("#arquivo-details").attr("src", data.Curriculo);
                             $('#detalhesConta').modal('show');
                         } else {
                             alert('Lead não encontrado ou erro ao buscar os dados.');
