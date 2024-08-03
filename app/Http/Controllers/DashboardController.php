@@ -92,24 +92,6 @@ class DashboardController extends Controller
         return view('dashboard.empresas');
     }
 
-    public function createCartaVendida()
-    {
-        $tiposCartas = TipoCarta::all();
-        $cadastros = Cadastro::all();
-        $administradoras = Empresa::where('TipoEmpresa', 'Administradora')->get();
-        $autorizadas = Empresa::where('TipoEmpresa', 'Autorizada')->get();
-
-        return view('dashboard.createCartaVendida', compact('tiposCartas', 'administradoras', 'cadastros', 'autorizadas'));
-    }
-
-    public function storeCartaVendida(Request $request)
-    {
-        $data = $request->all();
-    
-        CartaVendida::create($data);
-        return redirect('/contempladas/' . Auth::user()->IDCadastro);
-    }
-
     public function historicoAcesso()
     {
         $acessos = HistoricoAcesso::with(['usuario.cadastro'])->orderBy('DataEntrada', 'DESC')->get();

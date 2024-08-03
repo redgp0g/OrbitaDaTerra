@@ -9,7 +9,8 @@ Route::get('/{idVendedor?}', [HomeController::class, 'index'])->where('idVendedo
 Route::get('/public/index.php/id/{idVendedor?}', [HomeController::class, 'index'])->where('idVendedor','[0-9]+');
 Route::get('/contempladas/{idVendedor?}', [HomeController::class, 'contempladas'])->where('idVendedor','[0-9]+');
 Route::get('/simulacao/{idVendedor?}', [HomeController::class, 'simulacao'])->where('idVendedor','[0-9]+');
-
+Route::get('/createCartaVendida/{idAutorizada?}', [HomeController::class, 'createCartaVendida'])->name('createCartaVendida')->where('idAutorizada','[0-9]+');
+Route::post('/cartaVendida', [HomeController::class, 'storeCartaVendida'])->name('storeCartaVendida');
 
 Route::view('/usuario', 'usuario.login')->name('usuario.login');
 Route::post('/auth', [UsuarioController::class, 'auth'])->name('usuario.auth');
@@ -26,5 +27,3 @@ Route::get('/dashboard/empresas', [DashboardController::class, 'empresas'])->nam
 Route::get('/dashboard/perfil', [DashboardController::class, 'perfil'])->name('dashboard.perfil')->middleware('auth');
 Route::get('/dashboard/createEmpresa', [DashboardController::class, 'createEmpresa'])->name('dashboard.createEmpresa')->middleware('auth');
 Route::post('/dashboard/storeEmpresa', [DashboardController::class, 'storeEmpresa'])->name('dashboard.storeEmpresa')->middleware('auth');
-Route::get('/dashboard/createCartaVendida', [DashboardController::class, 'createCartaVendida'])->name('dashboard.createCartaVendida')->middleware('auth');
-Route::post('/dashboard/storeCartaVendida', [DashboardController::class, 'storeCartaVendida'])->name('dashboard.storeCartaVendida')->middleware('auth');
