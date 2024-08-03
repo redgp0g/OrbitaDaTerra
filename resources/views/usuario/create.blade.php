@@ -15,7 +15,7 @@
                         <h4 class="mb-2">Faça parte de nosso time 🚀</h4>
 
                         <p class="text-primary mb-4">Cadastrar Conta</p>
-                        <form class="mb-3" action="{{ url('usuario/store') }}" method="POST"
+                        <form id="formCadastrar" class="mb-3" action="{{ url('usuario/store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
@@ -25,10 +25,9 @@
                                         <input type="text" class="form-control" id="Nome" name="Nome"
                                             placeholder="Nome" autofocus required />
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="mb-3 d-flex flex-column">
                                         <label class="form-label" for="Telefone">Celular</label>
-                                        <input type="text" class="form-control celular" id="Telefone" name="Telefone"
-                                            placeholder="Digite seu celular com DDD" maxlength="16" required />
+                                        <input type="text" class="form-control celular" id="Telefone" name="Telefone" required />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="CPF">CPF</label>
@@ -141,6 +140,27 @@
 
     <script>
         const idVendedorIndicado = {{ $vendedorIndicado->IDCadastro }};
+        const input = document.querySelector(".celular");
+        const iti = window.intlTelInput(input, {
+            initialCountry: "br",
+            separateDialCode: true,
+            strictMode: true,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/build/js/utils.js",
+        });
+
+        const hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "Telefone";
+        input.parentNode.appendChild(hiddenInput);
+
+        $('#formCadastrar').submit(function(event) {
+            let celular = iti.getNumber();
+            if (celular.startsWith('+55') && celular.length < 14) {
+                alert('Telefone Incorreto!');
+                return;
+            }
+            hiddenInput.value = celular;
+        });
 
         function verificarSenha() {
             var senha = $("#Senha").val();
