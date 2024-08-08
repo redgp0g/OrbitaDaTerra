@@ -52,18 +52,7 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BMDJS2N" height="0" width="0"
         style="display:none;visibility:hidden"></iframe></noscript>
 
-<footer class="d-flex footer border-top border-primary border-1 z-3 justify-content-center align-items-center"
-    style="height: 5vh;">
-    <span>
-        ©
-        <script>
-            document.write(new Date().getFullYear());
-        </script>
-        Orbita da Terra |
-        por <a href="https://portfolio-gordiano.netlify.app/" target="_blank">Guilherme Gordiano</a>.
-    </span>
-</footer>
-
+        @include('partials.footer')
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>

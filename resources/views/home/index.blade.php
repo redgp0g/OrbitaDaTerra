@@ -18,9 +18,9 @@
         ],
     ])
 
-<div class="section 3" style="min-height: 85vh;">
-    <div class="container">
-        <div class="row">
+    <div class="section 3" style="min-height: 85vh;">
+        <div class="container">
+            <div class="row">
                 @for ($x = 1; $x <= 7; $x++)
                     @php
                         $filteredCartas = $cartas->filter(function ($carta) use ($x) {
@@ -35,24 +35,24 @@
                             return $b->ValorCredito - $a->ValorCredito;
                         });
                     @endphp
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <img class="img-thumbnail" src="{{ asset('/images/tipoproduto/3d-rendering-house-model.jpg') }}">
+                        </div>
+                        <h5 class="card-title">Consórcio de Carros</h5>
                         <div class="row">
                             <div class="items">
                                 @foreach ($sortedCartas as $carta)
                                     <div class="card">
-                                        <img src="{{ asset('/images/tipoproduto/' . $carta->tipocarta->Imagem) }}">
                                         <div class="card-body">
-                                            <h5 class="card-title">Consórcio de {{ $carta->tipocarta->Descricao }}</h5>
                                             <p class="card-text"><span class="text-danger">Crédito:</span>
                                                 R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
                                             <p class="card-text"><span class="text-danger">Parcela Integral:</span>
                                                 R$ {{ number_format($carta->ParcelaIntegral, 2, ',', '.') }}</p>
-                                            <p class="card-text"><span class="text-danger">Parcela Flex
-                                                    ({{ number_format($carta->PercentualFlex) }}%)
-                                                    : </span>
-                                                R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
                                             <p class="card-text"><span class="text-danger">Prazo:</span> {{ $carta->Prazo }}
                                                 Meses</p>
+                                            <button class="btn btn-success fs-6 h-auto w-auto">Reservar</button>
+                                            <button class="btn btn-info fs-6">Detalhes</button>
                                         </div>
                                     </div>
                                 @endforeach
@@ -72,23 +72,15 @@
         $(document).ready(function() {
             $('.items').slick({
                 infinite: true,
-                slidesToShow: 5,
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 autoplay: true,
-                autoplaySpeed: 2000,
+                autoplaySpeed: 10000,
                 responsive: [{
-                        breakpoint: 991,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1,
-                        }
-                    },
-                    {
                         breakpoint: 700,
                         settings: {
                             arrows: false,
                             slidesToShow: 3,
-                            slidesToScroll: 1,
                         }
                     },
                     {
@@ -96,12 +88,10 @@
                         settings: {
                             arrows: false,
                             slidesToShow: 2,
-                            slidesToScroll: 1,
                         }
                     },
                 ]
             });
         });
-
     </script>
 @endsection
