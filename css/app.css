@@ -19,9 +19,23 @@ html {
     position: fixed;
     height: 4rem;
     width: 4rem;
-    bottom: 30px;
+    bottom: 100px;
     right: 40px;
     background-color: #25d366;
+    color: #FFF !important;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+}
+
+.floatSimulacao {
+    position: fixed;
+    height: 3rem;
+    width: fit-content;
+    bottom: 30px;
+    right: 40px;
+    background-color: #2a85c2;
     color: #FFF !important;
     border-radius: 50px;
     text-align: center;
