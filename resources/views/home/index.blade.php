@@ -15,6 +15,7 @@
                 'url' => url('/usuario/create/' . $cadastro->IDCadastro),
                 'auth' => 'guest',
             ],
+            ['label' => 'Fazer Simulação', 'url' => url('/simulacao/' . $cadastro->IDCadastro), 'auth' => 'all'],
         ],
     ])
 
