@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\Notificacao;
 use App\Models\Cadastro;
 use App\Models\Funcao;
 use App\Models\HistoricoAcesso;
@@ -10,8 +9,6 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
 
 class UsuarioController extends Controller
 {
@@ -97,6 +94,8 @@ class UsuarioController extends Controller
 
             $dataAtual = now();
 
+            $mensagemNotificacao = $dataAtual . " <br> O usuário: " . $cadastro['Nome'] . "</strong>, email: " . $cadastro['Email'] . "</strong>, celular: " . $cadastro['Telefone'] . " acabou de efetuar um  Cadastro de Conta em nosso sistema. <br><br> Equipe Orbita.";
+
             $mensagemUsuario = "Olá " . $cadastro['Nome'] . ":<br>
         Recebemos uma solicitação de cadastro, caso não tenha sido você, não precisa fazer nada, mas se foi você, acesse o link abaixo para continuar seu registro no nosso sistema para verificar seu email!
         <br>
@@ -119,13 +118,7 @@ class UsuarioController extends Controller
 
             $user = User::create($dataUsuario);
 
-            Mail::to(['guilhermeg2004@gmail.com'])->send(new Notificacao([
-                'nome' => $cadastrado->Nome,
-                'telefone' => $cadastrado->Telefone,
-                'email' => $cadastrado->Email,
-                'data' => $dataAtual,
-                'endereco' => $cadastrado->Endereco + ', ' + $cadastrado->Bairro + ', ' + $cadastrado->Cidade + ', ' + $cadastrado->Estado,
-            ]));
+            // sendEmail($mensagemNotificacao, 'Cadastro de Usuário', 'denilson@orbitadaterra.com.br');
             // sendEmail($mensagemUsuario, 'Verificação de Email', $cadastrado->Email);
             return redirect("usuario")->with('sucesso', 'Cadastrado com sucesso! Verifique a sua caixa de entrada do email para realizar a validação!');
         } catch (Exception $ex) {
@@ -138,167 +131,4 @@ class UsuarioController extends Controller
             return redirect()->back()->with('erro', 'Houve um erro ao cadastrar o usuário:' . $ex->getMessage());
         }
     }
-
-    // public function emailVerification(Request $request)
-    // {
-
-    //     $request->validate([
-    //         'login' => 'required|string',
-    //         'codigoverificacaoemail' => 'required|string',
-    //     ]);
-
-    //     $login = $request->input('login');
-    //     $codigoVerificacaoEmail = $request->input('codigoverificacaoemail');
-
-    //     $usuario = User::where('Login', $login)
-    //         ->where('CodigoVerificacaoEmail', $codigoVerificacaoEmail)
-    //         ->first();
-
-    //     if ($usuario) {
-    //         $usuario->update([
-    //             'EmailConfirmado' => 1,
-    //             'CodigoVerificacaoEmail' => null,
-    //         ]);
-
-    //         return redirect('usuario')->with('sucesso', 'Seu email foi verificado com sucesso!');
-    //     } else {
-    //         return redirect('usuario')->with('erro', 'Link incorreto!');
-    //     }
-    // }
-
-    // public function recoverPassword()
-    // {
-
-    //     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-    //         return [
-    //             'view' => $this->getViewPath() . '/recoverPassword.php',
-    //             'data' => ['title' => 'Recuperação de Senha']
-    //         ];
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         $email = filter_input(INPUT_POST, 'email');
-    //         $cadastros = fullOuterJoin('Usuario', 'Cadastro', 'IDCadastro', 'IDCadastro');
-    //         $cadastroEncontrado = null;
-
-    //         foreach ($cadastros as $cadastro) {
-    //             if ($cadastro->Email == $email) {
-    //                 $cadastroEncontrado = $cadastro;
-    //                 break;
-    //             }
-    //         }
-
-    //         if ($cadastroEncontrado) {
-    //             if ($cadastroEncontrado->ContaSuspendida == 1) {
-    //                 setFlash('error', 'O email ' . $email . 'pertence a uma conta que foi suspendida, caso deseje ativá-la, contate os administradores do sistema.');
-    //                 return redirect('/public/index.php/usuario/recoverPassword');
-    //             }
-    //             $token = bin2hex(random_bytes(15));
-    //             $dados = array(
-    //                 'TokenRecuperacaoSenha' => $token
-    //             );
-    //             update('Usuario', $dados, 'IDUsuario', $cadastroEncontrado->IDUsuario);
-
-    //             $link = "https://www.orbitadaterraconsorcio.com.br/public/index.php/usuario/changePassword/email/" . $email . "/token/" . $token;
-    //             $mensagemRedefinicaoSenha = "Olá " . $cadastroEncontrado->Nome . ":<br>
-    //                                 Recebemos uma solicitação de redefinição de senha na data :" . date('d/m/Y - H:m:i') . ", caso não tenha sido você, entre em contato com o administrador do sistema, caso contrário, acesse o link abaixo para redefinir sua senha!
-    //                                 <br>
-    //                                 <br>
-    //                                 *****************************************************************
-    //                                 <br>
-    //                                      <font color='blue'><a href=" . $link . " style='text-decoration:none;'>" . $link . "</a></font>
-    //                                 <br>
-    //                                 ******************************************************************
-    //                           <br><br>
-    //                           Equipe Orbita.";
-    //             if (sendEmail($mensagemRedefinicaoSenha, 'Redefinir Senha', $email)) {
-    //                 setFlash('success', 'Solicitação enviada com sucesso! Verifique sua caixa de email, caso não tenha recebido, verifique sua caixa de spam!');
-    //                 return redirect('/public/index.php/usuario/recoverPassword');
-    //             } else {
-    //                 $dados = array(
-    //                     'TokenRecuperacaoSenha' => NULL
-    //                 );
-    //                 update('Usuario', $dados, 'IDUsuario', $cadastroEncontrado->IDUsuario);
-    //                 setFlash('error', 'Erro! Não foi possível enviar o e-mail');
-    //                 return redirect('/public/index.php/usuario/recoverPassword');
-    //             }
-    //         } else {
-    //             setFlash('error', 'Email não encontrado em nosso cadastro!');
-    //             return redirect('/public/index.php/usuario/recoverPassword');
-    //         }
-    //     }
-    // }
-
-    // public function changePassword($params)
-    // {
-
-    //     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    //         if ($params != []) {
-    //             $email = $params['email'];
-    //             $token = $params['token'];
-    //             $cadastros = fullOuterJoin('Usuario', 'Cadastro', 'IDCadastro', 'IDCadastro');
-    //             $cadastroEncontrado = null;
-
-    //             foreach ($cadastros as $cadastro) {
-    //                 if ($cadastro->Email == $email) {
-    //                     $cadastroEncontrado = $cadastro;
-    //                     break;
-    //                 }
-    //             }
-
-    //             if ($cadastroEncontrado) {
-    //                 if ($cadastroEncontrado->TokenRecuperacaoSenha != $token) {
-    //                     setFlash('error', 'Este link não é mais válido, solicite um novo link para redefinição de senha!');
-    //                     return redirect('/public/index.php/usuario/login');
-    //                 }
-    //                 if ($cadastroEncontrado->ContaSuspendida == 1) {
-    //                     setFlash('error', 'O email ' . $email . 'pertence a uma conta que foi suspendida, caso deseje ativá-la, contate os administradores do sistema.');
-    //                     return redirect('/public/index.php/usuario/login');
-    //                 }
-    //             } else {
-    //                 setFlash('erro', 'Email não encontrado em nosso cadastro!');
-    //                 return redirect('/public/index.php/usuario/login');
-    //             }
-    //         }
-    //         return [
-    //             'view' => $this->getViewPath() . '/changePassword.php',
-    //             'data' => ['title' => 'Alteração de Senha', 'email' => $cadastroEncontrado->Email]
-    //         ];
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         $senha = hash('sha256', filter_input(INPUT_POST, 'senha'));
-    //         $email = filter_input(INPUT_POST, 'email');
-    //         $cadastros = fullOuterJoin('Usuario', 'Cadastro', 'IDCadastro', 'IDCadastro');
-    //         $cadastroEncontrado = null;
-
-    //         foreach ($cadastros as $cadastro) {
-    //             if ($cadastro->Email == $email) {
-    //                 $cadastroEncontrado = $cadastro;
-    //                 break;
-    //             }
-    //         }
-
-    //         if ($cadastroEncontrado != null) {
-    //             $dados = array(
-    //                 'Senha' => $senha,
-    //                 'TokenRecuperacaoSenha' => NULL
-    //             );
-    //             if (update('Usuario', $dados, 'IDUsuario', $cadastroEncontrado->IDUsuario)) {
-    //                 $mensagemRedefinicaoSenha = "Olá " . $cadastroEncontrado->Nome . ":<br>
-    //                     Sua senha foi alterada na data:" . date('d/m/Y - H:m:i') . ", caso não tenha sido você, entre em contato com o administrador do sistema!
-    //                     <br><br>
-    //                     Equipe Orbita.";
-    //                 sendEmail($mensagemRedefinicaoSenha, 'Senha Alterada', $email);
-    //                 setFlash('success', 'Sua senha foi alterada!');
-    //                 return redirect('/public/index.php/usuario/login');
-    //             }
-    //             setFlash('error', 'Houve um erro ao alterar sua senha!');
-    //             return redirect('/public/index.php/usuario/login');
-    //         }
-    //         setFlash('error', 'Link Inválido!');
-    //         return redirect('/public/index.php/usuario/login');
-    //     }
-    // }
 }
