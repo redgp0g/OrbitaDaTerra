@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 d-md-block d-none bg-primary p-0 mt-n1 overflow-hidden" style="height: 95vh;">
+                <div class="col-md-6 d-md-block d-none bg-primary p-0 overflow-hidden" style="height: 95vh;">
                     <img src="{{ asset('/images/auth/01.png') }}" class="img-fluid gradient-main animated-scaleX"
                         alt="images">
                 </div>
