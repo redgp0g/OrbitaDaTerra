@@ -9,7 +9,6 @@
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'auth' => 'auth'],
             ['label' => 'Acessar Conta', 'url' => url('/usuario'), 'auth' => 'guest'],
             ['label' => 'Cadastrar-se', 'url' => url('/usuario' . $cadastro->IDCadastro), 'auth' => 'guest'],
-            ['label' => 'Fazer Simulação', 'url' => url('/simulacao/' . $cadastro->IDCadastro), 'auth' => 'all'],
         ],
     ])
 
@@ -118,7 +117,7 @@
             </table>
         </div>
     </div>
-
+    <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao'"><div class="mx-2">Simular Agora</div></button>
     @include('components.faleComOVendedor', ['cadastro' => $cadastro])
     <script>
         const tiposCarta = document.querySelectorAll('.dropdown-menu li');
