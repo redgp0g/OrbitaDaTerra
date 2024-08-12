@@ -15,7 +15,6 @@
                 'url' => url('/usuario/create/' . $cadastro->IDCadastro),
                 'auth' => 'guest',
             ],
-            ['label' => 'Fazer Simulação', 'url' => url('/simulacao/' . $cadastro->IDCadastro), 'auth' => 'all'],
         ],
     ])
 
@@ -66,6 +65,7 @@
 
     </div>
     
+    <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao'"><div class="mx-2">Simular Agora</div></button>
     @include('components.faleComOVendedor', ['cadastro' => $cadastro])
 
     <script>
