@@ -21,19 +21,11 @@
 <div class="section 3" style="min-height: 85vh;">
     <div class="container">
         <div class="row">
-                @for ($x = 1; $x <= 7; $x++)
+                @foreach ($tiposCartas as $tipoCarta)
                     @php
-                        $filteredCartas = $cartas->filter(function ($carta) use ($x) {
-                            return $carta->IDTipoCarta == $x;
-                        });
-
-                        $sortedCartas = $filteredCartas->sort(function ($a, $b) {
-                            if ($a->Prazo != $b->Prazo) {
-                                return $b->Prazo - $a->Prazo;
-                            }
-
-                            return $b->ValorCredito - $a->ValorCredito;
-                        });
+                        $cartasPorTipo = $cartas->filter(function ($carta) use ($tipoCarta) {
+                            return $carta->IDTipoCarta == $tipoCarta->IDTipoCarta;
+                        }); 
                     @endphp
                     <div class="col-md-12">
                         <div class="row">
@@ -59,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
 

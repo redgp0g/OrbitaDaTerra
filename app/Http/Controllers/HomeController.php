@@ -16,8 +16,9 @@ class HomeController extends Controller
     {
         $cadastro = Cadastro::find($idVendedor) ?? Cadastro::find(38);
         $cartas = Carta::with('tipocarta')->get();
+        $tiposCartas = TipoCarta::all();
 
-        return view('home/index', compact('cadastro', 'cartas'));
+        return view('home/index', compact('cadastro', 'cartas', 'tiposCartas'));
     }
 
     public function contempladas($idVendedor = 38)
