@@ -18,30 +18,30 @@
         ],
     ])
 
-<div class="section 3" style="min-height: 85vh;">
-    <div class="container">
-        <div class="row">
+    <div class="section 3 mt-3" style="min-height: 85vh;">
+        <div class="container">
+            <div class="row">
                 @foreach ($tiposCartas as $tipoCarta)
                     @php
                         $cartasPorTipo = $cartas->filter(function ($carta) use ($tipoCarta) {
                             return $carta->IDTipoCarta == $tipoCarta->IDTipoCarta;
                         }); 
                     @endphp
-                    <div class="col-md-12">
+                    @if ($cartasPorTipo->count() > 0)
+                        
+                    <div class="col-md-4">
+                        <h2 class="card-title fs-4 text-center mb-1">Consórcio de <span style="color: #1e9ef3">{{ $tipoCarta->Descricao }}</span></h2>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <img class="img-thumbnail " src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}">
+                        </div>
                         <div class="row">
                             <div class="items">
-                                @foreach ($sortedCartas as $carta)
+                                @foreach ($cartasPorTipo as $carta)
                                     <div class="card">
-                                        <img src="{{ asset('/images/tipoproduto/' . $carta->tipocarta->Imagem) }}">
                                         <div class="card-body">
-                                            <h5 class="card-title">Consórcio de {{ $carta->tipocarta->Descricao }}</h5>
                                             <p class="card-text"><span class="text-danger">Crédito:</span>
                                                 R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
-                                            <p class="card-text"><span class="text-danger">Parcela Integral:</span>
-                                                R$ {{ number_format($carta->ParcelaIntegral, 2, ',', '.') }}</p>
-                                            <p class="card-text"><span class="text-danger">Parcela Flex
-                                                    ({{ number_format($carta->PercentualFlex) }}%)
-                                                    : </span>
+                                            <p class="card-text"><span class="text-danger">Parcela Flex:</span>
                                                 R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
                                             <p class="card-text"><span class="text-danger">Prazo:</span> {{ $carta->Prazo }}
                                                 Meses</p>
@@ -51,6 +51,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 @endforeach
             </div>
         </div>
@@ -64,36 +65,12 @@
         $(document).ready(function() {
             $('.items').slick({
                 infinite: true,
-                slidesToShow: 5,
+                slidesToShow: 2,
                 slidesToScroll: 1,
                 autoplay: true,
-                autoplaySpeed: 2000,
-                responsive: [{
-                        breakpoint: 991,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1,
-                        }
-                    },
-                    {
-                        breakpoint: 700,
-                        settings: {
-                            arrows: false,
-                            slidesToShow: 3,
-                            slidesToScroll: 1,
-                        }
-                    },
-                    {
-                        breakpoint: 520,
-                        settings: {
-                            arrows: false,
-                            slidesToShow: 2,
-                            slidesToScroll: 1,
-                        }
-                    },
-                ]
+                arrows: false,
+                autoplaySpeed: 10000,
             });
         });
-
     </script>
 @endsection
