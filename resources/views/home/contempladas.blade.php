@@ -117,7 +117,7 @@
             </table>
         </div>
     </div>
-    <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao'"><div class="mx-2">Simular Agora</div></button>
+    <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao/{{ $cadastro->IDCadastro }}'"><div class="mx-2">Simular Agora</div></button>
     @include('components.faleComOVendedor', ['cadastro' => $cadastro])
     <script>
         const tiposCarta = document.querySelectorAll('.dropdown-menu li');
