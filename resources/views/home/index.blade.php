@@ -43,8 +43,16 @@
                                                 R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
                                             <p class="card-text"><span class="text-danger">Parcela Flex:</span>
                                                 R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
-                                            <p class="card-text"><span class="text-danger">Prazo:</span> {{ $carta->Prazo }}
-                                                Meses</p>
+                                            <p class="card-text"><span>
+                                                <p>{{ $carta->Prazo }} Meses</p>
+                                                <button class="btn btn-success"
+                                                    data-carta-categoria="{{ $carta->TipoCarta->Descricao }}"
+                                                    data-carta-valor="R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}"
+                                                    data-carta-flex="R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}"
+                                                    data-carta-prazo="{{ $carta->Prazo }}"
+                                                    onclick="comprarCarta(this)">Comprar</button>
+                                                {{-- <button class="btn btn-info fs-6">Detalhes</button> --}}
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -62,6 +70,19 @@
     @include('components.faleComOVendedor', ['cadastro' => $cadastro])
 
     <script>
+        function comprarCarta(button) {
+            var numeroVendedor = {{ $cadastro->Telefone }}
+            var mensagemPadrao = "Olá, eu gostaria de comprar um Consórcio de " + button.dataset.cartaCategoria +
+                "! Valor de crédito: " + button.dataset.cartaValor + ", Parcela Flex: " + button.dataset.cartaFlex +
+                ", Prazo: " + button.dataset.cartaPrazo + " meses";
+
+            mensagemPadrao = encodeURIComponent(mensagemPadrao);
+
+            var linkWhatsApp = 'https://api.whatsapp.com/send?phone=' + numeroVendedor + '&text=' +
+                mensagemPadrao;
+
+            window.location.href = linkWhatsApp;
+        }
         $(document).ready(function() {
             $('.items').slick({
                 infinite: true,
