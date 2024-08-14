@@ -25,25 +25,25 @@
                     @php
                         $cartasPorTipo = $cartas->filter(function ($carta) use ($tipoCarta) {
                             return $carta->IDTipoCarta == $tipoCarta->IDTipoCarta;
-                        }); 
+                        });
                     @endphp
                     @if ($cartasPorTipo->count() > 0)
-                        
-                    <div class="col-md-4">
-                        <h2 class="card-title fs-4 text-center mb-1">Consórcio de <span style="color: #1e9ef3">{{ $tipoCarta->Descricao }}</span></h2>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img class="img-thumbnail " src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}">
-                        </div>
-                        <div class="row">
-                            <div class="items">
-                                @foreach ($cartasPorTipo as $carta)
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <p class="card-text"><span class="text-danger">Crédito:</span>
-                                                R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
-                                            <p class="card-text"><span class="text-danger">Parcela Flex:</span>
-                                                R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
-                                            <p class="card-text"><span>
+                        <div class="col-md-4">
+                            <h2 class="card-title fs-4 text-center mb-1">Consórcio de <span
+                                    style="color: #1e9ef3">{{ $tipoCarta->Descricao }}</span></h2>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <img class="img-thumbnail " src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}">
+                            </div>
+                            <div class="row">
+                                <div class="items">
+                                    @foreach ($cartasPorTipo as $carta)
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <span class="text-danger">Crédito</span>
+                                                <p>R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
+                                                <span class="text-danger">Parcela Flex</span>
+                                                <p>R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
+                                                <span class="text-danger">Prazo</span>
                                                 <p>{{ $carta->Prazo }} Meses</p>
                                                 <button class="btn btn-success"
                                                     data-carta-categoria="{{ $carta->TipoCarta->Descricao }}"
@@ -54,11 +54,10 @@
                                                 {{-- <button class="btn btn-info fs-6">Detalhes</button> --}}
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endif
                 @endforeach
             </div>
