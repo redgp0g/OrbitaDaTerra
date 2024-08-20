@@ -14,7 +14,7 @@ class HomeController extends Controller
 {
     public function index($idVendedor = 38)
     {
-        $cadastro = Cadastro::find($idVendedor) ?? Cadastro::find(38);
+        $cadastro = Cadastro::find($idVendedor)->where('TipoCadastro', 'Vendedor')->orWhere('TipoCadastro', 'Indicador')->first() ?? Cadastro::find(38);
         $cartas = Carta::with('TipoCarta')->get();
         $tiposCartas = TipoCarta::all();
 
@@ -23,7 +23,7 @@ class HomeController extends Controller
 
     public function contempladas($idVendedor = 38)
     {
-        $cadastro = Cadastro::find($idVendedor) ?? Cadastro::find(38);
+        $cadastro = Cadastro::find($idVendedor)->where('TipoCadastro', 'Vendedor')->orWhere('TipoCadastro', 'Indicador')->first() ?? Cadastro::find(38);
         $cartasVendidas = CartaVendida::with('tipoCarta')->with('empresaAdministradora')->with('empresaAutorizada')->with('cadastroConsorciado')->with('cadastroVendedor')->get();
 
         return view('home/contempladas', compact('cadastro','cartasVendidas'));
@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function simulacao($idVendedor = 38)
     {
-        $cadastro = Cadastro::find($idVendedor) ?? Cadastro::find(38);
+        $cadastro = Cadastro::find($idVendedor)->where('TipoCadastro', 'Vendedor')->orWhere('TipoCadastro', 'Indicador')->first() ?? Cadastro::find(38);
         $tiposCarta = TipoCarta::all();
 
         return view('home/simulacao', compact('cadastro','tiposCarta'));
