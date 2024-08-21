@@ -122,7 +122,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <input id="IDVendedorIndicado" type="hidden" name="IDVendedorIndicado" value="">
+                            <input id="IDCadastroVendedorIndicado" type="hidden" name="IDCadastroVendedorIndicado" value="">
                             <button type="submit" id="btnCadastro"
                                 class="btn btn-primary d-grid w-100">Cadastrar</button>
                         </form>
@@ -180,11 +180,11 @@
             if (perfilSelecionado === "Vendedor") {
                 // $(".div-curriculo").removeClass("d-none");
                 $(".div-vendedorindicado").addClass("d-none");
-                $("#IDVendedorIndicado").val('');
+                $("#IDCadastroVendedorIndicado").val('');
             } else {
                 // $(".div-curriculo").addClass("d-none");
                 $(".div-vendedorindicado").removeClass("d-none");
-                $("#IDVendedorIndicado").val(idVendedorIndicado);
+                $("#IDCadastroVendedorIndicado").val(idVendedorIndicado);
             }
         });
 
