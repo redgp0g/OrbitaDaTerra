@@ -29,13 +29,8 @@
                                             </div>
                                             <input type="hidden" name="Origem" value="Lead fez a Simulação">
                                             <input type="hidden" name="TipoCadastro" value="Lead">
-                                            @if ($cadastro->TipoCadastro == 'Vendedor')
-                                                <input type="hidden" name="IDCadastroVendedor"
-                                                    value="{{ $cadastro->IDCadastro }}">
-                                            @else
-                                                <input type="hidden" name="IDCadastroVendedor"
-                                                    value="{{ $cadastro->IDCadastroVendedorIndicado }}">
-                                            @endif
+                                            <input type="hidden" name="IDCadastroVendedor"
+                                                value="{{ $vendedor->IDCadastro }}">
                                             <input type="hidden" name="IDCadastroIndicador"
                                                 value="{{ $cadastro->IDCadastro }}">
                                             <button type="submit" class="btn btn-primary">Próximo</button>
@@ -268,7 +263,7 @@
                         .data('carta-prazo', item.Prazo)
                         .text('Quero esse!')
                         .click(function() {
-                            var numeroVendedor = {{ $cadastro->Telefone }};
+                            var numeroVendedor = {{ $vendedor->Telefone }};
                             var mensagemPadrao =
                                 "Olá, eu gostaria de reservar uma carta de " + $(this).data('carta-tipo') +
                                 "! Valor de crédito: " +

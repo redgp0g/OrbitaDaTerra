@@ -69,7 +69,7 @@
         <div class="mx-2">Simular Agora</div>
     </button>
 
-    @include('components.faleComOVendedor', ['cadastro' => $cadastro])
+    @include('components.faleComOVendedor', ['cadastro' => $vendedor])
 
     <script>
         function comprarCarta(button) {

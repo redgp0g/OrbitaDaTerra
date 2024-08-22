@@ -118,7 +118,7 @@
         </div>
     </div>
     <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao/{{ $cadastro->IDCadastro }}'"><div class="mx-2">Simular Agora</div></button>
-    @include('components.faleComOVendedor', ['cadastro' => $cadastro])
+    @include('components.faleComOVendedor', ['cadastro' => $vendedor])
     <script>
         const tiposCarta = document.querySelectorAll('.dropdown-menu li');
         const nav = document.getElementById('navbarSupportedContent');
@@ -150,7 +150,7 @@
         }
 
         function reservarCarta(button) {
-            var numeroVendedor = {{ $cadastro->Telefone }}
+            var numeroVendedor = {{ $vendedor->Telefone }}
             var mensagemPadrao = "Olá, eu gostaria de reservar uma carta contemplada! Código: " + button.dataset.cartaId +
                 ", valor de crédito: " + button.dataset.cartaValor + ", carta de " + button.dataset.cartaCategoria;
 
