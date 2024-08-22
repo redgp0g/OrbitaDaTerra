@@ -64,13 +64,16 @@
         </div>
 
     </div>
-    
-    <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao/{{ $cadastro->IDCadastro }}'"><div class="mx-2">Simular Agora</div></button>
+
+    <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao/{{ $vendedor->IDCadastro }}'">
+        <div class="mx-2">Simular Agora</div>
+    </button>
+
     @include('components.faleComOVendedor', ['cadastro' => $cadastro])
 
     <script>
         function comprarCarta(button) {
-            var numeroVendedor = {{ $cadastro->Telefone }}
+            var numeroVendedor = {{ $vendedor->Telefone }}
             var mensagemPadrao = "Olá, eu gostaria de comprar um Consórcio de " + button.dataset.cartaCategoria +
                 "! Valor de crédito: " + button.dataset.cartaValor + ", Parcela Flex: " + button.dataset.cartaFlex +
                 ", Prazo: " + button.dataset.cartaPrazo + " meses";
