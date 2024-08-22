@@ -20,7 +20,8 @@ class HomeController extends Controller
             $cadastro = Cadastro::find(38);
         }
 
-        $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDVendedorIndicado);
+        $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDCadastroVendedorIndicado);
+
         $cartas = Carta::with('TipoCarta')->get();
         $tiposCartas = TipoCarta::all();
 
@@ -35,7 +36,7 @@ class HomeController extends Controller
             $cadastro = Cadastro::find(38);
         }
 
-        $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDVendedorIndicado);
+        $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDCadastroVendedorIndicado);
         $cartasVendidas = CartaVendida::with('tipoCarta')->with('empresaAdministradora')->with('empresaAutorizada')->with('cadastroConsorciado')->with('cadastroVendedor')->get();
 
         return view('home/contempladas', compact('cadastro', 'cartasVendidas', 'vendedor'));
@@ -49,7 +50,7 @@ class HomeController extends Controller
             $cadastro = Cadastro::find(38);
         }
 
-        $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDVendedorIndicado);
+        $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDCadastroVendedorIndicado);
         $tiposCarta = TipoCarta::all();
 
         return view('home/simulacao', compact('cadastro', 'tiposCarta', 'vendedor'));
