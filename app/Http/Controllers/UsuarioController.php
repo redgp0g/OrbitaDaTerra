@@ -88,7 +88,6 @@ class UsuarioController extends Controller
             $cadastro['CPF'] = preg_replace('/\D/', '', $cadastro['CPF']);
             $cadastro['CEP'] = preg_replace('/\D/', '', $cadastro['CEP']);
             $cadastro['Senha'] = bcrypt($cadastro['Senha']);
-            $cadastro['Origem'] = 'Cadastra-se';
             $codigoVerificacaoEmail = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
             $cadastrado = Cadastro::create($cadastro) ?? Cadastro::where('Email', $cadastro['Email'])->first()->update($cadastro);
 

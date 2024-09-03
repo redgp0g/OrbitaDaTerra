@@ -123,6 +123,7 @@
                                 </div>
                             </div>
                             <input id="IDCadastroVendedorIndicado" type="hidden" name="IDCadastroVendedorIndicado" value="">
+                            <input id="Origem" type="hidden" name="Origem" value="Cadastrar-se">
                             <button type="submit" id="btnCadastro"
                                 class="btn btn-primary d-grid w-100">Cadastrar</button>
                         </form>
