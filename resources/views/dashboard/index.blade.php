@@ -178,8 +178,7 @@
                         </div>
                         <div class="form-group">
                             <label for="telefone-edit">Número de Telefone:</label>
-                            <input type="text" class="form-control celular" name="Telefone" id="telefone-edit"
-                                required pattern="\(\d{2}\) \d{5}-\d{4}">
+                            <input type="text" class="form-control" name="Telefone" id="telefone-edit" required>
                         </div>
                         <div class="form-group">
                             <label for="email-edit">Email:</label>
@@ -493,15 +492,9 @@ Confira a minha página repleta de opções de crédito disponíveis para você:
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
-                        var telefoneString = data.Telefone.toString();
-                        var telefoneFormatado = telefoneString.replace(/\D/g, '').match(
-                            /(\d{0,2})(\d{0,5})(\d{0,4})/);
-                        var telefoneMascarado = !telefoneFormatado[2] ? telefoneFormatado[1] :
-                            '(' + telefoneFormatado[1] + ') ' + telefoneFormatado[2] + (
-                                telefoneFormatado[3] ? '-' + telefoneFormatado[3] : '');
 
                         $("#nome-edit").val(data.Nome);
-                        $("#telefone-edit").val(telefoneMascarado);
+                        $("#telefone-edit").val(data.Telefone);
                         $("#email-edit").val(data.Email);
                         $("#cadastroId-edit").val(cadastroId);
                         $("#atividadeVendedor-edit").val(data.AtividadeVendedor);
