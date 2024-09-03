@@ -456,7 +456,7 @@
                                                                 style="font-size: 14px; color: #333333; line-height: 160%; text-align: left; word-wrap: break-word;">
                                                                 <p style="font-size: 14px; line-height: 160%;"><span
                                                                         style="font-size: 16px; line-height: 25.6px; font-family: Lato, sans-serif;">Este
-                                                                        é umail de confirmação. Se você tiver qualquer
+                                                                        é um email de confirmação. Se você tiver qualquer
                                                                         dúvida entre em contato: <span
                                                                             style="text-decoration: underline; line-height: 25.6px; color: #e67e23; font-size: 16px;">suporteorbitadaterra@orbitadaterra.com.br</span></span>
                                                                 </p>
