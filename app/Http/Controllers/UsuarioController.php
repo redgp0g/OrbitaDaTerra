@@ -90,35 +90,15 @@ class UsuarioController extends Controller
             $cadastro['Senha'] = bcrypt($cadastro['Senha']);
             $codigoVerificacaoEmail = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
             $cadastrado = Cadastro::create($cadastro) ?? Cadastro::where('Email', $cadastro['Email'])->first()->update($cadastro);
-
-            $dataAtual = now();
-
-            $mensagemNotificacao = $dataAtual . " <br> O usuário: " . $cadastro['Nome'] . "</strong>, email: " . $cadastro['Email'] . "</strong>, celular: " . $cadastro['Telefone'] . " acabou de efetuar um  Cadastro de Conta em nosso sistema. <br><br> Equipe Orbita.";
-
-            $mensagemUsuario = "Olá " . $cadastro['Nome'] . ":<br>
-        Recebemos uma solicitação de cadastro, caso não tenha sido você, não precisa fazer nada, mas se foi você, acesse o link abaixo para continuar seu registro no nosso sistema para verificar seu email!
-        <br>
-        <br>
-        *****************************************************************
-        <br>
-                <font color='blue'><a href='https://www.orbitadaterraconsorcio.com.br/public/index.php/usuario/emailVerification/login/" . $cadastro['Email'] . "/codigoverificacaoemail/" . $codigoVerificacaoEmail . "' style='text-decoration:none;'>Link</a></font>
-        <br>
-        ******************************************************************
-        <br><br>
-        Equipe Orbita.";
-
-
+            
             $dataUsuario = array(
                 'Login' => $cadastrado->Email,
                 'Senha' => $cadastro['Senha'],
                 'IDCadastro' => $cadastrado->IDCadastro,
                 'CodigoVerificacaoEmail' => $codigoVerificacaoEmail,
             );
-
             $user = User::create($dataUsuario);
 
-            // sendEmail($mensagemNotificacao, 'Cadastro de Usuário', 'denilson@orbitadaterra.com.br');
-            // sendEmail($mensagemUsuario, 'Verificação de Email', $cadastrado->Email);
             return redirect("usuario")->with('sucesso', 'Cadastrado com sucesso! Verifique a sua caixa de entrada do email para realizar a validação!');
         } catch (Exception $ex) {
             if ($user) {
