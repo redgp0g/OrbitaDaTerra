@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerificacaoEmail;
 use App\Models\Cadastro;
 use App\Models\Funcao;
 use App\Models\HistoricoAcesso;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
@@ -99,6 +101,15 @@ class UsuarioController extends Controller
             );
             $user = User::create($dataUsuario);
 
+            Mail::to([$cadastrado->Email])->send(new VerificacaoEmail([
+                'nome' => $cadastrado->Nome,
+                'telefone' => $cadastrado->Telefone,
+                'email' => $cadastrado->Email,
+                'data' => now(),
+                'endereco' => $cadastrado->Endereco . ', ' . $cadastrado->Bairro . ', ' . $cadastrado->Cidade . ', ' . $cadastrado->Estado,
+                'id' => $cadastrado->IDCadastro,
+                'codigo' => $codigoVerificacaoEmail,
+            ]));
             return redirect("usuario")->with('sucesso', 'Cadastrado com sucesso! Verifique a sua caixa de entrada do email para realizar a validação!');
         } catch (Exception $ex) {
             if ($user) {
@@ -108,6 +119,24 @@ class UsuarioController extends Controller
                 Cadastro::destroy($cadastrado->IDCadastro);
             }
             return redirect()->back()->with('erro', 'Houve um erro ao cadastrar o usuário:' . $ex->getMessage());
+        }
+    }
+
+    public function verificarEmail($id,$codigo)
+    {
+        $usuario = User::where('IDCadastro', $id)
+            ->where('CodigoVerificacaoEmail', $codigo)
+            ->first();
+        
+        if ($usuario) {
+            $usuario->update([
+                'EmailConfirmado' => 1,
+                'CodigoVerificacaoEmail' => null,
+            ]);
+
+            return redirect('usuario')->with('sucesso', 'Seu email foi verificado com sucesso!');
+        } else {
+            return redirect('usuario')->with('erro', 'Link incorreto!');
         }
     }
 }
