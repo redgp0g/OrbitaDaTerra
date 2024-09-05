@@ -1,9 +1,6 @@
 @extends('master')
 @section('title', 'Cadastrar-se')
 @section('conteudo')
-    @if ($mensagem = Session::get('erro'))
-        @include('components.alert', ['mensagem' => $mensagem, 'style' => 'danger'])
-    @endif
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic py-5">
             <div class="authentication-inner">

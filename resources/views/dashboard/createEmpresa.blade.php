@@ -1,12 +1,6 @@
 @extends('dashboard')
 @section('title', 'Cadastrar Empresa')
 @section('pagina')
-    @if ($mensagem = Session::get('erro'))
-        @include('components.alert', ['mensagem' => $mensagem, 'style' => 'danger'])
-    @endif
-    @if ($mensagem = Session::get('sucesso'))
-        @include('components.alert', ['mensagem' => $mensagem, 'style' => 'success'])
-    @endif
     <div class="col-16">
         <div class="card">
             <div class="card-body">

@@ -46,13 +46,24 @@
 
 <body>
     <div style="min-height: 95vh;">
+        @if ($mensagem = Session::get('erro'))
+            @include('components.alert', ['mensagem' => $mensagem, 'style' => 'danger'])
+        @endif
+        @if ($mensagem = Session::get('sucesso'))
+            @include('components.alert', ['mensagem' => $mensagem, 'style' => 'success'])
+        @endif
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                @include('components.alert', ['mensagem' => $error, 'style' => 'danger'])
+            @endforeach
+        @endif
         @yield('conteudo')
     </div>
 </body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BMDJS2N" height="0" width="0"
         style="display:none;visibility:hidden"></iframe></noscript>
 
-        @include('partials.footer')
+@include('partials.footer')
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>

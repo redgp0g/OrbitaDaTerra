@@ -1,17 +1,6 @@
 @extends('master')
 @section('title', 'Login')
 @section('conteudo')
-    @if ($mensagem = Session::get('erro'))
-        @include('components.alert', ['mensagem' => $mensagem, 'style' => 'danger'])
-    @endif
-    @if ($mensagem = Session::get('sucesso'))
-        @include('components.alert', ['mensagem' => $mensagem, 'style' => 'success'])
-    @endif
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            @include('components.alert', ['mensagem' => $error, 'style' => 'danger'])
-        @endforeach
-    @endif
     <div class="wrapper">
         <section class="login-content">
             <div class="row m-0 align-items-center bg-white">
@@ -41,8 +30,8 @@
                                                 <input type="password" id="senha" class="form-control" name="Senha"
                                                     placeholder="Senha" aria-describedby="password" />
                                             </div>
-                                            <div class="d-flex flex-row-reverse m-2 d-none">
-                                                <a href="/public/index.php/usuario/recoverPassword">Esqueceu a Senha?</a>
+                                            <div class="d-flex flex-row-reverse m-2">
+                                                <a href="{{ route('usuario.formRecoverPassword') }}">Esqueceu a Senha?</a>
                                             </div>
                                         </div>
 
