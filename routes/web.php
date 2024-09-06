@@ -14,6 +14,10 @@ Route::post('/cartaVendida', [HomeController::class, 'storeCartaVendida'])->name
 
 Route::view('/usuario', 'usuario.login')->name('usuario.login');
 Route::post('/auth', [UsuarioController::class, 'auth'])->name('usuario.auth');
+Route::view('/recoverPassword', 'usuario.recoverPassword')->name('usuario.recoverPassword');
+Route::post('/recoverPassword', [UsuarioController::class, 'recoverPassword']);
+Route::view('/changePassword/{id}/{token}', 'usuario.changePassword')->name('usuario.changePassword')->where('id','[0-9]+');
+Route::post('/changePassword', [UsuarioController::class, 'changePassword']);
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('usuario.logout');
 Route::get('/usuario/create/{id?}', [UsuarioController::class, 'create'])->name('usuario.create')->where('id','[0-9]+');
 Route::post('/usuario/store', [UsuarioController::class, 'store'])->name('usuario.store');

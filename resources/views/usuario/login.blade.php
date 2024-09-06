@@ -31,7 +31,7 @@
                                                     placeholder="Senha" aria-describedby="password" />
                                             </div>
                                             <div class="d-flex flex-row-reverse m-2">
-                                                <a href="{{ route('usuario.formRecoverPassword') }}">Esqueceu a Senha?</a>
+                                                <a href="{{ route('usuario.recoverPassword') }}">Esqueceu a Senha?</a>
                                             </div>
                                         </div>
 

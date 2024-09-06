@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RecuperarSenha;
+use App\Mail\SenhaAlterada;
 use App\Mail\VerificacaoEmail;
 use App\Models\Cadastro;
 use App\Models\Funcao;
@@ -92,7 +94,7 @@ class UsuarioController extends Controller
             $cadastro['Senha'] = bcrypt($cadastro['Senha']);
             $codigoVerificacaoEmail = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
             $cadastrado = Cadastro::create($cadastro) ?? Cadastro::where('Email', $cadastro['Email'])->first()->update($cadastro);
-            
+
             $dataUsuario = array(
                 'Login' => $cadastrado->Email,
                 'Senha' => $cadastro['Senha'],
@@ -122,12 +124,12 @@ class UsuarioController extends Controller
         }
     }
 
-    public function verificarEmail($id,$codigo)
+    public function verificarEmail($id, $codigo)
     {
         $usuario = User::where('IDCadastro', $id)
             ->where('CodigoVerificacaoEmail', $codigo)
             ->first();
-        
+
         if ($usuario) {
             $usuario->update([
                 'EmailConfirmado' => 1,
@@ -138,5 +140,57 @@ class UsuarioController extends Controller
         } else {
             return redirect('usuario')->with('erro', 'Link incorreto!');
         }
+    }
+
+    public function recoverPassword(Request $request)
+    {
+        $email = $request->input('email');
+        $cadastro = Cadastro::where('Email', $email)->first();
+
+        if (!$cadastro) {
+            return redirect('/recoverPassword')->with('erro', 'Email não encontrado em nosso cadastro!');
+        }
+        $usuario = User::where('IDCadastro', $cadastro->IDCadastro)->first();
+        
+        if ($usuario->ContaSuspendida == 1) {
+            return redirect('/recoverPassword')->with('erro', 'Essa conta foi suspendida, contate o administrador do sistema!');
+        }
+        $token = bin2hex(random_bytes(15));
+
+        $usuario->update(['TokenRecuperacaoSenha' => $token]);
+
+        Mail::to([$cadastro->Email])->send(new RecuperarSenha([
+            'id' => $usuario->IDUsuario,
+            'nome' => $cadastro->Nome,
+            'token' => $token
+        ]));
+
+        return redirect('/recoverPassword')->with('sucesso', 'Solicitação enviada com sucesso! Verifique sua caixa de email!');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $token = $request->input('token');
+        $id = $request->input('id');
+        $senha = bcrypt($request->input('senha'));
+
+        $usuario = User::find($id);
+        if (!$usuario) {
+            return redirect('/usuario')->with('erro', 'Link Inválido!');
+        }
+        if ($usuario->ContaSuspendida == 1) {
+            return redirect('/usuario')->with('erro', 'Essa conta foi suspendida, contate o administrador do sistema!');
+        }
+        if ($usuario->TokenRecuperacaoSenha != $token) {
+            return redirect('/usuario')->with('erro', 'Link Inválido!');
+        }
+
+        $usuario->update(['Senha' => $senha, 'TokenRecuperacaoSenha' => null]);
+
+        Mail::to([$usuario->cadastro->Email])->send(new SenhaAlterada([
+            'data' => now()->format('d/m/Y H:i:s'),
+        ]));
+
+        return redirect('/usuario')->with('sucesso', 'Senha alterada com sucesso!');
     }
 }

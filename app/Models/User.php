@@ -25,7 +25,7 @@ class User extends Authenticatable
         'CodigoVerificacaoEmail',
         'AdminConfirmado',
         'ContaSuspendida',
-        'TokeRecuperacaoSenha',
+        'TokenRecuperacaoSenha',
         'is_migrated'
     ];
 
