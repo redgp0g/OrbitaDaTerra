@@ -41,7 +41,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/build/js/intlTelInput.min.js"></script>
-    @livewireScripts
+    @livewireStyles
 </head>
 
 <body>
@@ -59,6 +59,7 @@
         @endif
         @yield('conteudo')
     </div>
+    @livewireScripts
 </body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BMDJS2N" height="0" width="0"
         style="display:none;visibility:hidden"></iframe></noscript>
