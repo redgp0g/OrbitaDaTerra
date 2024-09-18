@@ -56,12 +56,10 @@ class HomeController extends Controller
         return view('home/simulacao', compact('cadastro', 'tiposCarta', 'vendedor'));
     }
 
-    public function createCartaVendida($idAutorizada)
+    public function createCartaVendida($idAutorizada = 8)
     {
         $autorizada = Empresa::find($idAutorizada);
-        if (!$autorizada) {
-            abort(404);
-        }
+        
         $tiposCartas = TipoCarta::all();
         $administradoras = Empresa::where('TipoEmpresa', 'Administradora')->get();
 
