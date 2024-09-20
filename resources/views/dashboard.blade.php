@@ -6,9 +6,9 @@
             </div>
         </div>
     </div>
-
-    @include('partials.asideDashboard')
-
+    @if (auth()->user()->IDVendedor == 31 || auth()->user()->IDVendedor == 38)
+        @include('partials.asideDashboard')
+    @endif
     <main class="main-content">
         <div class="position-relative iq-banner">
             @include('partials.navbarDashboard')
