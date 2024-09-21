@@ -14,7 +14,7 @@
                 <div class="text-center">
                     <div>
                         <h3 class="d-inline-block">{{ auth()->user()->cadastro->Nome }}</h3>
-                        <p class="d-inline-block pl-3"> - Vendedor</p>
+                        <p class="d-inline-block pl-3"> - {{ auth()->user()->cadastro->TipoCadastro }}</p>
                     </div>
                 </div>
             </div>
