@@ -61,7 +61,7 @@
                                                 value="{{ auth()->user()->IDCadastro }}">
                                         @else
                                             <input type="hidden" name="IDCadastroVendedor"
-                                                value="{{ auth()->user()->IDCadastroVendedorIndicado }}">
+                                                value="{{ auth()->user()->cadastro->IDCadastroVendedorIndicado }}">
                                         @endif
                                         <input type="hidden" name="IDCadastroIndicador"
                                             value="{{ auth()->user()->IDCadastro }}">
