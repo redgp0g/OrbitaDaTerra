@@ -59,7 +59,10 @@ class HomeController extends Controller
     public function createCartaVendida($idAutorizada = 8)
     {
         $autorizada = Empresa::find($idAutorizada);
-        
+        if (!$autorizada) {
+            $autorizada = Empresa::find(8);
+        }
+
         $tiposCartas = TipoCarta::all();
         $administradoras = Empresa::where('TipoEmpresa', 'Administradora')->get();
 
