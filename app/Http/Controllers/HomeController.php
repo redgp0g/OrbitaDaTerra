@@ -78,6 +78,6 @@ class HomeController extends Controller
         $data['TaxaTransferencia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
         
         CartaVendida::create($data);
-        return redirect('/cartasAVenda/' . Auth::user()->IDCadastro);
+        return redirect('/cartasAVenda');
     }
 }
