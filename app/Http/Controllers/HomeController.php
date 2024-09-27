@@ -69,6 +69,14 @@ class HomeController extends Controller
     public function storeCartaVendida(Request $request)
     {
         $data = $request->all();
+        $data['ValorCredito'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
+        $data['ValorPago'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
+        $data['ValorVenda'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
+        $data['SaldoDevedor'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
+        $data['ValorParcela'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
+        $data['ValorGarantia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
+        $data['TaxaTransferencia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
+        
         CartaVendida::create($data);
         return redirect('/cartasAVenda/' . Auth::user()->IDCadastro);
     }
