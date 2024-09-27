@@ -4,8 +4,8 @@
     @include('components.navbarHome', [
         'items' => [
             [
-                'label' => 'Cartas Contempladas',
-                'url' => url('/contempladas/' . $cadastro->IDCadastro),
+                'label' => 'Cartas À Venda',
+                'url' => url('/cartasAVenda/' . $cadastro->IDCadastro),
                 'auth' => 'all',
             ],
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'auth' => 'auth'],

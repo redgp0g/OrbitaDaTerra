@@ -28,7 +28,7 @@ class HomeController extends Controller
         return view('home/index', compact('cadastro', 'cartas', 'tiposCartas', 'vendedor'));
     }
 
-    public function contempladas($idVendedor = 38)
+    public function cartasAVenda($idVendedor = 38)
     {
         $cadastro = Cadastro::find($idVendedor);
 
@@ -39,7 +39,7 @@ class HomeController extends Controller
         $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDCadastroVendedorIndicado);
         $cartasVendidas = CartaVendida::with('tipoCarta')->with('empresaAdministradora')->with('empresaAutorizada')->with('cadastroConsorciado')->with('cadastroVendedor')->get();
 
-        return view('home/contempladas', compact('cadastro', 'cartasVendidas', 'vendedor'));
+        return view('home/cartasAVenda', compact('cadastro', 'cartasVendidas', 'vendedor'));
     }
 
     public function simulacao($idVendedor = 38)
@@ -70,6 +70,6 @@ class HomeController extends Controller
     {
         $data = $request->all();
         CartaVendida::create($data);
-        return redirect('/contempladas/' . Auth::user()->IDCadastro);
+        return redirect('/cartasAVenda/' . Auth::user()->IDCadastro);
     }
 }

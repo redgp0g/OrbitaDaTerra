@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', 'Cartas Contempladas')
+@section('title', 'Cartas À Venda')
 @section('conteudo')
     @php $cartas = json_decode(file_get_contents('https://fragaebitelloconsorcios.com.br/api/json/contemplados'), true); @endphp
 
@@ -151,7 +151,7 @@
 
         function reservarCarta(button) {
             var numeroVendedor = {{ $vendedor->Telefone }}
-            var mensagemPadrao = "Olá, eu gostaria de reservar uma carta contemplada! Código: " + button.dataset.cartaId +
+            var mensagemPadrao = "Olá, eu gostaria de reservar uma carta à venda! Código: " + button.dataset.cartaId +
                 ", valor de crédito: " + button.dataset.cartaValor + ", carta de " + button.dataset.cartaCategoria;
 
             mensagemPadrao = encodeURIComponent(mensagemPadrao);
