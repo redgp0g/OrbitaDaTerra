@@ -41,7 +41,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/build/js/intlTelInput.min.js"></script>
-    @livewireStyles
 </head>
 
 <body>
@@ -59,14 +58,12 @@
         @endif
         @yield('conteudo')
     </div>
-    @livewireScripts
-</body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BMDJS2N" height="0" width="0"
-        style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BMDJS2N" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
 
-@include('partials.footer')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+    @include('partials.footer')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
