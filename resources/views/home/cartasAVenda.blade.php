@@ -85,7 +85,11 @@
                             $saldoDevedor = $carta->ValorCredito - $carta->ValorGarantia;
                             $parcelas = $carta->ParcelasPagar;
                             $totalParcelas = $carta->ValorParcela * $parcelas;
-                            $percentualParcela = (($totalParcelas - $saldoDevedor) / $saldoDevedor / $parcelas) * 100;
+                            if ($saldoDevedor <= 0 || $parcelas <= 0) {
+                                $percentualParcela = 0;
+                            }else{
+                                $percentualParcela = (($totalParcelas - $saldoDevedor) / $saldoDevedor / $parcelas) * 100;
+                            }
                         @endphp
                         <tr>
                             <td>{{ $carta->IDCartaVendida }}</td>
