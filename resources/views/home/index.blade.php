@@ -65,11 +65,7 @@
 
     </div>
 
-    <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao/{{ $vendedor->IDCadastro }}'">
-        <div class="mx-2">Simular Agora</div>
-    </button>
-
-    @include('components.faleComOVendedor', ['cadastro' => $vendedor])
+    @include('components.faleComOVendedor', ['cadastro' => $cadastro])
 
     <script>
         function comprarCarta(button) {
