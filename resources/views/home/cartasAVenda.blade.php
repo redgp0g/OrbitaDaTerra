@@ -184,7 +184,7 @@
             $('#filtroAdministradora').on('change', function() {
                 var filtro = $(this).val();
                 filtroAdministradoraSelecionada = filtro;
-                table.column(7).search(filtro).draw();
+                table.column(6).search(filtro).draw();
 
                 atualizarFiltros();
             });
@@ -192,21 +192,21 @@
             $('#filtroDisponibilidade').on('change', function() {
                 var filtro = $(this).val();
                 filtroDisponibilidadeSelecionada = filtro;
-                table.column(8).search(filtro).draw();
+                table.column(7).search(filtro).draw();
 
                 atualizarFiltros();
             });
 
             function atualizarFiltros() {
                 atualizarOptionsfiltro(table, $('#filtroCategoria'), 1, filtroCategoriaSelecionada);
-                atualizarOptionsfiltro(table, $('#filtroAdministradora'), 7, filtroAdministradoraSelecionada);
-                atualizarOptionsfiltro(table, $('#filtroDisponibilidade'), 8, filtroDisponibilidadeSelecionada);
+                atualizarOptionsfiltro(table, $('#filtroAdministradora'), 6, filtroAdministradoraSelecionada);
+                atualizarOptionsfiltro(table, $('#filtroDisponibilidade'), 7, filtroDisponibilidadeSelecionada);
             }
 
             $('#limparFiltros').on('click', function() {
                 table.column(1).search('').draw();
+                table.column(6).search('').draw();
                 table.column(7).search('').draw();
-                table.column(8).search('').draw();
                 filtroDisponibilidadeSelecionada = '';
                 filtroAdministradoraSelecionada = '';
                 filtroCategoriaSelecionada = '';
