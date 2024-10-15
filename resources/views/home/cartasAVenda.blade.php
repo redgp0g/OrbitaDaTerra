@@ -40,71 +40,34 @@
                         <th>Entrada</th>
                         <th>Meses</th>
                         <th>Parcela</th>
-                        <th>Taxa</th>
                         <th>Administradora</th>
                         <th>Disponibilidade</th>
+                        <th>Contemplada?</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($cartas as $carta)
-                        @php
-                            $saldoDevedor = $carta['valor_credito'] - $carta['entrada'];
-                            $parcelas = $carta['parcelas'];
-                            $totalParcelas = $carta['valor_parcela'] * $parcelas;
-                            $percentualParcela = (($totalParcelas - $saldoDevedor) / $saldoDevedor / $parcelas) * 100;
-                        @endphp
-                        <tr>
-                            <td>{{ htmlspecialchars($carta['id']) }}</td>
-                            <td>{{ htmlspecialchars($carta['categoria']) }}</td>
-                            <td>R$ {{ number_format($carta['valor_credito'], 2, ',', '.') }}</td>
-                            <td>R$ {{ number_format($carta['entrada'], 2, ',', '.') }}</td>
-                            <td>{{ htmlspecialchars($carta['parcelas']) }}</td>
-                            <td>R$ {{ number_format($carta['valor_parcela'], 2, ',', '.') }}</td>
-                            <td>{{ number_format($percentualParcela, 2, ',') }}%</td>
-                            <td>{{ htmlspecialchars($carta['administradora']) }}</td>
-                            <td>
-                                @if ($carta['reserva'] == 'Reservar')
-                                    Disponível
-                                @else
-                                    Reservado
-                                @endif
-                            </td>
-                            <td>
-                                @if ($carta['reserva'] == 'Reservar')
-                                    <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}"
-                                        data-carta-categoria="{{ $carta['categoria'] }}"
-                                        data-carta-valor="{{ $carta['valor_credito'] }}"
-                                        onclick="reservarCarta(this)">Reservar</button>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
                     @foreach ($cartasVendidas as $carta)
-                        @php
-                            $saldoDevedor = $carta->ValorCredito - $carta->ValorGarantia;
-                            $parcelas = $carta->ParcelasPagar;
-                            $totalParcelas = $carta->ValorParcela * $parcelas;
-                            if ($saldoDevedor <= 0 || $parcelas <= 0) {
-                                $percentualParcela = 0;
-                            }else{
-                                $percentualParcela = (($totalParcelas - $saldoDevedor) / $saldoDevedor / $parcelas) * 100;
-                            }
-                        @endphp
                         <tr>
                             <td>{{ $carta->IDCartaVendida }}</td>
                             <td>{{ $carta->tipoCarta->Descricao }}</td>
-                            <td>R$ {{ $carta->ValorCredito }}</td>
+                            <td>R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</td>
                             <td>R$ {{ number_format($carta->ValorGarantia, 2, ',', '.') }}</td>
                             <td>{{ $carta->ParcelasPagar }}</td>
                             <td>R$ {{ number_format($carta->ValorParcela, 2, ',', '.') }}</td>
-                            <td>{{ number_format($percentualParcela, 2, ',') }}%</td>
                             <td>{{ $carta->empresaAdministradora->NomeFantasia }}</td>
                             <td>
                                 @if ($carta->Status == 'Reservar')
-                                    Disponível
+                                Disponível
                                 @else
-                                    Reservado
+                                Reservado
+                                @endif
+                            </td>
+                            <td>
+                                @if ($carta->Contemplada)
+                                Sim
+                                @else
+                                Não
                                 @endif
                             </td>
                             <td>
@@ -112,6 +75,33 @@
                                     <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}"
                                         data-carta-categoria="{{ $carta->tipoCarta->descricao }}"
                                         data-carta-valor="{{ $carta->ValorCredito }}"
+                                        onclick="reservarCarta(this)">Reservar</button>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    @foreach ($cartas as $carta)
+                        <tr>
+                            <td>{{ htmlspecialchars($carta['id']) }}</td>
+                            <td>{{ htmlspecialchars($carta['categoria']) }}</td>
+                            <td>R$ {{ number_format($carta['valor_credito'], 2, ',', '.') }}</td>
+                            <td>R$ {{ number_format($carta['entrada'], 2, ',', '.') }}</td>
+                            <td>{{ htmlspecialchars($carta['parcelas']) }}</td>
+                            <td>R$ {{ number_format($carta['valor_parcela'], 2, ',', '.') }}</td>
+                            <td>{{ htmlspecialchars($carta['administradora']) }}</td>
+                            <td>
+                                @if ($carta['reserva'] == 'Reservar')
+                                Disponível
+                                @else
+                                Reservado
+                                @endif
+                            </td>
+                            <td>Sim</td>
+                            <td>
+                                @if ($carta['reserva'] == 'Reservar')
+                                    <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}"
+                                        data-carta-categoria="{{ $carta['categoria'] }}"
+                                        data-carta-valor="{{ $carta['valor_credito'] }}"
                                         onclick="reservarCarta(this)">Reservar</button>
                                 @endif
                             </td>
