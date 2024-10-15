@@ -12,8 +12,8 @@
         ],
     ])
 
-    <div class="section 3" style="min-height: 85vh;">
-        <div class="container">
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+        <div style="width: 90vw">
             <div class="d-sm-flex py-3 align-items-sm-center">
                 <div class="my-3 d-sm-flex">
                     <label>Categoria:</label>
@@ -176,7 +176,8 @@
                 "autoWidth": true,
                 "responsive": true,
             });
-
+            $('#table').css('width', '100%');
+            $('.dataTables_scrollHeadInner').css('width', '100%');
             atualizarFiltros();
 
             $('#filtroCategoria').on('change', function() {
