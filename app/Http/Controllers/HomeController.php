@@ -73,12 +73,12 @@ class HomeController extends Controller
     {
         $data = $request->all();
         $data['ValorCredito'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
-        $data['ValorPago'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
-        $data['ValorVenda'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
-        $data['SaldoDevedor'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
-        $data['ValorParcela'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
-        $data['ValorGarantia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
-        $data['TaxaTransferencia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
+        $data['ValorPago'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorPago']));
+        $data['ValorVenda'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorVenda']));
+        $data['SaldoDevedor'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['SaldoDevedor']));
+        $data['ValorParcela'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorParcela']));
+        $data['ValorGarantia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorGarantia']));
+        $data['TaxaTransferencia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['TaxaTransferencia']));
         
         CartaVendida::create($data);
         return redirect('/cartasAVenda');
