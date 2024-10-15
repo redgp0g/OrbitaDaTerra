@@ -1,4 +1,4 @@
-<dialog id="dialogFaleVendedor" class="rounded rounded-4 border border-0 p-5" style="z-index: 100;">
+<dialog id="dialogFaleVendedor" class="rounded rounded-4 border p-5" style="z-index: 100;">
     <button style="right: 10px; top:10px" class="position-absolute" id="fecharDialog"
         onclick="dialogFaleVendedor.close()"><i class="fa fa-times"></i></button>
     <h2 class="mb-2">Preencha para conversar com um Vendedor</h2>
@@ -30,7 +30,7 @@
     </form>
 </dialog>
 
-<button class="float fs-1" target="_blank" id="btnmodal"
+<button class="fs-1 text-white rounded rounded-circle" style="background-color: #25d366" target="_blank" id="btnmodal"
     onclick="document.getElementById('dialogFaleVendedor').showModal()"><i class="fa fa-whatsapp px-2"></i></button>
 
 <script>

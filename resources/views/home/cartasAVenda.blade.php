@@ -111,8 +111,14 @@
             </table>
         </div>
     </div>
-    <button class="floatSimulacao fs-5" onclick="window.location.href = '/simulacao/{{ $cadastro->IDCadastro }}'"><div class="mx-2">Simular Agora</div></button>
-    @include('components.faleComOVendedor', ['cadastro' => $vendedor])
+
+    <div class="d-flex align-items-end flex-column position-fixed bottom-0 end-0 m-5 gap-3" style="z-index: 1100;">
+        @include('components.faleComOVendedor', ['cadastro' => $cadastro])
+        {{-- <livewire:simulacao :cadastro="$cadastro" :vendedor="$vendedor" /> --}}
+        <button class="fs-5 p-1 text-white rounded rounded-pill" style="background-color: #1e9ef3" onclick="window.location.href = '/simulacao/{{ $cadastro->IDCadastro }}'">Simular Agora</button>
+        <button class="fs-5 bg-success text-white rounded rounded-pill p-1 px-2" onclick="window.location.href = '/carta-a-venda/8'">Venda sua Carta</button>
+    </div>
+
     <script>
         const tiposCarta = document.querySelectorAll('.dropdown-menu li');
         const nav = document.getElementById('navbarSupportedContent');
