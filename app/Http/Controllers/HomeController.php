@@ -37,7 +37,7 @@ class HomeController extends Controller
         }
 
         $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDCadastroVendedorIndicado);
-        $cartasVendidas = CartaVendida::with('tipoCarta')->with('empresaAdministradora')->with('empresaAutorizada')->with('cadastroConsorciado')->with('cadastroVendedor')->get();
+        $cartasVendidas = CartaVendida::with('tipoCarta')->with('empresaAdministradora')->with('empresaAutorizada')->with('cadastroConsorciado')->with('cadastroVendedor')->where('Status', 'Aprovada' )->get();
 
         return view('home/cartasAVenda', compact('cadastro', 'cartasVendidas', 'vendedor'));
     }
