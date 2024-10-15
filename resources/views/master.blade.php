@@ -51,6 +51,9 @@
         @if ($mensagem = Session::get('sucesso'))
             @include('components.alert', ['mensagem' => $mensagem, 'style' => 'success'])
         @endif
+        @if ($mensagem = Session::get('alerta'))
+            @include('components.alert', ['mensagem' => $mensagem, 'style' => 'warning'])
+        @endif
         @if ($errors->any())
             @foreach ($errors->all() as $error)
                 @include('components.alert', ['mensagem' => $error, 'style' => 'danger'])
