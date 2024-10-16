@@ -36,6 +36,18 @@ class CartaVendida extends Model
         'Contemplada',
     ];
 
+    public function casts() : array
+    {
+        return [
+            'ValorCredito' => 'decimal:2',
+            'ValorVenda' => 'decimal:2',
+            'SaldoDevedor' => 'decimal:2',
+            'ValorParcela' => 'decimal:2',
+            'ValorGarantia' => 'decimal:2',
+            'TaxaTransferencia' => 'decimal:2',
+        ];
+    }
+
     public function tipoCarta()
     {
         return $this->belongsTo(TipoCarta::class, 'IDTipoCarta', 'IDTipoCarta');
