@@ -24,7 +24,7 @@
                             </div>
 
 
-                            <div class="form-group col-lg-3">
+                            <div class="form-group col-lg-3 d-flex flex-column">
                                 <label class="form-label" for="Celular">Celular <span
                                         class="text-danger">*</span></label>
                                 <input x-ref="input" x-init="iti = intlTelInput($refs.input, {
