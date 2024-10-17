@@ -1,4 +1,4 @@
-<div class="container-xxl d-flex justify-content-center align-items-center" style="height: 95vh">
+<div class="container-xxl d-flex justify-content-center align-items-center" style="min-height: 95vh">
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner py-4">
             <div class="card">
