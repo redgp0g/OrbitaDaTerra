@@ -10,9 +10,21 @@
                             <tr>
                                 <th>Tipo de Carta</th>
                                 <th>Status</th>
+                                <th>Consorciado</th>
+                                <th>Telefone Consorciado</th>
+                                <th>Autorizada</th>
                                 <th>Valor do Crédito</th>
                                 <th>Valor Pago</th>
                                 <th>Valor de Venda</th>
+                                <th>Saldo Devedor</th>
+                                <th>Parcelas Pagas</th>
+                                <th>Parcelas a Pagar</th>
+                                <th>Valor da Parcela</th>
+                                <th>Vencimento</th>
+                                <th>Valor de Garantia</th>
+                                <th>Grupo</th>
+                                <th>Cota</th>
+                                <th>Observações</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -21,9 +33,21 @@
                                 <tr>
                                     <td>{{ $cartaAVenda->TipoCarta->Descricao }}</td>
                                     <td class="{{ $cartaAVenda->Status == 'Em Aprovação' ? 'text-danger' : '' }}">{{ $cartaAVenda->Status }}</td>
+                                    <td>{{ $cartaAVenda->cadastroConsorciado->Nome }}</td>
+                                    <td>{{ $cartaAVenda->cadastroConsorciado->Telefone }}</td>
+                                    <td>{{ $cartaAVenda->empresaAutorizada->RazaoSocial }}</td>
                                     <td>{{ $cartaAVenda->ValorCredito }}</td>
                                     <td>{{ $cartaAVenda->ValorPago }}</td>
                                     <td>{{ $cartaAVenda->ValorVenda }}</td>
+                                    <td>{{ $cartaAVenda->SaldoDevedor }}</td>
+                                    <td>{{ $cartaAVenda->ParcelasPagas }}</td>
+                                    <td>{{ $cartaAVenda->ParcelasPagar }}</td>
+                                    <td>{{ $cartaAVenda->ValorParcela }}</td>
+                                    <td>{{ $cartaAVenda->DiaVencimento }}</td>
+                                    <td>{{ $cartaAVenda->ValorGarantia }}</td>
+                                    <td>{{ $cartaAVenda->Grupo }}</td>
+                                    <td>{{ $cartaAVenda->Cota }}</td>
+                                    <td>{{ $cartaAVenda->Observacoes }}</td>
                                     <td>
                                         @if ($cartaAVenda->Status == 'Em Aprovação')
                                             <button class="btn btn-success aprovar"
