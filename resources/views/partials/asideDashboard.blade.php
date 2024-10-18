@@ -126,6 +126,22 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="sub-nav collapse" id="sidebar-consultar" data-bs-parent="#sidebar-menu">
+                        <li class="nav-item">
+                            <a class="nav-link " href="{{ url('/dashboard/cartas-a-venda') }}">
+                                <i class="icon">
+                                    <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <g>
+                                            <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                        </g>
+                                    </svg>
+                                </i>
+                                <i class="sidenav-mini-icon"> V </i>
+                                <span class="item-name">Cartas à Venda</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-cadastrar" role="button"

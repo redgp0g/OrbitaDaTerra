@@ -66,6 +66,13 @@ class DashboardController extends Controller
         return view('dashboard.contas', compact('contas'));
     }
 
+    public function cartasAVenda()
+    {
+        $cartasAVenda = CartaVendida::with('tipoCarta')->with('empresaAdministradora')->with('empresaAutorizada')->with('cadastroConsorciado')->get();
+
+        return view('dashboard.cartasAVenda', compact('cartasAVenda'));
+    }
+
     public function perfil()
     {
         return view('dashboard.perfil');
