@@ -22,7 +22,7 @@ Route::put('/cadastros/excluirLead/{id}', [CadastroController::class, 'excluirLe
 Route::put('/usuario/liberar/{id}', [UsuarioController::class, 'liberar'])->where('id','[0-9]+');
 Route::put('/usuario/suspender/{id}', [UsuarioController::class, 'suspender'])->where('id','[0-9]+');
 
-Route::put('/cartaAVenda/aprovar/{id}', [UsuarioController::class, 'aprovar'])->where('id','[0-9]+');
+Route::put('/cartaAVenda/aprovar/{id}', [CartaVendidaController::class, 'aprovar'])->where('id','[0-9]+');
 Route::put('/cartaAVenda/bloquear/{id}', [CartaVendidaController::class, 'bloquear'])->where('id','[0-9]+');
 
 Route::delete('/empresas/{id}', [EmpresaController::class, 'delete'])->where('id','[0-9]+');
