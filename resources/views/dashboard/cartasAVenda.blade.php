@@ -30,9 +30,24 @@
             </thead>
             <tbody>
               @foreach ($cartasAVenda as $cartaAVenda)
+                @php
+                  switch ($cartaAVenda->Status) {
+                      case 'Em Aprovação':
+                          $cor = 'text-warning';
+                          break;
+                      case 'Bloqueada':
+                          $cor = 'text-danger';
+                          break;
+                      case 'Aprovada':
+                          $cor = 'text-success';
+                          break;
+                      default:
+                          break;
+                  }
+                @endphp
                 <tr>
                   <td>{{ $cartaAVenda->TipoCarta->Descricao }}</td>
-                  <td class="{{ $cartaAVenda->Status == 'Em Aprovação' || $cartaAVenda->Status == 'Bloqueada' ? 'text-danger' : '' }}">{{ $cartaAVenda->Status }}</td>
+                  <td class="{{ $cor }}" data-column="status">{{ $cartaAVenda->Status }}</td>
                   <td>{{ $cartaAVenda->cadastroConsorciado->Nome }}</td>
                   <td>{{ $cartaAVenda->cadastroConsorciado->Telefone }}</td>
                   <td>{{ $cartaAVenda->empresaAutorizada->RazaoSocial }}</td>
