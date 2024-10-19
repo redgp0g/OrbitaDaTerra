@@ -92,13 +92,15 @@
 
       table.on('click', '.aprovar', function() {
         var button = $(this);
-        var id = $(this).data('id');        
+        var id = $(this).data('id');
         if (confirm('Tem certeza de que deseja aprovar essa carta?')) {
           $.ajax({
             url: '/api/cartaAVenda/aprovar/' + id,
             type: 'PUT',
             dataType: 'json',
             success: function() {
+              button.remove();
+              $('.bloquear').remove();
               alert('Aprovada!');
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -119,6 +121,8 @@
             type: 'PUT',
             dataType: 'json',
             success: function(data) {
+              button.remove();
+              $('.aprovar').remove();
               alert('Bloqueada!');
             },
             error: function(jqXHR, textStatus, errorThrown) {
