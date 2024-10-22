@@ -63,7 +63,7 @@
           </div>
           <div class="form-group">
             <label for="telefone-details">Telefone:</label>
-            <input class="form-control celular" id="telefone-details" name="telefone" type="text" required disabled pattern="\(\d{2}\) \d{5}-\d{4}">
+            <input class="form-control celular" id="telefone-details" name="telefone" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="cpf-details">CPF:</label>
@@ -133,14 +133,7 @@
           success: function(data) {
             if (data) {
               $("#nome-details").val(data.Nome);
-              var telefoneString = data.Telefone.toString();
-              var telefoneFormatado = telefoneString.replace(/\D/g, '').match(
-                /(\d{0,2})(\d{0,5})(\d{0,4})/);
-              var telefoneMascarado = !telefoneFormatado[2] ? telefoneFormatado[
-                  1] : '(' + telefoneFormatado[1] + ') ' + telefoneFormatado[
-                  2] +
-                (telefoneFormatado[3] ? '-' + telefoneFormatado[3] : '');
-              $("#telefone-details").val(telefoneMascarado);
+              $("#telefone-details").val(data.Telefone);
               $("#cpf-details").val(data.CPF);
               $("#email-details").val(data.Email);
               $("#cep-details").val(data.CEP);
