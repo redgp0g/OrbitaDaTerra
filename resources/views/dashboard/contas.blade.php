@@ -59,7 +59,7 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="nome-details">Nome Completo:</label>
-            <input class="form-control" id="nome-details" name="nome" type="text" disabled required>
+            <input class="form-control" id="nome-details" name="nome" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="telefone-details">Telefone:</label>
@@ -67,7 +67,7 @@
           </div>
           <div class="form-group">
             <label for="cpf-details">CPF:</label>
-            <input class="form-control cpf" id="cpf-details" name="cpf" type="text" disabled required>
+            <input class="form-control cpf" id="cpf-details" name="cpf" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="email-details">Email:</label>
@@ -75,31 +75,31 @@
           </div>
           <div class="form-group">
             <label for="cep-details">CEP:</label>
-            <input class="form-control cep" id="cep-details" name="cep" type="text" disabled required>
+            <input class="form-control cep" id="cep-details" name="cep" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="endereco-details">Endereço:</label>
-            <input class="form-control" id="endereco-details" name="endereco" type="text" disabled required>
+            <input class="form-control" id="endereco-details" name="endereco" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="estado-details">Bairro:</label>
-            <input class="form-control" id="bairro-details" name="bairro" type="text" disabled required>
+            <input class="form-control" id="bairro-details" name="bairro" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="estado-details">Cidade:</label>
-            <input class="form-control" id="cidade-details" name="cidade" type="text" disabled required>
+            <input class="form-control" id="cidade-details" name="cidade" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="estado-details">Estado:</label>
-            <input class="form-control" id="estado-details" name="estado" type="text" disabled required>
+            <input class="form-control" id="estado-details" name="estado" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="tipocadastro-details">Tipo de Cadastro:</label>
-            <input class="form-control" id="tipocadastro-details" name="tipocadastro" type="text" disabled required>
+            <input class="form-control" id="tipocadastro-details" name="tipocadastro" type="text" disabled>
           </div>
           <div class="form-group">
             <label for="datacadastro-details">Data de Cadastro:</label>
-            <input class="form-control" id="datacadastro-details" name="datacadastro" type="datetime-local" disabled required>
+            <input class="form-control" id="datacadastro-details" name="datacadastro" type="datetime-local" disabled>
           </div>
           <!-- Campo ocultado -->
           <div class="form-group d-none">
