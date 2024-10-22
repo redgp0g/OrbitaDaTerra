@@ -27,6 +27,15 @@
           <label>Administradora:</label>
           <select class="ms-1 form-select form-select-sm w-auto" id="filtroAdministradora"></select>
         </div>
+        <div class="my-3 ms-2 d-sm-flex">
+          <label>Contemplada?</label>
+          <select class="ms-1 form-select form-select-sm w-auto" id="filtroContemplada">
+            <option value="">Todas</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+
         <div class="ps-5 h-50 d-sm-flex">
           <button class="btn btn-info" id="limparFiltros">Limpar Filtros</button>
         </div>
@@ -200,6 +209,12 @@
         atualizarFiltros();
       });
 
+      $('#filtroContemplada').on('change', function() {
+        var filtro = $(this).val();
+        table.column(8).search(filtro).draw();
+        atualizarFiltros();
+      });
+
       function atualizarFiltros() {
         atualizarOptionsfiltro(table, $('#filtroCategoria'), 1, filtroCategoriaSelecionada);
         atualizarOptionsfiltro(table, $('#filtroAdministradora'), 6, filtroAdministradoraSelecionada);
@@ -210,6 +225,7 @@
         table.column(1).search('').draw();
         table.column(6).search('').draw();
         table.column(7).search('').draw();
+        table.column(8).search('').draw();
         filtroDisponibilidadeSelecionada = '';
         filtroAdministradoraSelecionada = '';
         filtroCategoriaSelecionada = '';
