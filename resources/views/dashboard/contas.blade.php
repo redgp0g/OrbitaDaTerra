@@ -58,6 +58,9 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
+            <a class="text-success" id="linkPaginaVendedor" target="_blank">Link Pagina do Vendedor</a>
+          </div>
+          <div class="form-group">
             <label for="nome-details">Nome Completo:</label>
             <input class="form-control" id="nome-details" name="nome" type="text" disabled>
           </div>
@@ -144,6 +147,7 @@
               $("#tipocadastro-details").val(data.TipoCadastro);
               $("#datacadastro-details").val(data.DataCadastro);
               $("#observacoes-details").val(data.Observacoes);
+              $("#linkPaginaVendedor").attr("href", "/" + idUsuario);
               $('#detalhesConta').modal('show');
             } else {
               alert('Lead não encontrado ou erro ao buscar os dados.');
