@@ -45,7 +45,7 @@
                           break;
                   }
                 @endphp
-                <tr>
+                <tr data-id="{{ $cartaAVenda->IDCartaVendida }}">
                   <td>{{ $cartaAVenda->TipoCarta->Descricao }}</td>
                   <td class="{{ $cor }}" data-column="status">{{ $cartaAVenda->Status }}</td>
                   <td>{{ $cartaAVenda->cadastroConsorciado->Nome }}</td>
@@ -102,6 +102,9 @@
               button.remove();
               $('.bloquear').remove();
               alert('Aprovada!');
+              var coluna = $('#datatable').find('tr[data-id="' + id + '"]').find('td[data-column="status"]');
+              coluna.text('Aprovada');
+              coluna.attr('class', 'text-success');
             },
             error: function(jqXHR, textStatus, errorThrown) {
               console.error('Erro na requisição AJAX:', textStatus, errorThrown);
@@ -124,6 +127,9 @@
               button.remove();
               $('.aprovar').remove();
               alert('Bloqueada!');
+              var coluna = $('#datatable').find('tr[data-id="' + id + '"]').find('td[data-column="status"]');
+              coluna.text('Bloqueada');
+              coluna.attr('class', 'text-danger');
             },
             error: function(jqXHR, textStatus, errorThrown) {
               console.error('Erro na requisição AJAX:', textStatus, errorThrown);
