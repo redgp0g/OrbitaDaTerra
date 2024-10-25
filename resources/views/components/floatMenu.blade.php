@@ -6,7 +6,7 @@
 </div>
 
 <dialog class="rounded rounded-4 border p-5" id="dialogFaleVendedor" style="z-index: 100;">
-  <button class="position-absolute" id="fecharDialog" style="right: 10px; top:10px" onclick="dialogFaleVendedor.close()"><i class="fa fa-times"></i></button>
+  <span class="modal-close" onclick="dialogFaleVendedor.close()" x-on:click="showModal = false">&times;</span>
   <h2 class="mb-2">Preencha para conversar com um Vendedor</h2>
   <h4 class="text-center text-danger fs-6">Os campos com * são obrigatórios</h4>
   <form id="enviarDados" method="POST">
