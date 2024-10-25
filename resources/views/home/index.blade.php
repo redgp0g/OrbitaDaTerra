@@ -47,7 +47,7 @@
                         <button class="btn btn-success" data-carta-categoria="{{ $carta->TipoCarta->Descricao }}"
                           data-carta-valor="R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}"
                           data-carta-flex="R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}" data-carta-prazo="{{ $carta->Prazo }}"
-                          onclick="comprarCarta(this)">Comprar</button>
+                          onclick="comprarCarta(this)"><i class="fa fa-shopping-cart"></i> Comprar</button>
                         {{-- <button class="btn btn-info fs-6">Detalhes</button> --}}
                       </div>
                     </div>
