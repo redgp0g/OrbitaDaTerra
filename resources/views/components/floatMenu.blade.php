@@ -1,8 +1,12 @@
-<div class="d-flex align-items-end flex-column position-fixed bottom-0 end-0 m-5 gap-3" style="z-index: 1100;">
-  <button class="fs-1 text-white rounded rounded-circle" id="btnmodal" style="background-color: #25d366" target="_blank"
-    onclick="document.getElementById('dialogFaleVendedor').showModal()"><i class="fa fa-whatsapp px-2"></i></button>
-    <button class="fs-5 p-1 text-white rounded rounded-pill" style="background-color: #1e9ef3" onclick="window.location.href = '/simulacao/{{ $cadastro->IDCadastro }}'">Simular Agora</button>
-  <button class="fs-5 bg-success text-white rounded rounded-pill p-1 px-2" onclick="window.location.href = '/carta-a-venda/8'">Venda sua Carta</button>
+<div class="float d-flex align-items-end flex-column-reverse position-fixed bottom-0 end-0 m-5" style="z-index: 1100;">
+  <input class="mt-3" type="checkbox" checked />
+  <div class="mt-3 buttonFloatMenu fs-1 d-flex justify-content-center align-items-center"><i class="fa fa-angle-up"></i></div>
+  <div class="floatMenu align-items-end flex-column gap-3">
+    <button class="fs-1 text-white rounded rounded-circle" id="btnmodal" style="background-color: #25d366" target="_blank"
+      onclick="document.getElementById('dialogFaleVendedor').showModal()"><i class="fa fa-whatsapp px-2"></i></button>
+      <button class="fs-5 p-1 text-white rounded rounded-pill" style="background-color: #1e9ef3" onclick="window.location.href = '/simulacao/{{ $cadastro->IDCadastro }}'">Simular Agora</button>
+    <button class="fs-5 bg-success text-white rounded rounded-pill p-1 px-2" onclick="window.location.href = '/carta-a-venda/8'">Venda sua Carta</button>
+  </div>
 </div>
 
 <dialog class="rounded rounded-4 border p-5" id="dialogFaleVendedor" style="z-index: 100;">
