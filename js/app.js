@@ -91,21 +91,16 @@ function atualizarOptionsFiltroDataTable(
 
 $("#CEP").focusout(function () {
     var cep = $(this).val();
-    console.log(cep);
     cep = cep.replace(/\D/g, "");
-    var url = "https://api.brasilaberto.com/v1/zipcode/" + cep;
+    var url = "https://viacep.com.br/ws/" + cep + "/json/";
 
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            if (data && data.result) {
-                $("#Endereco").val(data.result.street);
-                $("#Bairro").val(data.result.district);
-                $("#Cidade").val(data.result.city);
-                $("#Estado").val(data.result.state);
-            } else {
-                console.error("Resposta da API sem dados válidos.");
-            }
+            $("#Endereco").val(data.logradouro);
+            $("#Bairro").val(data.bairro);
+            $("#Cidade").val(data.localidade);
+            $("#Estado").val(data.estado);
         })
         .catch((error) => {
             console.error("Erro na requisição:", error);
@@ -113,7 +108,6 @@ $("#CEP").focusout(function () {
 
     return false;
 });
-
 
 function validarCPF(cpf) {
     var token = "5735|bXDX7IRtgcyFFLs4SMSX3BFGXBvseRWR";
