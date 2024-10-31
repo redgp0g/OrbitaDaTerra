@@ -20,6 +20,20 @@
     })(window, document, 'script', 'dataLayer', 'GTM-5BMDJS2N');
   </script>
   <!-- End Google Tag Manager -->
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11312268635"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    
+    gtag('config', 'AW-11312268635');
+    </script>
+    <!-- End Google Tag -->
 
   <meta name="google-site-verification" content="0m0e911CLxGxr2hkn_OUwanL9jtNYJdZKY-T3bmF89I" />
   <meta charset="utf-8">
