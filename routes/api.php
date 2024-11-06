@@ -22,6 +22,10 @@ Route::put('/cadastros/excluirLead/{id}', [CadastroController::class, 'excluirLe
 Route::put('/usuario/liberar/{id}', [UsuarioController::class, 'liberar'])->where('id','[0-9]+');
 Route::put('/usuario/suspender/{id}', [UsuarioController::class, 'suspender'])->where('id','[0-9]+');
 
+Route::post('/cartas/simulacao', [CartaController::class, 'simulacao']);
+Route::get('/prazos/tipocarta/{idTipoCarta}', [CartaController::class, 'buscarPrazosPorTipoCarta'])->where('idTipoCarta','[0-9]+');
+Route::get('/creditos/tipocarta/{idTipoCarta}', [CartaController::class, 'buscarCreditosPorTipoCarta'])->where('idTipoCarta','[0-9]+');
+
 Route::put('/cartaAVenda/aprovar/{id}', [CartaVendidaController::class, 'aprovar'])->where('id','[0-9]+');
 Route::put('/cartaAVenda/bloquear/{id}', [CartaVendidaController::class, 'bloquear'])->where('id','[0-9]+');
 
