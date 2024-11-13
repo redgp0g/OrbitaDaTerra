@@ -7,12 +7,12 @@ use App\Models\User;
 
 class UsuarioController extends Controller
 {
-    public function liberar($id) {
-        User::find($id)->update(['AdminConfirmado' => 1, 'ContaSuspendida' => 0]);
-        return response()->json('Conta Suspensa', 200);
+    public function ativar($id) {
+        User::find($id)->update(['Status' => 'Ativa']);
+        return response()->json('Conta Ativada', 200);
     }
     public function suspender($id) {
-        User::find($id)->update(['AdminConfirmado' => 0, 'ContaSuspendida' => 1]);
+        User::find($id)->update(['Status' => 'Suspendida']);
         return response()->json('Conta Suspensa', 200);
     }
 }

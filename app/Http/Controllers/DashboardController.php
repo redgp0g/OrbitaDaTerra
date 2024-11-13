@@ -61,7 +61,10 @@ class DashboardController extends Controller
 
     public function contas()
     {
-        $contas = User::with('cadastro')->orderBy('AdminConfirmado')->get();
+        $contas = User::with('cadastro')
+            ->orderByRaw("FIELD(Status, 'Em Análise', 'Ativa', 'Suspendida')")
+            ->get();
+
 
         return view('dashboard.contas', compact('contas'));
     }

@@ -19,7 +19,7 @@ Route::put('/cadastros/{id}', [CadastroController::class, 'update'])->where('id'
 Route::put('/cadastros/excluirLead/{id}', [CadastroController::class, 'excluirLead'])->where('id','[0-9]+');
 
 
-Route::put('/usuario/liberar/{id}', [UsuarioController::class, 'liberar'])->where('id','[0-9]+');
+Route::put('/usuario/ativar/{id}', [UsuarioController::class, 'ativar'])->where('id','[0-9]+');
 Route::put('/usuario/suspender/{id}', [UsuarioController::class, 'suspender'])->where('id','[0-9]+');
 
 Route::post('/cartas/simulacao', [CartaController::class, 'simulacao']);

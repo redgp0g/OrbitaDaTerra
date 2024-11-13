@@ -10,6 +10,7 @@
               <tr>
                 <th>Nome</th>
                 <th>Login</th>
+                <th>Status</th>
                 <th>Email Confirmado</th>
                 <th>Telefone</th>
                 <th>Tipo Cadastro</th>
@@ -19,9 +20,32 @@
             </thead>
             <tbody>
               @foreach ($contas as $conta)
+                @php
+                  $cor = 'text-black';
+                @endphp
+                @switch($conta->Status)
+                  @case('Em Análise')
+                    @php
+                      $cor = 'text-warning';
+                    @endphp
+                  @break
+
+                  @case('Suspendida')
+                    @php
+                      $cor = 'text-danger';
+                    @endphp
+                  @break
+
+                  @case('Ativa')
+                    @php
+                      $cor = 'text-success';
+                    @endphp
+                  @break
+                @endswitch
                 <tr>
-                  <td class="{{ $conta->ContaSuspendida ? 'text-danger' : '' }}">{{ $conta->cadastro->Nome }}</td>
+                  <td>{{ $conta->cadastro->Nome }}</td>
                   <td>{{ $conta->Login }}</td>
+                  <td class="{{ $cor }}" data-label="status">{{ $conta->Status }}</td>
                   @if ($conta->EmailConfirmado)
                     <td>Confirmado</td>
                   @else
@@ -32,9 +56,9 @@
                   <td>{{ $conta->DataCadastro }}</td>
                   <td>
                     <button class="btn btn-info detalhes" data-id="{{ $conta->IDCadastro }}">Detalhes</button>
-                    @if (!$conta->AdminConfirmado)
-                      <button class="btn btn-success liberar" data-id="{{ $conta->IDUsuario }}">Liberar</button>
-                    @elseif (!$conta->ContaSuspendida)
+                    @if ($conta->Status == 'Em Análise' || $conta->Status == 'Suspendida')
+                      <button class="btn btn-success ativar" data-id="{{ $conta->IDUsuario }}">Ativar</button>
+                    @elseif ($conta->Status == 'Ativa')
                       <button class="btn btn-danger suspender" data-id="{{ $conta->IDUsuario }}">Suspender</button>
                     @endif
                   </td>
@@ -160,19 +184,19 @@
         });
       });
 
-      table.on('click', '.liberar', function() {
+      table.on('click', '.ativar', function() {
         var button = $(this);
         var idUsuario = $(this).data('id');
-        if (confirm('Tem certeza de que deseja liberar essa conta?')) {
+        if (confirm('Tem certeza de que deseja ativar essa conta?')) {
           $.ajax({
-            url: '/api/usuario/liberar/' + idUsuario,
+            url: '/api/usuario/ativar/' + idUsuario,
             type: 'PUT',
             dataType: 'json',
             success: function() {
-              alert('Aprovado!');
-              var row = table.row($('button[data-id="' + idUsuario + '"]')
-                .closest('tr'));
-              row.remove().draw();
+              alert('Conta Ativada!');
+              var row = $('button[data-id="' + idUsuario + '"]').closest('tr');
+              row.find('td[data-label="status"]').text('Ativa').removeClass('text-warning text-danger').addClass('text-success');
+              button.remove();
             },
             error: function(jqXHR, textStatus, errorThrown) {
               console.error('Erro na requisição AJAX:', textStatus, errorThrown);
@@ -192,11 +216,10 @@
             type: 'PUT',
             dataType: 'json',
             success: function(data) {
-              alert('Suspendido!');
-              var row = table.row($('button[data-id="' + idUsuario + '"]')
-                .closest('tr'));
-              row.remove().draw();
-
+              alert('Conta Suspendida!');
+              var row = $('button[data-id="' + idUsuario + '"]').closest('tr');
+              row.find('td[data-label="status"]').text('Suspendida').removeClass('text-warning text-success').addClass('text-danger');
+              button.remove();
             },
             error: function(jqXHR, textStatus, errorThrown) {
               console.error('Erro na requisição AJAX:', textStatus, errorThrown);

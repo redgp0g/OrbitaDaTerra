@@ -49,7 +49,7 @@ class UsuarioController extends Controller
                 $user = Auth::user();
             }
 
-            if ($user->AdminConfirmado && $user->EmailConfirmado && !$user->ContaSuspendida) {
+            if ($user->Status == 'Ativa' && $user->EmailConfirmado) {
                 HistoricoAcesso::create([
                     'IDUsuario' => $user->IDUsuario,
                     'DataEntrada' => now(),
@@ -152,7 +152,7 @@ class UsuarioController extends Controller
         }
         $usuario = User::where('IDCadastro', $cadastro->IDCadastro)->first();
         
-        if ($usuario->ContaSuspendida == 1) {
+        if ($usuario->Status == "Suspendida") {
             return redirect('/recoverPassword')->with('erro', 'Essa conta foi suspendida, contate o administrador do sistema!');
         }
         $token = bin2hex(random_bytes(15));
@@ -178,7 +178,7 @@ class UsuarioController extends Controller
         if (!$usuario) {
             return redirect('/usuario')->with('erro', 'Link Inválido!');
         }
-        if ($usuario->ContaSuspendida == 1) {
+        if ($usuario->Status == "Suspendida") {
             return redirect('/usuario')->with('erro', 'Essa conta foi suspendida, contate o administrador do sistema!');
         }
         if ($usuario->TokenRecuperacaoSenha != $token) {

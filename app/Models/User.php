@@ -23,8 +23,7 @@ class User extends Authenticatable
         'DataCadastro',
         'EmailConfirmado',
         'CodigoVerificacaoEmail',
-        'AdminConfirmado',
-        'ContaSuspendida',
+        'Status',
         'TokenRecuperacaoSenha',
         'is_migrated'
     ];
@@ -45,8 +44,7 @@ class User extends Authenticatable
         static::creating(function ($usuario) {
             $usuario->DataCadastro = now();
             $usuario->EmailConfirmado = 0;
-            $usuario->AdminConfirmado = 0;
-            $usuario->ContaSuspendida = 0;
+            $usuario->Status = "Em Análise";
         });
     }
 
