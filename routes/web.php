@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/{idVendedor?}', [HomeController::class, 'index'])->where('idVendedor','[0-9]+');
 Route::get('/public/index.php/id/{idVendedor?}', [HomeController::class, 'index'])->where('idVendedor','[0-9]+');
 Route::get('/cartasAVenda/{idVendedor?}', [HomeController::class, 'cartasAVenda'])->where('idVendedor','[0-9]+');
+Route::get('/detalhesCartaNova/{idCarta}/{idVendedor?}', [HomeController::class, 'detalhesCartaNova'])->where('idCarta','[0-9]+')->where('idVendedor','[0-9]+');
 Route::get('/simulacao/{idVendedor?}', [HomeController::class, 'simulacao'])->where('idVendedor','[0-9]+');
 Route::get('/carta-a-venda/{idAutorizada?}', [HomeController::class, 'createCartaVendida'])->name('cartaVendida')->where('idAutorizada','[0-9]+');
 Route::post('/carta-a-venda', [HomeController::class, 'storeCartaVendida'])->name('storeCartaVendida');

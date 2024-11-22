@@ -37,9 +37,23 @@ class HomeController extends Controller
         }
 
         $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDCadastroVendedorIndicado);
-        $cartasVendidas = CartaVendida::with('tipoCarta')->with('empresaAdministradora')->with('empresaAutorizada')->with('cadastroConsorciado')->with('cadastroVendedor')->where('Status', 'Aprovada' )->get();
+        $cartasVendidas = CartaVendida::with('tipoCarta')->with('empresaAdministradora')->with('empresaAutorizada')->with('cadastroConsorciado')->with('cadastroVendedor')->where('Status', 'Aprovada')->get();
 
         return view('home/cartasAVenda', compact('cadastro', 'cartasVendidas', 'vendedor'));
+    }
+
+    public function detalhesCartaNova($idCarta, $idVendedor = 38)
+    {
+        $cadastro = Cadastro::find($idVendedor);
+
+        if (!$cadastro || !in_array($cadastro->TipoCadastro, ['Vendedor', 'Indicador'])) {
+            $cadastro = Cadastro::find(38);
+        }
+
+        $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDCadastroVendedorIndicado);
+        $carta = Carta::find($idCarta);
+        $cartasSemelhantes = Carta::where('IDTipoCarta', $carta->IDTipoCarta)->where('IDCarta', '<>', $carta->IDCarta)->take(4)->get();
+        return view('home/detalhesCartaNova', compact('carta', 'cadastro', 'vendedor', 'cartasSemelhantes'));
     }
 
     public function simulacao($idVendedor = 38)
@@ -79,7 +93,7 @@ class HomeController extends Controller
         $data['ValorParcela'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorParcela']));
         $data['ValorGarantia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorGarantia']));
         $data['TaxaTransferencia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['TaxaTransferencia']));
-        
+
         CartaVendida::create($data);
         return redirect('/cartasAVenda');
     }
