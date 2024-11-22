@@ -40,7 +40,7 @@ class DashboardController extends Controller
 
     public function leads()
     {
-        $leads = Cadastro::select('L.*', 'I.Nome as NomeIndicador','V.Nome as NomeVendedor')
+        $leads = Cadastro::select('L.*', 'I.Nome as NomeIndicador', 'V.Nome as NomeVendedor')
             ->from('Cadastro as L')
             ->join('Cadastro as I', 'L.IDCadastroIndicador', '=', 'I.IDCadastro')
             ->join('Cadastro as V', 'L.IDCadastroVendedor', '=', 'V.IDCadastro')
@@ -97,7 +97,7 @@ class DashboardController extends Controller
         if (Empresa::where('CNPJ', $data['CNPJ'])->exists()) {
             return redirect()->back()->with('erro', 'Já existe um cadastro com esse CNPJ!');
         }
-    
+
         Empresa::create($data);
         return view('dashboard.empresas');
     }
