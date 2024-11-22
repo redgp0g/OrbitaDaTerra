@@ -100,6 +100,18 @@
     hiddenInput.name = "Telefone";
     input.parentNode.appendChild(hiddenInput);
 
+    var table = $('#tableSimulacao').DataTable({
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
+      },
+      "dom": '<"row align-items-center"<"col-md-6" l><"col-md-6" f>><"table-responsive border-bottom my-3" rt><"row align-items-center" <"col-md-6"><"col-md-6" p>><"clear">',
+      "responsive": true,
+      "order": [],
+      "paging": false,
+      "searching": false
+    });
+
+
     $('#formSimulacaoDados').submit(function(event) {
       event.preventDefault();
       let celular = iti.getNumber();
