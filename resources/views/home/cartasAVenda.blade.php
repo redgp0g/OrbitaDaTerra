@@ -8,7 +8,7 @@
           ['label' => 'Cartas Novas', 'url' => url('/' . $cadastro->IDCadastro), 'auth' => 'all'],
           ['label' => 'Dashboard', 'url' => url('/dashboard'), 'auth' => 'auth'],
           ['label' => 'Acessar Conta', 'url' => url('/usuario'), 'auth' => 'guest'],
-          ['label' => 'Cadastrar-se', 'url' => url('/usuario' . $cadastro->IDCadastro), 'auth' => 'guest'],
+          ['label' => 'Cadastrar-se', 'url' => url('/usuario/create/' . $cadastro->IDCadastro), 'auth' => 'guest'],
       ],
   ])
 
