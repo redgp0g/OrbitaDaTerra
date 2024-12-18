@@ -19,5 +19,6 @@ class Simulacao extends Model
         'IDTipoCarta',
         'Credito',
         'Prazo',
+        'Data'
     ];
 }
