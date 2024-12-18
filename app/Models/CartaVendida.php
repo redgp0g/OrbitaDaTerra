@@ -17,8 +17,8 @@ class CartaVendida extends Model
     protected $fillable = [
         'IDEmpresaAdministradora',
         'IDEmpresaAutorizada',
+        'IDCadastroCadastrador',
         'IDCadastroConsorciado',
-        'IDCadastroVendedor',
         'IDTipoCarta',
         'Status',
         'ValorCredito',
@@ -34,6 +34,10 @@ class CartaVendida extends Model
         'Cota',
         'TaxaTransferencia',
         'Contemplada',
+        'ComissaoAutorizada',
+        'ComissaoOrbita',
+        'Contemplada',
+        'Observacoes'
     ];
 
     public function casts() : array
