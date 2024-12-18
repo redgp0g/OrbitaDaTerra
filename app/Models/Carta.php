@@ -16,8 +16,8 @@ class Carta extends Model
     
     protected $fillable = [
         'IDCarta',
-        'IDTipoCarta',
         'IDEmpresaAdministradora',
+        'IDTipoCarta',
         'ValorCredito',
         'ParcelaIntegral',
         'ParcelaFlex',
