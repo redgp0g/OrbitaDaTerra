@@ -24,6 +24,9 @@
                     <li class="nav-item mx-3">
                         <a href="{{ url('/dashboard') }}" class="nav-link text-primary">Dashboard</a>
                     </li>
+                    <li class="nav-item mx-3">
+                        <a href="{{ url('/logout') }}" class="nav-link text-primary">Sair</a>
+                    </li>
                 @endif
                 @if(auth()->guest())
                     <li class="nav-item mx-3">
