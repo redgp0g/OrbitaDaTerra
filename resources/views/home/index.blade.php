@@ -1,22 +1,7 @@
 @extends('master')
 @section('title', 'Cartas Novas')
 @section('conteudo')
-  @include('components.navbarHome', [
-      'items' => [
-          [
-              'label' => 'Cartas À Venda',
-              'url' => url('/cartasAVenda/' . $cadastro->IDCadastro),
-              'auth' => 'all',
-          ],
-          ['label' => 'Dashboard', 'url' => url('/dashboard'), 'auth' => 'auth'],
-          ['label' => 'Acessar Conta', 'url' => url('/usuario'), 'auth' => 'guest'],
-          [
-              'label' => 'Cadastrar-se',
-              'url' => url('/usuario/create/' . $cadastro->IDCadastro),
-              'auth' => 'guest',
-          ],
-      ],
-  ])
+  @include('components.navbarHome', ['cadastroId' => $cadastro->IDCadastro])
 
   <div class="section 3 mt-3" style="min-height: 85vh;">
     <div class="container">

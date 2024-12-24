@@ -14,21 +14,25 @@
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-6">
-                @foreach ($items as $item)
-                    @if ($item['auth'] === 'guest' && auth()->guest())
-                        <li class="nav-item mx-3">
-                            <a href="{{ $item['url'] }}" class="nav-link text-primary">{{ $item['label'] }}</a>
-                        </li>
-                    @elseif ($item['auth'] === 'auth' && auth()->check())
-                        <li class="nav-item mx-3">
-                            <a href="{{ $item['url'] }}" class="nav-link text-primary">{{ $item['label'] }}</a>
-                        </li>
-                    @elseif ($item['auth'] === 'all')
-                        <li class="nav-item mx-3">
-                            <a href="{{ $item['url'] }}" class="nav-link text-primary">{{ $item['label'] }}</a>
-                        </li>
-                    @endif
-                @endforeach
+                <li class="nav-item mx-3">
+                    <a href="{{ url('/' . $cadastroId) }}" class="nav-link {{ request()->is($cadastroId) ? 'text-warning' : 'text-primary' }}">Cartas Novas</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a href="{{ url('/cartasAVenda/' . $cadastroId) }}" class="nav-link {{ request()->is('cartasAVenda*') ? 'text-warning' : 'text-primary' }}">Cartas À Venda</a>
+                </li>
+                @if(auth()->check())
+                    <li class="nav-item mx-3">
+                        <a href="{{ url('/dashboard') }}" class="nav-link text-primary">Dashboard</a>
+                    </li>
+                @endif
+                @if(auth()->guest())
+                    <li class="nav-item mx-3">
+                        <a href="{{ url('/usuario') }}" class="nav-link text-primary">Acessar Conta</a>
+                    </li>
+                    <li class="nav-item mx-3">
+                        <a href="{{ url('/usuario/create/' . $cadastroId) }}" class="nav-link text-primary">Cadastrar-Se</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

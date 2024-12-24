@@ -3,14 +3,7 @@
 @section('conteudo')
   @php $cartas = json_decode(file_get_contents('https://fragaebitelloconsorcios.com.br/api/json/contemplados'), true); @endphp
 
-  @include('components.navbarHome', [
-      'items' => [
-          ['label' => 'Cartas Novas', 'url' => url('/' . $cadastro->IDCadastro), 'auth' => 'all'],
-          ['label' => 'Dashboard', 'url' => url('/dashboard'), 'auth' => 'auth'],
-          ['label' => 'Acessar Conta', 'url' => url('/usuario'), 'auth' => 'guest'],
-          ['label' => 'Cadastrar-se', 'url' => url('/usuario/create/' . $cadastro->IDCadastro), 'auth' => 'guest'],
-      ],
-  ])
+  @include('components.navbarHome', ['cadastroId' => $cadastro->IDCadastro,])
 
   <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
     <div style="width: 90vw">
