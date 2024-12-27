@@ -36,9 +36,11 @@
             <li>
               <a class="dropdown-item" href="{{ url('/' . auth()->user()->IDCadastro) }}">Minha Página</a>
             </li>
-            <li>
-              <a class="dropdown-item" href="{{ url('/usuario/create/' . auth()->user()->IDCadastro) }}">Link para Indicador</a>
-            </li>
+            @if (auth()->user()->cadastro->TipoCadastro == 'Vendedor')
+              <li>
+                <a class="dropdown-item" href="{{ url('/usuario/create/' . auth()->user()->IDCadastro) }}">Link para Indicador</a>
+              </li>
+            @endif
             <li>
               <a class="dropdown-item" href="{{ url('/logout') }}">Sair</a>
             </li>

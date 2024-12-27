@@ -77,6 +77,9 @@ class UsuarioController extends Controller
     public function create($idVendedorIndicado = 38)
     {
         $vendedorIndicado = Cadastro::find($idVendedorIndicado);
+        if (!$vendedorIndicado->TipoCadastro != 'Vendedor') {
+            $vendedorIndicado = Cadastro::find(38);
+        }
 
         $funcoes = Funcao::all();
 
