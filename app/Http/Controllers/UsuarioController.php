@@ -114,12 +114,6 @@ class UsuarioController extends Controller
             ]));
             return redirect("usuario")->with('sucesso', 'Cadastrado com sucesso! Verifique a sua caixa de entrada do email para realizar a validação!');
         } catch (Exception $ex) {
-            if ($user) {
-                User::destroy($user->IDUsuario);
-            }
-            if ($cadastrado) {
-                Cadastro::destroy($cadastrado->IDCadastro);
-            }
             return redirect()->back()->with('erro', 'Houve um erro ao cadastrar o usuário:' . $ex->getMessage());
         }
     }
