@@ -81,9 +81,7 @@ class UsuarioController extends Controller
             $vendedorIndicado = Cadastro::find(38);
         }
 
-        $funcoes = Funcao::all();
-
-        return view('usuario.create', compact('funcoes', 'vendedorIndicado'));
+        return view('usuario.create', compact('vendedorIndicado'));
     }
 
 
