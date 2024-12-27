@@ -159,7 +159,7 @@ class UsuarioController extends Controller
             'token' => $token
         ]));
 
-        return redirect('/recoverPassword')->with('sucesso', 'Solicitação enviada com sucesso! Verifique sua caixa de email!');
+        return redirect('/usuario')->with('sucesso', 'Solicitação enviada com sucesso! Verifique sua caixa de email!');
     }
 
     public function changePassword(Request $request)
