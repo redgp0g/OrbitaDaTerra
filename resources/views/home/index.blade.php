@@ -16,7 +16,7 @@
             <div class="col-md-4">
               <h2 class="card-title fs-4 text-center mb-1">Consórcio de <span style="color: #1e9ef3">{{ $tipoCarta->Descricao }}</span></h2>
               <div class="d-flex align-items-center justify-content-center">
-                <img class="img-thumbnail " src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}">
+                <img alt="imagem do produto" class="img-thumbnail " src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}">
               </div>
               <div class="row">
                 <div class="items">
@@ -56,11 +56,9 @@
         ", Prazo: " + button.dataset.cartaPrazo + " meses";
 
       mensagemPadrao = encodeURIComponent(mensagemPadrao);
-
-      var linkWhatsApp = 'https://api.whatsapp.com/send?phone=' + numeroVendedor + '&text=' +
-        mensagemPadrao;
-
-      window.location.href = linkWhatsApp;
+  
+      window.location.href = 'https://api.whatsapp.com/send?phone=' + numeroVendedor + '&text=' +
+          mensagemPadrao;
     }
     $(document).ready(function() {
       $('.items').slick({
