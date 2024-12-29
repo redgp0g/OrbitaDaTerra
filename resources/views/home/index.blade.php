@@ -71,4 +71,35 @@
       });
     });
   </script>
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+      @foreach ($cartas as $index => $carta)
+          {
+            "@type": "ListItem",
+            "position": {{ $index + 1 }},
+      "item": {
+        "@type": "Product",
+        "name": "{{ $carta->TipoCarta->Descricao }} - Consórcio de R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}",
+        "image": "{{ asset('/images/tipoproduto/' . $carta->TipoCarta->Imagem) }}",
+        "description": "Consórcio para {{ $carta->TipoCarta->Descricao }}, com parcela flexível e vantagens incríveis.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Cartas Consórcios"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "BRL",
+          "price": "{{ number_format($carta->ValorCredito, 2, '.', '') }}",
+          "availability": "https://schema.org/InStock",
+          "url": "{{ url('/detalhesCartaNova/' . $carta->IDCarta . '/' . $cadastro->IDCadastro) }}"
+        }
+      }
+    } @if (!$loop->last), @endif {{-- Adiciona vírgula apenas se não for o último elemento --}}
+      @endforeach
+      ]
+    }
+  </script>
 @endsection
