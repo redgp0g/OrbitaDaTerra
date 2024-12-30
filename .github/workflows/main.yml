@@ -33,9 +33,15 @@ jobs:
           sed -i "s/^MAIL_USERNAME=.*/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/" .env
           sed -i "s/^MAIL_PASSWORD=.*/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}/" .env
           sed -i "s/^MAIL_FROM_ADDRESS=.*/MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}/" .env
-          
+
       - name: Instalar Dependências 📦
         run: composer install --no-dev --no-scripts --prefer-dist
+
+      - name: Instalar Dependências NPM 📦
+        run: npm install
+
+      - name: Compilar Assets NPM 🛠️
+        run: npm run build
 
       - name: Gerar Chave da Aplicação 🔑
         run: php artisan key:generate
