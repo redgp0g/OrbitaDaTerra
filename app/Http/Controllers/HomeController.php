@@ -22,7 +22,7 @@ class HomeController extends Controller
 
         $vendedor = $cadastro->TipoCadastro == 'Vendedor' ? $cadastro : Cadastro::find($cadastro->IDCadastroVendedorIndicado);
 
-        $cartas = Carta::with('TipoCarta')->get();
+        $cartas = Carta::with('TipoCarta')->orderBy('Prazo','DESC')->get();
         $tiposCartas = TipoCarta::all();
 
         return view('home/index', compact('cadastro', 'cartas', 'tiposCartas', 'vendedor'));
