@@ -2,9 +2,7 @@
     style="height: 5vh;">
     <span>
         ©
-        <script>
-            document.write(new Date().getFullYear());
-        </script>
+        @php echo date('Y'); @endphp
         Orbita da Terra |
         por <a href="https://portfolio-gordiano.netlify.app/" target="_blank">Guilherme Gordiano</a>.
     </span>
