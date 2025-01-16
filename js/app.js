@@ -39,18 +39,6 @@ function mascaraCNPJ(inputCnpj) {
           (cnpj[5] ? "-" + cnpj[5] : "");
 }
 
-// const getIPAddress = async () => {
-//     try {
-//         const response = await fetch("https://api.ipify.org");
-//         const data = await response.text();
-//         console.log(data);
-//     } catch (error) {
-//         console.error("Falhou ao pegar o IP:", error);
-//     }
-// };
-
-// getIPAddress();
-
 function atualizarOptionsFiltroDataTable(
     filtro,
     table,
