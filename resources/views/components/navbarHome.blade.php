@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="d-flex w-lg-100 pe-4">
             <a class="navbar-brand mx-5 mb-2" href="#">
-                <img src="{{ asset('images/logo.png') }}" height="60px">
+                <img src="{{ asset('images/logo.png') }}" alt="logo" height="60px">
             </a>
             <div class="w-100 d-flex justify-content-end align-items-center d-lg-none">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
