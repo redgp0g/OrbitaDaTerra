@@ -60,5 +60,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: node_modules/
-          server-dir: public_html/node_modules
+          server-dir: public_html/node_modules/
 
