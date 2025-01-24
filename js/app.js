@@ -1,11 +1,6 @@
 function habilitar() {
-    if (document.getElementById("toggle").checked) {
-        document.getElementById("btnCadastro").disabled = false;
-    } else {
-        document.getElementById("btnCadastro").disabled = true;
-    }
+    document.getElementById("btnCadastro").disabled = !document.getElementById("toggle").checked;
 }
-
 function mascaraCEP(inputCep) {
     let cep = inputCep.value.replace(/\D/g, "");
     cep = cep.replace(/^(\d{5})(\d{3})/, "$1-$2");
