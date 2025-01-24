@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -63,9 +62,9 @@
     @include('partials.dashboardLinks')
     @include('partials.dashboardScripts')
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{{ asset('node_modules/intl-tel-input/build/js/intlTelInput.js') }}"></script>
+    <link href="{{ asset('node_modules/select2/dist/css/select2.min.css')}}" rel="stylesheet">
+    <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('node_modules/intl-tel-input/build/js/intlTelInputWithUtils.min.js') }}"></script>
 </head>
 
 <body>
