@@ -43,6 +43,9 @@ jobs:
       - name: Compilar Assets NPM 🛠️
         run: npm run build
 
+      - name: Listar Pastas no Servidor Ubuntu 📂
+        run: ls -d */
+
       - name: Gerar Chave da Aplicação 🔑
         run: php artisan key:generate
 
