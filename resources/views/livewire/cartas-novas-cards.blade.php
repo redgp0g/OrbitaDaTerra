@@ -60,7 +60,7 @@
         $('.comprar').click(function() {
           let button = $(this)[0];
           console.log(button);
-          let numeroVendedor = {{ $vendedor->telefone }};
+          let numeroVendedor = {{ $vendedor->Telefone }};
           let mensagemPadrao = "Olá, eu gostaria de comprar um Consórcio de " + button.dataset.cartaCategoria +
             "! Valor de crédito: " + button.dataset.cartaValor + ", Parcela Flex: " + button.dataset.cartaFlex +
             ", Prazo: " + button.dataset.cartaPrazo + " meses";
