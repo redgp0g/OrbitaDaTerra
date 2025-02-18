@@ -433,7 +433,6 @@ Aguardo seu contato!</textarea>
 
 
       table.on('click', '.delete-lead', function(event) {
-        let idLead = $(this).data('id');
         let cadastroId = $(this).data('id');
         let vendedorId = {{ auth()->user()->IDCadastro }};
 
@@ -453,7 +452,7 @@ Aguardo seu contato!</textarea>
             },
             success: function() {
               alert('Lead excluído com sucesso!');
-              let row = table.row($('button[data-id="' + idLead + '"]')
+              let row = table.row($('button[data-id="' + cadastroId + '"]')
                 .closest('tr'));
               row.remove().draw();
             },
