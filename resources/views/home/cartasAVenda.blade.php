@@ -3,7 +3,7 @@
 @section('conteudo')
   @php $cartas = json_decode(file_get_contents('https://fragaebitelloconsorcios.com.br/api/json/contemplados'), true); @endphp
 
-  @include('components.navbarHome', ['cadastroId' => $cadastro->IDCadastro,])
+  @include('components.navbarHome', ['cadastroId' => $cadastro->IDCadastro])
 
   <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
     <div style="width: 90vw">
@@ -116,22 +116,22 @@
     const tiposCarta = document.querySelectorAll('.dropdown-menu li');
     const nav = document.getElementById('navbarSupportedContent');
 
-    var filtroAdministradoraSelecionada = '';
-    var filtroCategoriaSelecionada = '';
-    var filtroDisponibilidadeSelecionada = '';
+    let filtroAdministradoraSelecionada = '';
+    let filtroCategoriaSelecionada = '';
+    let filtroDisponibilidadeSelecionada = '';
 
     function atualizarOptionsfiltro(table, filtro, posicaoColuna, filtroSelecionado) {
       filtro.empty();
       filtro.append('<option value="">Todas</option>');
 
-      var dados = table.column(posicaoColuna, {
+      let dados = table.column(posicaoColuna, {
         filter: 'applied'
       }).data();
 
-      var dadosUnicos = dados.unique().toArray();
+      let dadosUnicos = dados.unique().toArray();
 
       dadosUnicos.forEach(function(value) {
-        var count = dados.filter(function(item) {
+        let count = dados.filter(function(item) {
           return item === value;
         }).count();
 
@@ -143,19 +143,17 @@
     }
 
     function reservarCarta(button) {
-      var numeroVendedor = {{ $vendedor->Telefone }}
-      var mensagemPadrao = "Olá, eu gostaria de reservar uma carta à venda! Código: " + button.dataset.cartaId +
+      let numeroVendedor = {{ $vendedor->telefone }};
+      let mensagemPadrao = "Olá, eu gostaria de reservar uma carta à venda! Código: " + button.dataset.cartaId +
         ", valor de crédito: " + button.dataset.cartaValor + ", carta de " + button.dataset.cartaCategoria;
 
       mensagemPadrao = encodeURIComponent(mensagemPadrao);
 
-      var linkWhatsApp = 'https://api.whatsapp.com/send?phone=' + numeroVendedor + '&text=' + mensagemPadrao;
-
-      window.location.href = linkWhatsApp;
+      window.location.href = 'https://api.whatsapp.com/send?phone=' + numeroVendedor + '&text=' + mensagemPadrao;
     }
 
     $(document).ready(function() {
-      var table = $('#table').DataTable({
+      const table = $('#table').DataTable({
         order: [],
         "language": {
           "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
@@ -174,7 +172,7 @@
       atualizarFiltros();
 
       $('#filtroCategoria').on('change', function() {
-        var filtro = $(this).val();
+        let filtro = $(this).val();
         filtroCategoriaSelecionada = filtro;
         table.column(1).search(filtro).draw();
 
@@ -182,7 +180,7 @@
       });
 
       $('#filtroAdministradora').on('change', function() {
-        var filtro = $(this).val();
+        let filtro = $(this).val();
         filtroAdministradoraSelecionada = filtro;
         table.column(6).search(filtro).draw();
 
@@ -190,7 +188,7 @@
       });
 
       $('#filtroDisponibilidade').on('change', function() {
-        var filtro = $(this).val();
+        let filtro = $(this).val();
         filtroDisponibilidadeSelecionada = filtro;
         table.column(7).search(filtro).draw();
 
@@ -198,7 +196,7 @@
       });
 
       $('#filtroContemplada').on('change', function() {
-        var filtro = $(this).val();
+        let filtro = $(this).val();
         table.column(8).search(filtro).draw();
         atualizarFiltros();
       });
