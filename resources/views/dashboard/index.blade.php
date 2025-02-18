@@ -518,11 +518,9 @@ Aguardo seu contato!</textarea>
           mensagem = mensagem.replace('[NomeLead]', nomeLead);
           mensagem = mensagem.replace('[NomeIndicador]', nomeIndicador);
           mensagem = encodeURIComponent(mensagem);
-          var linkWhatsapp = 'https://wa.me/55' + telefoneLead + '?text=' + mensagem;
-          window.location.href = linkWhatsapp;
+          window.location.href = 'https://wa.me/55' + telefoneLead + '?text=' + mensagem;
         } else {
-          var linkWhatsapp = 'https://wa.me/55' + telefoneLead;
-          window.location.href = linkWhatsapp;
+          window.location.href = 'https://wa.me/55' + telefoneLead;
         }
 
         return false;
