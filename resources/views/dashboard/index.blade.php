@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card" data-aos="fade-up" data-aos-delay="800">
-          <div class="mb-4 flex-wrap card-header d-flex justify-content-between align-items-center">
+          <div class="card-header d-flex justify-content-between align-items-center mb-4 flex-wrap">
             <div class="header-title d-flex">
               <h4 class="card-title me-4">Cadastrar Novo Lead</h4>
               <svg class="icon-32 cursor-pointer" id="abrirFormNovoLead" style="cursor: pointer" onclick="abrirFecharFormNovoLead()" width="32" viewBox="0 0 24 24"
@@ -74,16 +74,16 @@
     <div class="card">
       <div class="card-body">
         <div class="d-lg-flex col">
-          <div class="my-3 d-sm-flex">
+          <div class="d-sm-flex my-3">
             <label class="me-1">Indicador:</label>
             <select class="form-select form-select-sm w-auto" id="filtroIndicador"></select>
           </div>
-          <div class="ms-lg-2 my-3 d-sm-flex">
+          <div class="ms-lg-2 d-sm-flex my-3">
             <label class="me-1">Atividade:</label>
             <select class="form-select form-select-sm w-auto" id="filtroAtividade"></select>
           </div>
         </div>
-        <table class="table table-striped" id="table">
+        <table class="table-striped table" id="table">
           <thead>
             <tr>
               <th>Nome</th>
