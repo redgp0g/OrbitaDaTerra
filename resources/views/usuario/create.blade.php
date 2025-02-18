@@ -151,7 +151,7 @@
         hiddenInput.name = "Telefone";
         input.parentNode.appendChild(hiddenInput);
 
-        $('#formCadastrar').submit(function(event) {
+        $('#formCadastrar').submit(function() {
             let celular = iti.getNumber();
             if (celular.startsWith('+55') && celular.length < 14) {
                 alert('Telefone Incorreto!');
