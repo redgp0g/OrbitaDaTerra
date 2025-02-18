@@ -300,31 +300,31 @@ Aguardo seu contato!</textarea>
     const modalEditarLead = $('#editarLeadModal');
     const modalEnviarMensagem = $('#enviarMensagemModal');
 
-    var filtroAtividadeSelecionado = '';
-    var filtroIndicadorSelecionado = '';
+    let filtroAtividadeSelecionado = '';
+    let filtroIndicadorSelecionado = '';
 
     function atualizarOptionsFiltroIndicador(table, filtroIndicadorSelecionado, dadosInvisiveis) {
       $('#filtroIndicador').empty();
       $('#filtroIndicador').append('<option value="">Todos</option>');
 
       if (dadosInvisiveis) {
-        var data = table.column(5).data();
+        let data = table.column(5).data();
 
         indicadores.each(function(value, index) {
-          var count = data.filter(function(item) {
+          let count = data.filter(function(item) {
             return item === value;
           }).count();
           $('#filtroIndicador').append('<option value="' + value + '"' + (filtroIndicadorSelecionado ===
             value ? ' selected' : '') + '>' + value + ' (' + count + ')' + '</option>');
         });
       } else {
-        var dadosVisiveis = table.rows({
+        let dadosVisiveis = table.rows({
           filter: 'applied'
         }).data().toArray();
-        var indicadoresUnicos = dadosVisiveis.map(row => row[5]).filter((value, index, self) => self.indexOf(
+        let indicadoresUnicos = dadosVisiveis.map(row => row[5]).filter((value, index, self) => self.indexOf(
           value) === index);
         indicadoresUnicos.forEach(function(value) {
-          var count = dadosVisiveis.filter(function(item) {
+          const count = dadosVisiveis.filter(function(item) {
             return item[5] === value;
           }).length;
           $('#filtroIndicador').append('<option value="' + value + '"' + (filtroIndicadorSelecionado ===
@@ -338,10 +338,10 @@ Aguardo seu contato!</textarea>
       $('#filtroAtividade').append('<option value="">Todas</option>');
 
       if (dadosInvisiveis) {
-        var data = table.column(3).data();
+        let data = table.column(3).data();
 
         table.column(3).data().unique().sort().each(function(value, index) {
-          var count = data.filter(function(item) {
+          let count = data.filter(function(item) {
             return item === value;
           }).count();
           if (value == '') {
@@ -354,13 +354,13 @@ Aguardo seu contato!</textarea>
           }
         });
       } else {
-        var dadosVisiveis = table.rows({
+        let dadosVisiveis = table.rows({
           filter: 'applied'
         }).data().toArray();
-        var atividadesUnicas = dadosVisiveis.map(row => row[3]).filter((value, index, self) => self.indexOf(
+        let atividadesUnicas = dadosVisiveis.map(row => row[3]).filter((value, index, self) => self.indexOf(
           value) === index);
         atividadesUnicas.forEach(function(value) {
-          var count = dadosVisiveis.filter(function(item) {
+          let count = dadosVisiveis.filter(function(item) {
             return item[3] === value;
           }).length;
           if (value == '') {
@@ -376,7 +376,7 @@ Aguardo seu contato!</textarea>
     }
 
     $(document).ready(function() {
-      var table = $('#table').DataTable({
+      let table = $('#table').DataTable({
         order: [],
         "language": {
           "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
@@ -399,7 +399,7 @@ Aguardo seu contato!</textarea>
       atualizarOptionsFiltroAtividade(table, '');
 
       $('#filtroAtividade').on('change', function() {
-        var filtro = $(this).val();
+        let filtro = $(this).val();
         filtroAtividadeSelecionado = filtro;
         if (filtro === " ") {
           table.columns(3).search('^$', true, false).draw();
@@ -408,16 +408,16 @@ Aguardo seu contato!</textarea>
         }
 
         if (filtro === '') {
-          var dadosInvisiveis = true;
+          let dadosInvisiveis = true;
         } else {
-          var dadosInvisiveis = false;
+          let dadosInvisiveis = false;
         }
 
         atualizarOptionsFiltroIndicador(table, filtroIndicadorSelecionado, dadosInvisiveis);
       });
 
       $('#filtroIndicador').on('change', function() {
-        var filtro = $(this).val();
+        let filtro = $(this).val();
         filtroIndicadorSelecionado = filtro;
         if (filtro === " ") {
           table.columns(5).search('^$', true, false).draw();
@@ -425,20 +425,21 @@ Aguardo seu contato!</textarea>
           table.column(5).search(filtro).draw();
         }
         if (filtro === '') {
-          var dadosInvisiveis = true;
+          let dadosInvisiveis = true;
         } else {
-          var dadosInvisiveis = false;
+          let dadosInvisiveis = false;
         }
         atualizarOptionsFiltroAtividade(table, filtroAtividadeSelecionado, dadosInvisiveis);
       });
 
 
       table.on('click', '.delete-lead', function(event) {
-        var cadastroId = $(this).data('id');
-        var vendedorId = {{ auth()->user()->IDCadastro }};
+        let idLead = $(this).data('id');
+        let cadastroId = $(this).data('id');
+        let vendedorId = {{ auth()->user()->IDCadastro }};
 
         if (confirm('Tem certeza de que deseja excluir este lead?')) {
-          var observacoes = prompt('Digite as observações (opcional):');
+          let observacoes = prompt('Digite as observações (opcional):');
           if (observacoes === null) {
             return;
           }
@@ -468,7 +469,7 @@ Aguardo seu contato!</textarea>
 
 
       table.on('click', '.editar-lead', function() {
-        var cadastroId = $(this).data('id');
+        let cadastroId = $(this).data('id');
         $.ajax({
           url: '/api/cadastros/' + cadastroId,
           type: 'GET',
@@ -496,9 +497,9 @@ Aguardo seu contato!</textarea>
       });
 
       $('.btn-enviar-mensagem').click(function() {
-        var nomeLead = $(this).data('nomelead');
-        var telefoneLead = $(this).data('telefonelead');
-        var nomeIndicador = $(this).data('nomeindicador');
+        let nomeLead = $(this).data('nomelead');
+        let telefoneLead = $(this).data('telefonelead');
+        let nomeIndicador = $(this).data('nomeindicador');
 
         $('#nomeLead').val(nomeLead);
         $('#telefoneLead').val(telefoneLead);
@@ -508,12 +509,12 @@ Aguardo seu contato!</textarea>
       });
 
       $('.link-whatsapp').click(function() {
-        var idTextArea = $(this).data('textareaid');
-        var telefoneLead = $('#telefoneLead').val();
+        let idTextArea = $(this).data('textareaid');
+        let telefoneLead = $('#telefoneLead').val();
         if (idTextArea !== null && idTextArea !== undefined && idTextArea !== '') {
-          var mensagem = $('#' + idTextArea).val();
-          var nomeLead = $('#nomeLead').val();
-          var nomeIndicador = $('#nomeIndicador').val();
+          let mensagem = $('#' + idTextArea).val();
+          let nomeLead = $('#nomeLead').val();
+          let nomeIndicador = $('#nomeIndicador').val();
 
           mensagem = mensagem.replace('[NomeLead]', nomeLead);
           mensagem = mensagem.replace('[NomeIndicador]', nomeIndicador);
@@ -532,7 +533,7 @@ Aguardo seu contato!</textarea>
 
     $("#formEditarLead").submit(function() {
       event.preventDefault();
-      var formData = $(this).serialize();
+      let formData = $(this).serialize();
       let idCadastro = $("#cadastroId-edit").val();
       $.ajax({
         url: '/api/cadastros/' + idCadastro,
@@ -558,7 +559,7 @@ Aguardo seu contato!</textarea>
 
     $('#formCadastrarLead').submit(function(event) {
       event.preventDefault();
-      var formData = $(this).serialize();
+      let formData = $(this).serialize();
       $.ajax({
         url: '/api/cadastros',
         type: 'POST',
