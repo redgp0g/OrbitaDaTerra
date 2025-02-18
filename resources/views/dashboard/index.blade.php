@@ -459,6 +459,7 @@ Aguardo seu contato!</textarea>
             },
             error: function(jqXHR, textStatus, errorThrown) {
               console.error('Erro na requisição AJAX:', textStatus, errorThrown);
+              console.error('Response details:', jqXHR.responseText);
               alert('Erro na requisição AJAX.');
             }
           });
@@ -488,6 +489,7 @@ Aguardo seu contato!</textarea>
           },
           error: function(jqXHR, textStatus, errorThrown) {
             console.error('Erro na requisição AJAX:', textStatus, errorThrown);
+            console.error('Response details:', jqXHR.responseText);
             alert('Erro na requisição AJAX.');
           }
         });
@@ -542,6 +544,7 @@ Aguardo seu contato!</textarea>
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.error('Erro na requisição AJAX:', textStatus, errorThrown);
+          console.error('Response details:', jqXHR.responseText);
           alert('Erro na requisição AJAX.');
         }
       });
@@ -567,7 +570,8 @@ Aguardo seu contato!</textarea>
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.error('Erro na requisição AJAX:', textStatus, errorThrown);
-          alert('Erro na requisição AJAX.');
+          console.error('Response details:', jqXHR.responseText);
+          alert('Houve um erro ao realizar o cadastro!');
         }
       });
     });
