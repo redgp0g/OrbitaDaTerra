@@ -134,6 +134,7 @@
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.error('Erro na requisição AJAX:', textStatus, errorThrown);
+          console.error('Response details:', jqXHR.responseText);
           alert('Erro na requisição AJAX.');
         }
       });
