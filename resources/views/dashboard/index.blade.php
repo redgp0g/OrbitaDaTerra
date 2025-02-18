@@ -391,8 +391,7 @@ Aguardo seu contato!</textarea>
         "scrollY": "60vh",
         "scrollX": true,
         "scrollCollapse": true,
-        "autoWidth": true,
-        "responsive": true
+        "autoWidth": false,
       });
 
       atualizarOptionsFiltroIndicador(table, '');
