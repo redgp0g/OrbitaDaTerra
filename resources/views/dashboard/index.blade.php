@@ -453,7 +453,7 @@ Aguardo seu contato!</textarea>
             },
             success: function() {
               alert('Lead excluído com sucesso!');
-              var row = table.row($('button[data-id="' + cadastroId + '"]')
+              let row = table.row($('button[data-id="' + idLead + '"]')
                 .closest('tr'));
               row.remove().draw();
             },
