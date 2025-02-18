@@ -8,7 +8,6 @@ use App\Models\CartaVendida;
 use App\Models\Empresa;
 use App\Models\TipoCarta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
