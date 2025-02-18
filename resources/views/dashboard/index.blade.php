@@ -344,7 +344,7 @@ Aguardo seu contato!</textarea>
           let count = data.filter(function(item) {
             return item === value;
           }).count();
-          if (value == '') {
+          if (value === '') {
             $('#filtroAtividade').append('<option value=" ">Nenhuma</option>');
           }
           if (value !== null && value.trim() !== '') {
