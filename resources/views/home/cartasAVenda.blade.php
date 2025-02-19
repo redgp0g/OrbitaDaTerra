@@ -9,33 +9,33 @@
 
   <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
     <div style="width: 90vw">
-      <div class="d-sm-flex py-3 align-items-sm-center">
-        <div class="my-3 d-sm-flex">
+      <div class="d-sm-flex align-items-sm-center py-3">
+        <div class="d-sm-flex my-3">
           <label>Categoria:</label>
-          <select class="ms-1 form-select form-select-sm w-auto" id="filtroCategoria"></select>
+          <select class="form-select form-select-sm ms-1 w-auto" id="filtroCategoria"></select>
         </div>
-        <div class="my-3 ms-2 d-sm-flex">
+        <div class="d-sm-flex my-3 ms-2">
           <label>Disponível:</label>
-          <select class="ms-1 form-select form-select-sm w-auto" id="filtroDisponibilidade"></select>
+          <select class="form-select form-select-sm ms-1 w-auto" id="filtroDisponibilidade"></select>
         </div>
-        <div class="my-3 ms-2 d-sm-flex">
+        <div class="d-sm-flex my-3 ms-2">
           <label>Administradora:</label>
-          <select class="ms-1 form-select form-select-sm w-auto" id="filtroAdministradora"></select>
+          <select class="form-select form-select-sm ms-1 w-auto" id="filtroAdministradora"></select>
         </div>
-        <div class="my-3 ms-2 d-sm-flex">
+        <div class="d-sm-flex my-3 ms-2">
           <label>Contemplada?</label>
-          <select class="ms-1 form-select form-select-sm w-auto" id="filtroContemplada">
+          <select class="form-select form-select-sm ms-1 w-auto" id="filtroContemplada">
             <option value="">Todas</option>
             <option value="Sim">Sim</option>
             <option value="Não">Não</option>
           </select>
         </div>
 
-        <div class="ps-5 h-50 d-sm-flex">
+        <div class="h-50 d-sm-flex ps-5">
           <button class="btn btn-info" id="limparFiltros">Limpar Filtros</button>
         </div>
       </div>
-      <table class="table table-striped" id="table">
+      <table class="table-striped table" id="table">
         <thead>
           <tr>
             <th>Código</th>
@@ -76,7 +76,8 @@
               </td>
               <td>
                 @if ($carta->Status == 'Reservar')
-                  <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}" data-carta-categoria="{{ $carta->tipoCarta->descricao }}"
+                  <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}"
+                    data-carta-categoria="{{ $carta->tipoCarta->descricao }}"
                     data-carta-valor="{{ $carta->ValorCredito }}" onclick="reservarCarta(this)">Reservar</button>
                 @endif
               </td>
@@ -101,8 +102,9 @@
               <td>Sim</td>
               <td>
                 @if ($carta['reserva'] == 'Reservar')
-                  <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}" data-carta-categoria="{{ $carta['categoria'] }}"
-                    data-carta-valor="{{ $carta['valor_credito'] }}" onclick="reservarCarta(this)">Reservar</button>
+                  <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}"
+                    data-carta-categoria="{{ $carta['categoria'] }}" data-carta-valor="{{ $carta['valor_credito'] }}"
+                    onclick="reservarCarta(this)">Reservar</button>
                 @endif
               </td>
             </tr>
