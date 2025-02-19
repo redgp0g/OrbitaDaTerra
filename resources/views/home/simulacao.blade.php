@@ -2,6 +2,9 @@
 @section('title', 'Simulação')
 @section('conteudo')
 
+  <link href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+  <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
+  
   <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic py-5">
       <div class="authentication-inner">

@@ -27,12 +27,10 @@
     <link href="{{ asset('node_modules/intl-tel-input/build/css/intlTelInput.css') }}" rel="stylesheet">
     <link href="{{ asset('node_modules/datatables/media/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('node_modules/select2/dist/css/select2.min.css')}}" rel="stylesheet">
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
 </head>
 
 <body>

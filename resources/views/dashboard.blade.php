@@ -61,9 +61,6 @@
 
     @include('partials.dashboardLinks')
     @include('partials.dashboardScripts')
-
-    <link href="{{ asset('node_modules/select2/dist/css/select2.min.css')}}" rel="stylesheet">
-    <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
 </head>
 
 <body>
