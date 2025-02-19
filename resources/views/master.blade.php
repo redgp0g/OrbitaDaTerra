@@ -2,43 +2,11 @@
 <html lang="pt-br">
 
 <head>
-    <!-- Google Tag Manager -->
-    <script>
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5BMDJS2N');
-    </script>
-    <!-- End Google Tag Manager -->
 
     <meta name="description"
           content="Descubra as melhores opções de cartas de consórcio no mercado. Compare e adquira a carta ideal para realizar seus sonhos de forma planejada e segura.">
     <meta name="keywords"
           content="cartas de consórcio, consórcio, consórcio imobiliário, consórcio de veículos, carta de crédito, comprar consórcio, melhores cartas de consórcio">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11312268635"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'AW-11312268635');
-    </script>
-    <!-- End Google Tag -->
 
     <meta name="google-site-verification" content="0m0e911CLxGxr2hkn_OUwanL9jtNYJdZKY-T3bmF89I"/>
     <meta charset="utf-8">
