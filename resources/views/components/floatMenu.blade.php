@@ -44,9 +44,11 @@
   </form>
 </dialog>
 
-<script>
+<script type="module">
+  import intlTelInput from 'https://cdn.jsdelivr.net/npm/intl-tel-input@23.3.0/+esm'
+
   const input = document.querySelector(".celular");
-  const iti = window.intlTelInput(input, {
+  const iti = intlTelInput(input, {
     initialCountry: "br",
     strictMode: true,
     separateDialCode: true,

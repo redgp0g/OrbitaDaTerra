@@ -1,4 +1,6 @@
 <div class="container-xxl d-flex justify-content-center align-items-center" style="min-height: 95vh">
+  <script src="{{ asset('node_modules/intl-tel-input/build/js/intlTelInputWithUtils.min.js') }}"></script>
+
   <div class="authentication-wrapper authentication-basic container-p-y">
     <div class="authentication-inner py-4">
       <div class="card">
