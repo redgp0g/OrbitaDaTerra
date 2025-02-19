@@ -18,7 +18,16 @@ class CartasNovasCards extends Component
     {
         $this->cadastro = $cadastro;
         $this->vendedor = $vendedor;
-        $this->cartas = Carta::with('TipoCarta')->orderBy('Prazo', 'DESC')->get();
+        $this->cartas = collect();
+
+        for ($i = 1; $i <= 7; $i++) {
+            $cartasPorTipo = Carta::where('IDTipoCarta', $i)
+                      ->orderBy('Prazo', 'DESC')
+                      ->take(5)
+                      ->get();
+            $this->cartas = $this->cartas->merge($cartasPorTipo);
+        }
+
         $this->tiposCartas = TipoCarta::all();
     }
 
