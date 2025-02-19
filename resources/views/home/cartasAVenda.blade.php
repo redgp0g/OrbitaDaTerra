@@ -143,7 +143,7 @@
     }
 
     function reservarCarta(button) {
-      let numeroVendedor = {{ $vendedor->telefone }};
+      let numeroVendedor = {{ $vendedor->Telefone }};
       let mensagemPadrao = "Olá, eu gostaria de reservar uma carta à venda! Código: " + button.dataset.cartaId +
         ", valor de crédito: " + button.dataset.cartaValor + ", carta de " + button.dataset.cartaCategoria;
 
