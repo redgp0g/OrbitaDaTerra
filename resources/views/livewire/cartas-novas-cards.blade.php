@@ -14,7 +14,7 @@
                   style="color: #1e9ef3">{{ $tipoCarta->Descricao }}</span></h2>
               <div class="d-flex align-items-center justify-content-center">
                 <img class="img-thumbnail" src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}"
-                  alt="imagem do produto" width="500" height="400">
+                  alt="imagem do produto" width="500" height="400" loading="lazy" decoding="async">
               </div>
               <div class="row">
                 <div class="carousel carousel-dark slide" id="carousel-{{ $tipoCarta->IDTipoCarta }}" data-bs-ride="carousel" data-bs-interval="2000" data-bs-pause="hover">
