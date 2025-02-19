@@ -24,11 +24,9 @@
     <link type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" rel="stylesheet"/>
     <link type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" rel="stylesheet"/>
     <link href="{{ asset('node_modules/intl-tel-input/build/css/intlTelInput.css') }}" rel="stylesheet">
-    <link href="{{ asset('node_modules/datatables/media/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 </head>
 

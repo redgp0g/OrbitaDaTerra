@@ -1,6 +1,8 @@
 @extends('master')
 @section('title', 'Cartas À Venda')
 @section('conteudo')
+  <link href="{{ asset('node_modules/datatables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+  <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
   @php $cartas = json_decode(file_get_contents('https://fragaebitelloconsorcios.com.br/api/json/contemplados'), true); @endphp
 
   @include('components.navbarHome', ['cadastroId' => $cadastro->IDCadastro])

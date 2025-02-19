@@ -1,7 +1,8 @@
 @extends('master')
 @section('title', 'Simulação')
 @section('conteudo')
-
+  <link href="{{ asset('node_modules/datatables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+  <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
   <link href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet">
   <script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
   
