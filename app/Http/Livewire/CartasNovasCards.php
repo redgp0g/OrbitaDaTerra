@@ -22,16 +22,6 @@ class CartasNovasCards extends Component
         $this->tiposCartas = TipoCarta::all();
     }
 
-    public function placeholder()
-    {
-        return <<<'HTML'
-            <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
-                <div class="spinner-border text-primary" role="status">
-                </div>
-            </div>
-        HTML;
-    }
-
     public function render()
     {
         return view('livewire.cartas-novas-cards');
