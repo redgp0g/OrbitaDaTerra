@@ -28,6 +28,7 @@
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/build/' . $manifest['js/app.js']['file']) }}"></script>
 </head>
 
 <body>
@@ -56,7 +57,6 @@
 
 @include('partials.footer')
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="{{ asset('public/build/' . $manifest['js/app.js']['file']) }}"></script>
 </body>
 
 </html>
