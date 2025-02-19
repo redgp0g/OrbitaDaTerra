@@ -23,7 +23,7 @@ class CartasNovasCards extends Component
         for ($i = 1; $i <= 7; $i++) {
             $cartasPorTipo = Carta::where('IDTipoCarta', $i)
                       ->orderBy('Prazo', 'DESC')
-                      ->take(5)
+                      ->take(6)
                       ->get();
             $this->cartas = $this->cartas->merge($cartasPorTipo);
         }

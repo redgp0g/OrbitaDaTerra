@@ -17,26 +17,47 @@
                   alt="imagem do produto" width="500" height="400">
               </div>
               <div class="row">
-                <div class="items">
-                  @foreach ($cartasPorTipo as $carta)
-                    <div class="card">
-                      <div class="card-body">
-                        <span class="text-danger">Crédito</span>
-                        <p>R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
-                        <span class="text-danger">Parcela Flex</span>
-                        <p>R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
-                        <span class="text-danger">Prazo</span>
-                        <p>{{ $carta->Prazo }} Meses</p>
-                        <button class="btn btn-success comprar"
-                          data-carta-categoria="{{ $carta->TipoCarta->Descricao }}"
-                          data-carta-valor="R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}"
-                          data-carta-flex="R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}"
-                          data-carta-prazo="{{ $carta->Prazo }}"><i class="fa fa-shopping-cart"></i> Comprar</button>
-                        <a class="btn btn-info fs-6 my-3"
-                          href="{{ url('/detalhesCartaNova/' . $carta->IDCarta . '/' . $cadastro->IDCadastro) }}">Detalhes</a>
+                <div class="carousel carousel-dark slide" id="carousel-{{ $tipoCarta->IDTipoCarta }}" data-bs-ride="carousel" data-bs-interval="2000" data-bs-pause="hover">
+                  <div class="carousel-inner">
+                    @foreach ($cartasPorTipo->chunk(2) as $chunk)
+                      <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                        <div class="row">
+                          @foreach ($chunk as $carta)
+                            <div class="col-md-6">
+                              <div class="card">
+                                <div class="card-body">
+                                  <span class="text-danger">Crédito</span>
+                                  <p>R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}</p>
+                                  <span class="text-danger">Parcela Flex</span>
+                                  <p>R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}</p>
+                                  <span class="text-danger">Prazo</span>
+                                  <p>{{ $carta->Prazo }} Meses</p>
+                                  <button class="btn btn-success comprar"
+                                    data-carta-categoria="{{ $carta->TipoCarta->Descricao }}"
+                                    data-carta-valor="R$ {{ number_format($carta->ValorCredito, 2, ',', '.') }}"
+                                    data-carta-flex="R$ {{ number_format($carta->ParcelaFlex, 2, ',', '.') }}"
+                                    data-carta-prazo="{{ $carta->Prazo }}"><i class="fa fa-shopping-cart"></i>
+                                    Comprar</button>
+                                  <a class="btn btn-info fs-6 my-3"
+                                    href="{{ url('/detalhesCartaNova/' . $carta->IDCarta . '/' . $cadastro->IDCadastro) }}">Detalhes</a>
+                                </div>
+                              </div>
+                            </div>
+                          @endforeach
+                        </div>
                       </div>
-                    </div>
-                  @endforeach
+                    @endforeach
+                  </div>
+                  <button class="carousel-control-prev text-black" data-bs-target="#carousel-{{ $tipoCarta->IDTipoCarta }}"
+                    data-bs-slide="prev" type="button">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" data-bs-target="#carousel-{{ $tipoCarta->IDTipoCarta }}"
+                    data-bs-slide="next" type="button">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -48,15 +69,6 @@
   @script
     <script>
       $(document).ready(function() {
-        $('.items').slick({
-          infinite: true,
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          autoplay: true,
-          arrows: false,
-          autoplaySpeed: 10000,
-        });
-
         $('.comprar').click(function() {
           let button = $(this)[0];
           console.log(button);
