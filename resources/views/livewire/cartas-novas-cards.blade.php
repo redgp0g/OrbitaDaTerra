@@ -10,10 +10,10 @@
           @endphp
           @if ($cartasPorTipo->count() > 0)
             <div class="col-md-4">
-              <h2 class="card-title fs-4 text-center mb-1">Consórcio de <span
+              <h2 class="card-title fs-4 mb-1 text-center">Consórcio de <span
                   style="color: #1e9ef3">{{ $tipoCarta->Descricao }}</span></h2>
               <div class="d-flex align-items-center justify-content-center">
-                <img class="img-thumbnail " src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}"
+                <img class="img-thumbnail" src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}"
                   alt="imagem do produto" width="500" height="400">
               </div>
               <div class="row">
@@ -71,7 +71,6 @@
       $(document).ready(function() {
         $('.comprar').click(function() {
           let button = $(this)[0];
-          console.log(button);
           let numeroVendedor = {{ $vendedor->Telefone }};
           let mensagemPadrao = "Olá, eu gostaria de comprar um Consórcio de " + button.dataset.cartaCategoria +
             "! Valor de crédito: " + button.dataset.cartaValor + ", Parcela Flex: " + button.dataset.cartaFlex +
