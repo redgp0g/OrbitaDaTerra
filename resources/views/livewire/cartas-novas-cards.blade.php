@@ -14,7 +14,7 @@
                   style="color: #1e9ef3">{{ $tipoCarta->Descricao }}</span></h2>
               <div class="d-flex align-items-center justify-content-center">
                 <img class="img-thumbnail " src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}"
-                  alt="imagem do produto">
+                  alt="imagem do produto" width="500" height="400">
               </div>
               <div class="row">
                 <div class="items">
