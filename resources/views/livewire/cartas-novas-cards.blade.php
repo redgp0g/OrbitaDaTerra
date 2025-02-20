@@ -17,10 +17,11 @@
                   alt="imagem do produto" width="500" height="400" loading="lazy" decoding="async">
               </div>
               <div class="row">
-                <div class="carousel carousel-dark slide" id="carousel-{{ $tipoCarta->IDTipoCarta }}" data-bs-ride="carousel" data-bs-interval="2000" data-bs-pause="hover">
+                <div class="carousel carousel-dark slide" id="carousel-{{ $tipoCarta->IDTipoCarta }}"
+                  data-bs-ride="carousel" data-bs-interval="2500" data-bs-pause="hover">
                   <div class="carousel-inner">
                     @foreach ($cartasPorTipo->chunk(2) as $chunk)
-                      <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                      <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="transition: 1s ease-in-out">
                         <div class="row">
                           @foreach ($chunk as $carta)
                             <div class="col-md-6">
@@ -48,8 +49,8 @@
                       </div>
                     @endforeach
                   </div>
-                  <button class="carousel-control-prev text-black" data-bs-target="#carousel-{{ $tipoCarta->IDTipoCarta }}"
-                    data-bs-slide="prev" type="button">
+                  <button class="carousel-control-prev text-black"
+                    data-bs-target="#carousel-{{ $tipoCarta->IDTipoCarta }}" data-bs-slide="prev" type="button">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
