@@ -51,17 +51,22 @@ class UsuarioController extends Controller
             $user = Auth::user();
         }
 
-        if ($user->Status == 'Ativa' && $user->EmailConfirmado) {
-            HistoricoAcesso::create([
-                'IDUsuario' => $user->IDUsuario,
-                'DataEntrada' => now(),
-            ]);
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
-        } else {
+        if ($user->Status !== 'Ativa' || !$user->EmailConfirmado) {
             Auth::logout();
-            return redirect()->route('usuario.login')->with('erro', 'Usuário não autorizado. Verifique se o administrador liberou seu acesso e se seu email está confirmado e se sua conta não está suspensa.');
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->route('usuario.login')->with(
+                'erro',
+                'Usuário não autorizado. Verifique se o administrador liberou seu acesso e se seu email está confirmado e se sua conta não está suspensa.'
+            );
         }
+
+        HistoricoAcesso::create([
+            'IDUsuario' => $user->IDUsuario,
+            'DataEntrada' => now(),
+        ]);
+        $request->session()->regenerate();
+        return redirect()->intended('/dashboard');
     }
 
 
