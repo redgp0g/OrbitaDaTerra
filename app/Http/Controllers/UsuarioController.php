@@ -7,8 +7,8 @@ use App\Mail\SenhaAlterada;
 use App\Mail\VerificacaoEmail;
 use App\Models\Cadastro;
 use App\Models\Funcao;
-use App\Models\HistoricoAcesso;
 use App\Models\User;
+use App\Models\UsuarioAcao;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,16 +55,14 @@ class UsuarioController extends Controller
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
+            UsuarioAcao::registrarAcao($user->IDUsuario, 'O usuário tentou acessar a conta, mas a conta estava bloqueada ou em análise');
             return redirect()->route('usuario.login')->with(
                 'erro',
                 'Usuário não autorizado. Verifique se o administrador liberou seu acesso e se seu email está confirmado e se sua conta não está suspensa.'
             );
         }
 
-        HistoricoAcesso::create([
-            'IDUsuario' => $user->IDUsuario,
-            'DataEntrada' => now(),
-        ]);
+        UsuarioAcao::registrarAcao($user->IDUsuario,'Acessou a conta');
         $request->session()->regenerate();
         return redirect()->intended('/dashboard');
     }
@@ -72,6 +70,7 @@ class UsuarioController extends Controller
 
     public function logout(Request $request)
     {
+        UsuarioAcao::registrarAcao(Auth::user()->IDUsuario, 'Deslogou da conta');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

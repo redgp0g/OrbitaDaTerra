@@ -26,7 +26,7 @@ Route::get('/verificarEmail/{id}/{codigo}', [UsuarioController::class, 'verifica
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
 Route::get('/dashboard/leads', [DashboardController::class, 'leads'])->name('dashboard.leads')->middleware('auth');
-Route::get('/dashboard/historicoAcesso', [DashboardController::class, 'historicoAcesso'])->name('dashboard.historicoAcesso')->middleware('auth');
+Route::get('/dashboard/usuarioAcoes', [DashboardController::class, 'usuarioAcoes'])->name('dashboard.usuarioAcoes')->middleware('auth');
 Route::get('/dashboard/contas', [DashboardController::class, 'contas'])->name('dashboard.contas')->middleware('auth');
 Route::get('/dashboard/cartas-a-venda', [DashboardController::class, 'cartasAVenda'])->name('dashboard.cartasAVenda')->middleware('auth');
 Route::get('/dashboard/empresas', [DashboardController::class, 'empresas'])->name('dashboard.empresas')->middleware('auth');

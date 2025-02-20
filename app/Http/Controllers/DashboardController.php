@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Cadastro;
 use App\Models\CartaVendida;
 use App\Models\Empresa;
-use App\Models\HistoricoAcesso;
 use App\Models\TipoCarta;
 use App\Models\User;
+use App\Models\UsuarioAcao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -102,10 +102,10 @@ class DashboardController extends Controller
         return view('dashboard.empresas');
     }
 
-    public function historicoAcesso()
+    public function usuarioAcoes()
     {
-        $acessos = HistoricoAcesso::with(['usuario.cadastro'])->orderBy('DataEntrada', 'DESC')->get();
+        $usuarioAcoes = UsuarioAcao::with('usuario')->orderBy('DataHora', 'DESC')->get();
 
-        return view('dashboard.historicoAcesso', compact('acessos'));
+        return view('dashboard.usuarioAcoes', compact('usuarioAcoes'));
     }
 }
