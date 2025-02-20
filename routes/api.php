@@ -24,7 +24,11 @@ Route::post('/cartas/simulacao', [CartaController::class, 'simulacao']);
 Route::get('/prazos/tipocarta/{idTipoCarta}', [CartaController::class, 'buscarPrazosPorTipoCarta'])->where('idTipoCarta','[0-9]+');
 Route::get('/creditos/tipocarta/{idTipoCarta}', [CartaController::class, 'buscarCreditosPorTipoCarta'])->where('idTipoCarta','[0-9]+');
 
-Route::put('/cartaAVenda/aprovar/{id}', [CartaVendidaController::class, 'aprovar'])->where('id','[0-9]+');
-Route::put('/cartaAVenda/bloquear/{id}', [CartaVendidaController::class, 'bloquear'])->where('id','[0-9]+');
+Route::prefix('cartaAVenda')->group(function () {
+    Route::put('/aprovar/{id}', [CartaVendidaController::class, 'aprovar'])->where('id', '[0-9]+');
+    Route::put('/bloquear/{id}', [CartaVendidaController::class, 'bloquear'])->where('id', '[0-9]+');
+});
 
-Route::delete('/empresas/{id}', [EmpresaController::class, 'delete'])->where('id','[0-9]+');
+Route::prefix('empresas')->group(function () {
+    Route::delete('{id}', [EmpresaController::class, 'delete'])->where('id', '[0-9]+');
+});
