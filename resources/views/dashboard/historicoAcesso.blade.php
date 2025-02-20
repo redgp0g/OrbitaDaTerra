@@ -1,34 +1,7 @@
-@extends('master')
+@extends('dashboard')
 @section('title', 'Dashboard')
-@section('conteudo')
-  <div id="loading">
-    <div class="loader simple-loader">
-      <div class="loader-body">
-      </div>
-    </div>
-  </div>
+@section('pagina')
 
-  @include('partials.asideDashboard')
-  <main class="main-content">
-    <div class="position-relative iq-banner">
-      @include('partials.navbarDashboard')
-      <div class="iq-navbar-header" style="height: 115px;">
-        <div class="container-fluid iq-container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="flex-wrap d-flex justify-content-between align-items-center">
-                Histórico de Acesso
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="iq-header-img">
-          <img class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX" src="{{ asset('/images/dashboard/top-header.png') }}" alt="header">
-        </div>
-      </div>
-    </div>
-    <div class="conatiner-fluid content-inner mt-n5 py-3">
-      <div class="row">
         <div class="col-16">
           <div class="card">
             <div class="card-body">
@@ -60,10 +33,7 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </main>
+
   <script>
     $(document).ready(function() {
       var table = $('#table').DataTable({
