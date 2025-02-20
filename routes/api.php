@@ -5,22 +5,20 @@ use App\Http\Controllers\api\CartaController;
 use App\Http\Controllers\api\CartaVendidaController;
 use App\Http\Controllers\api\EmpresaController;
 use App\Http\Controllers\api\UsuarioController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('cadastros')->group(function () {
+    Route::get('/', [CadastroController::class, 'index']);
+    Route::get('{id}', [CadastroController::class, 'show'])->where('id', '[0-9]+');
+    Route::post('/', [CadastroController::class, 'store']);
+    Route::put('{id}', [CadastroController::class, 'update'])->where('id', '[0-9]+');
+    Route::put('excluirLead/{id}', [CadastroController::class, 'excluirLead'])->where('id', '[0-9]+');
 });
 
-Route::get('/cadastros', [CadastroController::class, 'index']);
-Route::get('/cadastros/{id}', [CadastroController::class, 'show'])->where('id','[0-9]+');
-Route::post('/cadastros', [CadastroController::class, 'store']);
-Route::put('/cadastros/{id}', [CadastroController::class, 'update'])->where('id','[0-9]+');
-Route::put('/cadastros/excluirLead/{id}', [CadastroController::class, 'excluirLead'])->where('id','[0-9]+');
-
-
-Route::put('/usuario/ativar/{id}', [UsuarioController::class, 'ativar'])->where('id','[0-9]+');
-Route::put('/usuario/suspender/{id}', [UsuarioController::class, 'suspender'])->where('id','[0-9]+');
+Route::prefix('usuario')->group(function () {
+    Route::put('/ativar/{id}', [UsuarioController::class, 'ativar'])->where('id', '[0-9]+');
+    Route::put('/suspender/{id}', [UsuarioController::class, 'suspender'])->where('id', '[0-9]+');
+});
 
 Route::post('/cartas/simulacao', [CartaController::class, 'simulacao']);
 Route::get('/prazos/tipocarta/{idTipoCarta}', [CartaController::class, 'buscarPrazosPorTipoCarta'])->where('idTipoCarta','[0-9]+');
