@@ -6,7 +6,6 @@ use App\Mail\RecuperarSenha;
 use App\Mail\SenhaAlterada;
 use App\Mail\VerificacaoEmail;
 use App\Models\Cadastro;
-use App\Models\Funcao;
 use App\Models\User;
 use App\Models\UsuarioAcao;
 use Exception;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cadastro;
 use App\Models\CartaVendida;
 use App\Models\Empresa;
-use App\Models\TipoCarta;
 use App\Models\User;
 use App\Models\UsuarioAcao;
 use Illuminate\Http\Request;
