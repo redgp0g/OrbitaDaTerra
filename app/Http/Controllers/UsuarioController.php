@@ -30,38 +30,37 @@ class UsuarioController extends Controller
 
         $user = User::where('Login', $request->input('Login'))->first();
 
-        if ($user) {
-            if (!$user->is_migrated) {
-                if (hash('sha256', $request->input('Senha')) === $user->Senha) {
-                    $user->Senha = bcrypt($request->input('Senha'));
-                    $user->is_migrated = true;
-                    $user->save();
+        if (!$user) {
+            return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
+        }
+        if (!$user->is_migrated) {
+            if (hash('sha256', $request->input('Senha')) === $user->Senha) {
+                $user->Senha = bcrypt($request->input('Senha'));
+                $user->is_migrated = true;
+                $user->save();
 
-                    Auth::login($user);
-                } else {
-                    return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
-                }
+                Auth::login($user);
             } else {
-                if (!Auth::attempt($credenciais)) {
-                    return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
-                }
-
-                $user = Auth::user();
-            }
-
-            if ($user->Status == 'Ativa' && $user->EmailConfirmado) {
-                HistoricoAcesso::create([
-                    'IDUsuario' => $user->IDUsuario,
-                    'DataEntrada' => now(),
-                ]);
-                $request->session()->regenerate();
-                return redirect()->intended('/dashboard');
-            } else {
-                Auth::logout();
-                return redirect()->route('usuario.login')->with('erro', 'Usuário não autorizado. Verifique se o administrador liberou seu acesso e se seu email está confirmado e se sua conta não está suspensa.');
+                return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
             }
         } else {
-            return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
+            if (!Auth::attempt($credenciais)) {
+                return redirect()->back()->with('erro', 'Usuário ou senha incorreta.');
+            }
+
+            $user = Auth::user();
+        }
+
+        if ($user->Status == 'Ativa' && $user->EmailConfirmado) {
+            HistoricoAcesso::create([
+                'IDUsuario' => $user->IDUsuario,
+                'DataEntrada' => now(),
+            ]);
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
+        } else {
+            Auth::logout();
+            return redirect()->route('usuario.login')->with('erro', 'Usuário não autorizado. Verifique se o administrador liberou seu acesso e se seu email está confirmado e se sua conta não está suspensa.');
         }
     }
 
