@@ -10,9 +10,9 @@
                             <div class="card card-transparent shadow-none d-flex justify-content-center mb-0 auth-card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <a href="#" class="navbar-brand d-flex align-items-center mb-3">
+                                        <div class="navbar-brand d-flex align-items-center mb-3">
                                             <img src="{{ asset('/images/logo.png') }}" height="80px">
-                                        </a>
+                                        </div>
                                         <h2 class="mb-2 text-center">LOGIN</h2>
                                     </div>
                                     <form class="form-group" method="POST" action="{{ route('usuario.auth') }}">
