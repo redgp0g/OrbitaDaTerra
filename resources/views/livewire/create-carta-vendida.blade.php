@@ -151,8 +151,8 @@
               </div>
 
               <div class="form-group col-lg-12">
-                <label class="form-label" for="ComissaoOrbita">Observacões</label>
-                <textarea class="form-control" id="ComissaoOrbita" name="ComissaoOrbita" wire:model="ComissaoOrbita" rows="4"></textarea>
+                <label class="form-label" for="Observacoes">Observacões</label>
+                <textarea class="form-control" id="Observacoes" name="Observacoes" wire:model="Observacoes" rows="4"></textarea>
               </div>
 
               <div class="form-group col-lg-12">
