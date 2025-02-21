@@ -34,7 +34,7 @@ class UsuarioController extends Controller
         }
         if (!$user->is_migrated) {
             if (hash('sha256', $request->input('Senha')) === $user->Senha) {
-                $user->Senha = bcrypt($request->input('Senha'));
+                $user->Senha = bcrypt($user->Senha);
                 $user->is_migrated = true;
                 $user->save();
 
