@@ -24,12 +24,14 @@ Route::get('/usuario/create/{id?}', [UsuarioController::class, 'create'])->name(
 Route::post('/usuario/store', [UsuarioController::class, 'store'])->name('usuario.store');
 Route::get('/verificarEmail/{id}/{codigo}', [UsuarioController::class, 'verificarEmail'])->name('usuario.verificar-email')->where('id', '[0-9]+')->where('codigo', '[0-9]+');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
-Route::get('/dashboard/leads', [DashboardController::class, 'leads'])->name('dashboard.leads')->middleware('auth');
-Route::get('/dashboard/usuarioAcoes', [DashboardController::class, 'usuarioAcoes'])->name('dashboard.usuarioAcoes')->middleware('auth');
-Route::get('/dashboard/contas', [DashboardController::class, 'contas'])->name('dashboard.contas')->middleware('auth');
-Route::get('/dashboard/cartas-a-venda', [DashboardController::class, 'cartasAVenda'])->name('dashboard.cartasAVenda')->middleware('auth');
-Route::get('/dashboard/empresas', [DashboardController::class, 'empresas'])->name('dashboard.empresas')->middleware('auth');
-Route::get('/dashboard/perfil', [DashboardController::class, 'perfil'])->name('dashboard.perfil')->middleware('auth');
-Route::get('/dashboard/createEmpresa', [DashboardController::class, 'createEmpresa'])->name('dashboard.createEmpresa')->middleware('auth');
-Route::post('/dashboard/storeEmpresa', [DashboardController::class, 'storeEmpresa'])->name('dashboard.storeEmpresa')->middleware('auth');
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/leads', [DashboardController::class, 'leads'])->name('dashboard.leads');
+    Route::get('/usuarioAcoes', [DashboardController::class, 'usuarioAcoes'])->name('dashboard.usuarioAcoes');
+    Route::get('/contas', [DashboardController::class, 'contas'])->name('dashboard.contas');
+    Route::get('/cartas-a-venda', [DashboardController::class, 'cartasAVenda'])->name('dashboard.cartasAVenda');
+    Route::get('/empresas', [DashboardController::class, 'empresas'])->name('dashboard.empresas');
+    Route::get('/perfil', [DashboardController::class, 'perfil'])->name('dashboard.perfil');
+    Route::get('/createEmpresa', [DashboardController::class, 'createEmpresa'])->name('dashboard.createEmpresa');
+    Route::post('/storeEmpresa', [DashboardController::class, 'storeEmpresa'])->name('dashboard.storeEmpresa');
+});
