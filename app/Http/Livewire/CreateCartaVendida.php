@@ -12,7 +12,7 @@ class CreateCartaVendida extends Component
 {
     public $IDEmpresaAdministradora, $Nome, $Celular, $IDTipoCarta, $ValorCredito, $ValorPago, $ValorVenda,
         $SaldoDevedor, $ParcelasPagas, $ParcelasPagar, $ValorParcela, $DiaVencimento, $ValorGarantia, $Grupo,
-        $Cota, $TaxaTransferencia, $ComissaoAutorizada, $ComissaoOrbita, $Contemplada, $IDCadastroConsorciado,$Observacoes;
+        $Cota, $TaxaTransferencia, $ComissaoAutorizada, $Contemplada, $IDCadastroConsorciado,$Observacoes;
 
     public $administradoras, $tiposCartas, $autorizada;
 
@@ -75,7 +75,6 @@ class CreateCartaVendida extends Component
             'Cota' => $this->Cota,
             'TaxaTransferencia' => $this->TaxaTransferencia,
             'ComissaoAutorizada' => $this->ComissaoAutorizada,
-            'ComissaoOrbita' => $this->ComissaoOrbita,
             'Contemplada' => $this->Contemplada,
             'IDEmpresaAutorizada' => $this->autorizada->IDEmpresa,
             'Observacoes' => $this->Observacoes,
