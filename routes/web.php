@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuarioController;
 use Livewire\Volt\Volt;
@@ -14,6 +15,7 @@ Route::get('/simulacao/{idVendedor?}', [HomeController::class, 'simulacao'])->wh
 Route::get('/carta-a-venda/{idAutorizada?}', [HomeController::class, 'createCartaVendida'])->name('cartaVendida')->where('idAutorizada', '[0-9]+');
 Route::post('/carta-a-venda', [HomeController::class, 'storeCartaVendida'])->name('storeCartaVendida');
 Route::prefix('carta-vendida')->group(function () {
+    Volt::route('/detalhes/{idCarta}/{idVendedor?}', 'carta-vendida.detalhes', ['idCarta' => '[0-9]+', 'idVendedor' => '[0-9]+']);
     Volt::route('/create/{idAutorizada?}', 'carta-vendida.create', ['idAutorizada' => '[0-9]+']);
 });
 
@@ -39,3 +41,5 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/createEmpresa', [DashboardController::class, 'createEmpresa'])->name('dashboard.createEmpresa');
     Route::post('/storeEmpresa', [DashboardController::class, 'storeEmpresa'])->name('dashboard.storeEmpresa');
 });
+
+Route::post('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');

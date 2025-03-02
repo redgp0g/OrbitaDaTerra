@@ -88,6 +88,8 @@
                                         data-carta-valor="{{ $carta->ValorCredito }}"
                                         onclick="reservarCarta(this)">Reservar</button>
                                 @endif
+                                <a class="btn btn-info fs-6 my-3"
+                                    href="{{ url('/carta-vendida/detalhes/' . $carta->IDCartaVendida . '/' . $cadastro->IDCadastro) }}">Detalhes</a>
                             </td>
                         </tr>
                     @endforeach
