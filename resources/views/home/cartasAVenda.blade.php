@@ -66,7 +66,7 @@
                             <td>R$ {{ number_format($carta->ValorGarantia, 2, ',', '.') }}</td>
                             <td>{{ $carta->ParcelasPagar }}</td>
                             <td>R$ {{ number_format($carta->ValorParcela, 2, ',', '.') }}</td>
-                            <td>{{ $carta->empresaAdministradora->NomeFantasia }}</td>
+                            <td>{{ $carta->empresaAdministradora->NomeFantasia ?? 'Empresa não cadastrada' }}</td>
                             <td>
                                 @if ($carta->Status == 'Reservar' || $carta->Status == 'Aprovada')
                                     Disponível
