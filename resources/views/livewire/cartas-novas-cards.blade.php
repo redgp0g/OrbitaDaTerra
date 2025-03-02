@@ -13,7 +13,7 @@
               <h2 class="card-title fs-4 mb-1 text-center">Consórcio de <span
                   style="color: #1e9ef3">{{ $tipoCarta->Descricao }}</span></h2>
               <div class="d-flex align-items-center justify-content-center">
-                <img class="img-thumbnail" src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem) }}"
+                <img class="img-thumbnail" src="{{ asset('/images/tipoproduto/' . $tipoCarta->Imagem . '500x400.webp') }}"
                   alt="imagem do produto" width="500" height="400" loading="lazy" decoding="async">
               </div>
               <div class="row">

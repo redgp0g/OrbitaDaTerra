@@ -10,7 +10,8 @@
         <div class="col-md-8 col-12">
           <div id="product-main-img">
             <div class="product-preview">
-              <img class="img-thumbnail" src="{{ asset('/images/tipoproduto/' . $carta->tipoCarta->Imagem) }}">
+                            <img class="img-thumbnail"
+                                src="{{ asset('/images/tipoproduto/' . $carta->tipoCarta->Imagem . '800x500.webp') }}">
             </div>
           </div>
         </div>
