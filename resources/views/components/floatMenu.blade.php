@@ -10,7 +10,7 @@
       onclick="window.location.href = '/simulacao/{{ $cadastro->IDCadastro }}'">Simular Agora
     </button>
     <button class="fs-5 bg-success rounded-pill rounded p-1 px-2 text-white"
-      onclick="window.location.href = '/carta-a-venda/8'">Venda sua Carta
+      onclick="window.location.href = '/carta-vendida/create/8'">Venda sua Carta
     </button>
   </div>
 </div>

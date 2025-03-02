@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuarioController;
+use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/{idVendedor?}', [HomeController::class, 'index'])->where('idVendedor', '[0-9]+');
@@ -12,6 +13,9 @@ Route::get('/detalhesCartaNova/{idCarta}/{idVendedor?}', [HomeController::class,
 Route::get('/simulacao/{idVendedor?}', [HomeController::class, 'simulacao'])->where('idVendedor', '[0-9]+');
 Route::get('/carta-a-venda/{idAutorizada?}', [HomeController::class, 'createCartaVendida'])->name('cartaVendida')->where('idAutorizada', '[0-9]+');
 Route::post('/carta-a-venda', [HomeController::class, 'storeCartaVendida'])->name('storeCartaVendida');
+Route::prefix('carta-vendida')->group(function () {
+    Volt::route('/create/{idAutorizada?}', 'carta-vendida.create', ['idAutorizada' => '[0-9]+']);
+});
 
 Route::view('/usuario', 'usuario.login')->name('usuario.login');
 Route::post('/auth', [UsuarioController::class, 'auth'])->name('usuario.auth');

@@ -65,32 +65,4 @@ class HomeController extends Controller
 
         return view('home/simulacao', compact('cadastro', 'tiposCarta', 'vendedor'));
     }
-
-    public function createCartaVendida($idAutorizada = 8)
-    {
-        $autorizada = Empresa::find($idAutorizada);
-        if (!$autorizada) {
-            $autorizada = Empresa::find(8);
-        }
-
-        $tiposCartas = TipoCarta::all();
-        $administradoras = Empresa::where('TipoEmpresa', 'Administradora')->get();
-
-        return view('home/createCartaVendida', compact('tiposCartas', 'administradoras', 'autorizada'));
-    }
-
-    public function storeCartaVendida(Request $request)
-    {
-        $data = $request->all();
-        $data['ValorCredito'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorCredito']));
-        $data['ValorPago'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorPago']));
-        $data['ValorVenda'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorVenda']));
-        $data['SaldoDevedor'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['SaldoDevedor']));
-        $data['ValorParcela'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorParcela']));
-        $data['ValorGarantia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['ValorGarantia']));
-        $data['TaxaTransferencia'] = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $data['TaxaTransferencia']));
-
-        CartaVendida::create($data);
-        return redirect('/cartasAVenda');
-    }
 }
