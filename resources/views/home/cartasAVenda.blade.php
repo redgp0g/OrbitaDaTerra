@@ -68,7 +68,7 @@
                             <td>R$ {{ number_format($carta->ValorParcela, 2, ',', '.') }}</td>
                             <td>{{ $carta->empresaAdministradora->NomeFantasia }}</td>
                             <td>
-                                @if ($carta->Status == 'Reservar')
+                                @if ($carta->Status == 'Reservar' || $carta->Status == 'Aprovada')
                                     Disponível
                                 @else
                                     Reservado
@@ -82,7 +82,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($carta->Status == 'Reservar')
+                                @if ($carta->Status == 'Reservar' || $carta->Status == 'Aprovada')
                                     <button class="btn btn-success reservar" data-carta-id="{{ $carta['id'] }}"
                                         data-carta-categoria="{{ $carta->tipoCarta->descricao }}"
                                         data-carta-valor="{{ $carta->ValorCredito }}"
