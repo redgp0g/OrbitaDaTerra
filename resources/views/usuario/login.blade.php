@@ -1,6 +1,7 @@
 @extends('master')
 @section('title', 'Login')
 @section('conteudo')
+    <script src="https://accounts.google.com/gsi/client" async></script>
     <div class="wrapper">
         <section class="login-content">
             <div class="row align-items-center m-0 bg-white">
@@ -46,6 +47,17 @@
                                             <a href="{{ asset('/usuario/create') }}">
                                                 <span>Cadastre aqui.</span>
                                             </a>
+                                    </div>
+                                    <div>
+                                        <div id="g_id_onload" data-client_id="{{ env('GOOGLE_CLIENT_ID') }}"
+                                            data-context="signin" data-ux_mode="popup"
+                                            data-login_uri="{{ env('GOOGLE_REDIRECT_URL') }}" data-auto_prompt="false">
+                                        </div>
+
+                                        <div class="g_id_signin" data-type="standard" data-shape="rectangular"
+                                            data-theme="filled_blue" data-text="signin_with" data-size="large"
+                                            data-locale="pt-BR" data-logo_alignment="left">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
